@@ -1,0 +1,179 @@
+[     228ms] [ERROR] ./workspace/survibe-ai-season3/src/app/api/chat/route.ts:133:3
+Parsing ecmascript source code failed
+  131 |     message: { role: 'assistant', content: assistantContent },
+  132 |   });
+> 133 | } catch (error) {
+      |   ^^^^^
+  134 |   console.error('[Chat API] Unexpected error:', error);
+  135 |   return NextResponse.json(
+  136 |     { error: '通信エラーが発生しました。インターネット接続を確認してください。' },
+
+Expected a semicolon @ http://localhost:3000/_next/static/chunks/3444b_next_dist_f64338b2._.js:3127
+[     229ms] [ERROR] ./workspace/survibe-ai-season3/src/app/api/chat/route.ts:135:3
+Parsing ecmascript source code failed
+  133 | } catch (error) {
+  134 |   console.error('[Chat API] Unexpected error:', error);
+> 135 |   return NextResponse.json(
+      |   ^^^^^^^^^^^^^^^^^^^^^^^^^
+> 136 |     { error: '通信エラーが発生しました。インターネット接続を確認してください。' },
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 137 |     { status: 500 }
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 138 |   );
+      | ^^^^^
+  139 | }
+  140 | }
+  141 |
+
+Return statement is not allowed here @ http://localhost:3000/_next/static/chunks/3444b_next_dist_f64338b2._.js:3127
+[     831ms] [ERROR] ./workspace/survibe-ai-season3/src/app/api/chat/route.ts:133:3
+Parsing ecmascript source code failed
+  131 |     message: { role: 'assistant', content: assistantContent },
+  132 |   });
+> 133 | } catch (error) {
+      |   ^^^^^
+  134 |   console.error('[Chat API] Unexpected error:', error);
+  135 |   return NextResponse.json(
+  136 |     { error: '通信エラーが発生しました。インターネット接続を確認してください。' },
+
+Expected a semicolon @ http://localhost:3000/_next/static/chunks/3444b_next_dist_f64338b2._.js:3127
+[     832ms] [ERROR] ./workspace/survibe-ai-season3/src/app/api/chat/route.ts:135:3
+Parsing ecmascript source code failed
+  133 | } catch (error) {
+  134 |   console.error('[Chat API] Unexpected error:', error);
+> 135 |   return NextResponse.json(
+      |   ^^^^^^^^^^^^^^^^^^^^^^^^^
+> 136 |     { error: '通信エラーが発生しました。インターネット接続を確認してください。' },
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 137 |     { status: 500 }
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 138 |   );
+      | ^^^^^
+  139 | }
+  140 | }
+  141 |
+
+Return statement is not allowed here @ http://localhost:3000/_next/static/chunks/3444b_next_dist_f64338b2._.js:3127
+[    1137ms] [ERROR] ./workspace/survibe-ai-season3/src/app/api/chat/route.ts:133:3
+Parsing ecmascript source code failed
+  131 |     message: { role: 'assistant', content: assistantContent },
+  132 |   });
+> 133 | } catch (error) {
+      |   ^^^^^
+  134 |   console.error('[Chat API] Unexpected error:', error);
+  135 |   return NextResponse.json(
+  136 |     { error: '通信エラーが発生しました。インターネット接続を確認してください。' },
+
+Expected a semicolon @ http://localhost:3000/_next/static/chunks/3444b_next_dist_f64338b2._.js:3127
+[    1137ms] [ERROR] ./workspace/survibe-ai-season3/src/app/api/chat/route.ts:135:3
+Parsing ecmascript source code failed
+  133 | } catch (error) {
+  134 |   console.error('[Chat API] Unexpected error:', error);
+> 135 |   return NextResponse.json(
+      |   ^^^^^^^^^^^^^^^^^^^^^^^^^
+> 136 |     { error: '通信エラーが発生しました。インターネット接続を確認してください。' },
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 137 |     { status: 500 }
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 138 |   );
+      | ^^^^^
+  139 | }
+  140 | }
+  141 |
+
+Return statement is not allowed here @ http://localhost:3000/_next/static/chunks/3444b_next_dist_f64338b2._.js:3127
+[    1558ms] [WARNING] motion() is deprecated. Use motion.create() instead. @ http://localhost:3000/_next/static/chunks/3444b_next_dist_f64338b2._.js:2297
+[    1826ms] [ERROR] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="/workspace...">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html lang="ja">
+                          <body
+-                           style={{padding-right:"15px",overflow-x:"hidden",overflow-y:"hidden"}}
+                          >
+                  ...
+ @ http://localhost:3000/_next/static/chunks/3444b_next_dist_f64338b2._.js:3127
+[   26112ms] [ERROR] ./workspace/survibe-ai-season3/src/app/api/chat/route.ts:133:3
+Parsing ecmascript source code failed
+  131 |     message: { role: 'assistant', content: assistantContent },
+  132 |   });
+> 133 | } catch (error) {
+      |   ^^^^^
+  134 |   console.error('[Chat API] Unexpected error:', error);
+  135 |   return NextResponse.json(
+  136 |     { error: '通信エラーが発生しました。インターネット接続を確認してください。' },
+
+Expected a semicolon @ http://localhost:3000/_next/static/chunks/3444b_next_dist_f64338b2._.js:3127
+[   26113ms] [ERROR] ./workspace/survibe-ai-season3/src/app/api/chat/route.ts:135:3
+Parsing ecmascript source code failed
+  133 | } catch (error) {
+  134 |   console.error('[Chat API] Unexpected error:', error);
+> 135 |   return NextResponse.json(
+      |   ^^^^^^^^^^^^^^^^^^^^^^^^^
+> 136 |     { error: '通信エラーが発生しました。インターネット接続を確認してください。' },
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 137 |     { status: 500 }
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 138 |   );
+      | ^^^^^
+  139 | }
+  140 | }
+  141 |
+
+Return statement is not allowed here @ http://localhost:3000/_next/static/chunks/3444b_next_dist_f64338b2._.js:3127
+[   26853ms] [ERROR] ./workspace/survibe-ai-season3/src/app/api/chat/route.ts:133:3
+Parsing ecmascript source code failed
+  131 |     message: { role: 'assistant', content: assistantContent },
+  132 |   });
+> 133 | } catch (error) {
+      |   ^^^^^
+  134 |   console.error('[Chat API] Unexpected error:', error);
+  135 |   return NextResponse.json(
+  136 |     { error: '通信エラーが発生しました。インターネット接続を確認してください。' },
+
+Expected a semicolon @ http://localhost:3000/_next/static/chunks/3444b_next_dist_f64338b2._.js:3127
+[   26855ms] [ERROR] ./workspace/survibe-ai-season3/src/app/api/chat/route.ts:135:3
+Parsing ecmascript source code failed
+  133 | } catch (error) {
+  134 |   console.error('[Chat API] Unexpected error:', error);
+> 135 |   return NextResponse.json(
+      |   ^^^^^^^^^^^^^^^^^^^^^^^^^
+> 136 |     { error: '通信エラーが発生しました。インターネット接続を確認してください。' },
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 137 |     { status: 500 }
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 138 |   );
+      | ^^^^^
+  139 | }
+  140 | }
+  141 |
+
+Return statement is not allowed here @ http://localhost:3000/_next/static/chunks/3444b_next_dist_f64338b2._.js:3127
+[   38275ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=juKYo9AuOVakMMv4FPEAt' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/3444b_next_dist_client_4872860d._.js:10878
+[   49484ms] [WARNING] motion() is deprecated. Use motion.create() instead. @ http://localhost:3000/_next/static/chunks/3444b_next_dist_f64338b2._.js:2297

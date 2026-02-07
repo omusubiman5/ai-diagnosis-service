@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import { Box } from '@mui/material';
 import HeroSection from './components/HeroSection';
 import EmpathySection from './components/EmpathySection';
@@ -10,8 +10,11 @@ import TrustSection from './components/TrustSection';
 import CTASection from './components/CTASection';
 import Footer from './components/Footer';
 import VoiceControl from './components/VoiceControl';
+import AIChatWidget from './components/AIChatWidget';
 
 export default function Home() {
+  const [isChatOpen, setIsChatOpen] = useState(false);
+
   return (
     <Box component="main">
       <HeroSection />
@@ -22,7 +25,14 @@ export default function Home() {
       <TrustSection />
       <CTASection />
       <Footer />
-      <VoiceControl />
+      <VoiceControl
+        onChatToggle={() => setIsChatOpen(true)}
+        isChatOpen={isChatOpen}
+      />
+      <AIChatWidget
+        open={isChatOpen}
+        onClose={() => setIsChatOpen(false)}
+      />
     </Box>
   );
 }

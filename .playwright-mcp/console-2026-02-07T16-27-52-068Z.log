@@ -1,0 +1,7 @@
+[    3533ms] [WARNING] motion() is deprecated. Use motion.create() instead. @ http://localhost:3000/_next/static/chunks/3444b_next_dist_f64338b2._.js:2297
+[   16104ms] [ERROR] [VoiceGuide] Playback Error: interrupted SpeechSynthesisErrorEvent @ http://localhost:3000/_next/static/chunks/3444b_next_dist_f64338b2._.js:3127
+[  171913ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=OoWwlZANhvHRMBeQs00Uv' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/3444b_next_dist_client_4872860d._.js:10878
+[  175269ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=OoWwlZANhvHRMBeQs00Uv' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/3444b_next_dist_client_4872860d._.js:10878
+[  178606ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=OoWwlZANhvHRMBeQs00Uv' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/3444b_next_dist_client_4872860d._.js:10878
+[  181964ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=OoWwlZANhvHRMBeQs00Uv' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/3444b_next_dist_client_4872860d._.js:10878
+[  196304ms] [WARNING] motion() is deprecated. Use motion.create() instead. @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_f3530cac._.js:2297

@@ -1,0 +1,62 @@
+
+> survibe-ai-season3@0.1.0 lint
+> eslint
+
+
+C:\Users\omusu\workspace\survibe-ai-season3\src\app\components\AIChatWidget.tsx
+  96:7  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\omusu\workspace\survibe-ai-season3\src\app\components\AIChatWidget.tsx:96:7
+  94 |   useEffect(() => {
+  95 |     if (transcript) {
+> 96 |       setInputValue(transcript);
+     |       ^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  97 |       handleSend(transcript);
+  98 |     }
+  99 |   }, [transcript, handleSend]);  react-hooks/set-state-in-effect
+
+C:\Users\omusu\workspace\survibe-ai-season3\src\app\hooks\useReducedMotion.ts
+  11:7  error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\omusu\workspace\survibe-ai-season3\src\app\hooks\useReducedMotion.ts:11:7
+   9 |
+  10 |     if (prefersReducedMotion !== mediaQuery.matches) {
+> 11 |       setPrefersReducedMotion(mediaQuery.matches);
+     |       ^^^^^^^^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  12 |     }
+  13 |
+  14 |     const handleChange = (e: MediaQueryListEvent) => {  react-hooks/set-state-in-effect
+  23:6  warning  React Hook useEffect has a missing dependency: 'prefersReducedMotion'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         react-hooks/exhaustive-deps
+
+C:\Users\omusu\workspace\survibe-ai-season3\src\app\hooks\useSpeechToText.ts
+  50:7  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\omusu\workspace\survibe-ai-season3\src\app\hooks\useSpeechToText.ts:50:7
+  48 |     const SpeechRecognitionAPI = w.SpeechRecognition || w.webkitSpeechRecognition;
+  49 |     if (isSupported !== !!SpeechRecognitionAPI) {
+> 50 |       setIsSupported(!!SpeechRecognitionAPI);
+     |       ^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  51 |     }
+  52 |   }, [isSupported]);
+  53 |  react-hooks/set-state-in-effect
+
+笨・4 problems (3 errors, 1 warning)
+

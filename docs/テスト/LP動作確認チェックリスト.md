@@ -3,8 +3,8 @@
 ## 基本情報
 - **実施日**: 2026年02月07日
 - **実施者**: Antigravity (AI)
-- **対象URL/環境**: Localhost (http://localhost:3000)
-- **ブラウザ**: Chrome (Source Evaluation)
+- **対象URL/環境**: Vercel (https://ai-diagnosis-service-woad.vercel.app/) / Localhost
+- **ブラウザ**: Chrome (Antigravity verification)
 
 ---
 
@@ -97,7 +97,7 @@
 ---
 
 ## 備考・バグ報告
-- 気づいた点や修正が必要な箇所があれば記入してください。
+- **2026/02/07**: Vercel 本番環境での動作確認を完了。全てのセクション表示、レスポンシブ、Coming Soonダイアログの動作が正常であることを確認済み。
 
 | 日時 | 種類 | 内容 | 担当 | 完了 |
 |----|----|----|----|---|

@@ -1,0 +1,11 @@
+[    6121ms] [WARNING] A preload for 'https://app.buildwithfern.com/_next/static/chunks/2906.2b07e274029633ac.js' is found, but is not used because the request credentials mode does not match. Consider taking a look at crossorigin attribute. @ https://app.buildwithfern.com/_next/static/chunks/webpack-d06e612b45955ae7.js:0
+[    6360ms] Error: Minified React error #418; visit https://react.dev/errors/418?args[]=HTML&args[]= for the full message or use the non-minified dev environment for full errors and additional helpful warnings.
+    at r1 (https://app.buildwithfern.com/_next/static/chunks/a1115b83-75dfc338ab069889.js:1:36513)
+    at iS (https://app.buildwithfern.com/_next/static/chunks/a1115b83-75dfc338ab069889.js:1:89611)
+    at sI (https://app.buildwithfern.com/_next/static/chunks/a1115b83-75dfc338ab069889.js:1:128623)
+    at https://app.buildwithfern.com/_next/static/chunks/a1115b83-75dfc338ab069889.js:1:124413
+    at sE (https://app.buildwithfern.com/_next/static/chunks/a1115b83-75dfc338ab069889.js:1:124514)
+    at ca (https://app.buildwithfern.com/_next/static/chunks/a1115b83-75dfc338ab069889.js:1:157195)
+    at MessagePort.S (https://app.buildwithfern.com/_next/static/chunks/4206-29e63f06d0e1f449.js:1:26316)
+[   13466ms] [WARNING] The resource https://app.buildwithfern.com/_next/static/chunks/2906.2b07e274029633ac.js was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://openrouter.ai/docs/api/reference/overview:0
+[   20765ms] [WARNING] The resource https://app.buildwithfern.com/_next/static/chunks/2906.2b07e274029633ac.js was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ https://openrouter.ai/docs/api/reference/overview:0

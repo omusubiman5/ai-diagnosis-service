@@ -1,0 +1,24 @@
+[    1356ms] [WARNING] motion() is deprecated. Use motion.create() instead. @ http://localhost:3000/_next/static/chunks/3444b_next_dist_f64338b2._.js:2297
+[   15793ms] [ERROR] [VoiceGuide] Error: SpeechSynthesisErrorEvent @ http://localhost:3000/_next/static/chunks/3444b_next_dist_f64338b2._.js:3127
+[   95817ms] [WARNING] motion() is deprecated. Use motion.create() instead. @ http://localhost:3000/_next/static/chunks/3444b_next_dist_f64338b2._.js:2297
+[   98292ms] [ERROR] [VoiceGuide] Error: SpeechSynthesisErrorEvent @ http://localhost:3000/_next/static/chunks/3444b_next_dist_f64338b2._.js:3127
+[  100509ms] [ERROR] [VoiceGuide] Error: SpeechSynthesisErrorEvent @ http://localhost:3000/_next/static/chunks/3444b_next_dist_f64338b2._.js:3127
+[  108092ms] [ERROR] [VoiceGuide] Error: SpeechSynthesisErrorEvent @ http://localhost:3000/_next/static/chunks/3444b_next_dist_f64338b2._.js:3127
+[  168039ms] TypeError: (textOverride || inputValue).trim is not a function
+    at handleSend (http://localhost:3000/_next/static/chunks/workspace_survibe-ai-season3_src_app_11b0938f._.js:2901:51)
+    at executeDispatch (http://localhost:3000/_next/static/chunks/3444b_next_dist_compiled_react-dom_81cb18dc._.js:10314:13)
+    at runWithFiberInDEV (http://localhost:3000/_next/static/chunks/3444b_next_dist_compiled_react-dom_81cb18dc._.js:965:74)
+    at processDispatchQueue (http://localhost:3000/_next/static/chunks/3444b_next_dist_compiled_react-dom_81cb18dc._.js:10340:41)
+    at http://localhost:3000/_next/static/chunks/3444b_next_dist_compiled_react-dom_81cb18dc._.js:10615:13
+    at batchedUpdates$1 (http://localhost:3000/_next/static/chunks/3444b_next_dist_compiled_react-dom_81cb18dc._.js:2253:44)
+    at dispatchEventForPluginEventSystem (http://localhost:3000/_next/static/chunks/3444b_next_dist_compiled_react-dom_81cb18dc._.js:10416:9)
+    at dispatchEvent (http://localhost:3000/_next/static/chunks/3444b_next_dist_compiled_react-dom_81cb18dc._.js:12935:37)
+    at dispatchDiscreteEvent (http://localhost:3000/_next/static/chunks/3444b_next_dist_compiled_react-dom_81cb18dc._.js:12917:64)
+[  187496ms] [WARNING] motion() is deprecated. Use motion.create() instead. @ http://localhost:3000/_next/static/chunks/3444b_next_dist_f64338b2._.js:2297
+[  190858ms] [ERROR] Failed to load resource: the server responded with a status of 502 (Bad Gateway) @ http://localhost:3000/api/chat:0
+[  253857ms] [WARNING] motion() is deprecated. Use motion.create() instead. @ http://localhost:3000/_next/static/chunks/3444b_next_dist_f64338b2._.js:2297
+[  256711ms] [ERROR] Failed to load resource: the server responded with a status of 502 (Bad Gateway) @ http://localhost:3000/api/chat:0
+[  290203ms] [WARNING] motion() is deprecated. Use motion.create() instead. @ http://localhost:3000/_next/static/chunks/3444b_next_dist_f64338b2._.js:2297
+[  293701ms] [ERROR] Failed to load resource: the server responded with a status of 502 (Bad Gateway) @ http://localhost:3000/api/chat:0
+[  577235ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr?id=GllKmRs5Yxw0vsZELTzdb' failed: Error in connection establishment: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/chunks/3444b_next_dist_client_4872860d._.js:10878
+[  584049ms] [WARNING] motion() is deprecated. Use motion.create() instead. @ http://localhost:3000/_next/static/chunks/3444b_next_dist_f64338b2._.js:2297

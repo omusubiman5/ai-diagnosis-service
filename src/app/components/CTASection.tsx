@@ -1,9 +1,9 @@
 'use client';
 import React, { useState } from 'react';
-import { Box, Container, Typography, Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material';
+import { Box, Container, Typography, Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 import { motion } from 'framer-motion';
 
-const MotionButton = motion(Button);
+const MotionButton = motion.create(Button);
 
 export default function CTASection() {
     const [open, setOpen] = useState(false);

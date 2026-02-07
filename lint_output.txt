@@ -1,0 +1,84 @@
+
+> survibe-ai-season3@0.1.0 lint
+> eslint
+
+
+C:\Users\omusu\workspace\survibe-ai-season3\src\app\api\chat\route.ts
+  27:18  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+  28:20  error  A `require()` style import is forbidden  @typescript-eslint/no-require-imports
+
+C:\Users\omusu\workspace\survibe-ai-season3\src\app\components\AIChatWidget.tsx
+  43:21  warning  'setAutoSpeak' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    @typescript-eslint/no-unused-vars
+  77:7   error    Error: Cannot access variable before it is declared
+
+`handleSend` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+C:\Users\omusu\workspace\survibe-ai-season3\src\app\components\AIChatWidget.tsx:77:7
+  75 |     if (transcript) {
+  76 |       setInputValue(transcript);
+> 77 |       handleSend(transcript);
+     |       ^^^^^^^^^^ `handleSend` accessed before it is declared
+  78 |     }
+  79 |   }, [transcript]);
+  80 |
+
+C:\Users\omusu\workspace\survibe-ai-season3\src\app\components\AIChatWidget.tsx:81:3
+   79 |   }, [transcript]);
+   80 |
+>  81 |   const handleSend = (textOverride?: string | React.MouseEvent | React.KeyboardEvent) => {
+      |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+>  82 |     let text = '';
+      | ^^^^^^^^^^^^^^^^^^
+>  83 |     if (typeof textOverride === 'string') {
+      窶ｦ
+      | ^^^^^^^^^^^^^^^^^^
+>  98 |     if (isListening) stopListening();
+      | ^^^^^^^^^^^^^^^^^^
+>  99 |   };
+      | ^^^^^ `handleSend` is declared here
+  100 |
+  101 |   const handleKeyDown = (e: React.KeyboardEvent) => {
+  102 |     if (e.key === 'Enter' && !e.shiftKey) {  react-hooks/immutability
+  79:6   warning  React Hook useEffect has a missing dependency: 'handleSend'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        react-hooks/exhaustive-deps
+
+C:\Users\omusu\workspace\survibe-ai-season3\src\app\components\CTASection.tsx
+  3:82  warning  'DialogContentText' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\omusu\workspace\survibe-ai-season3\src\app\hooks\useReducedMotion.ts
+  10:5  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\omusu\workspace\survibe-ai-season3\src\app\hooks\useReducedMotion.ts:10:5
+   8 |     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+   9 |
+> 10 |     setPrefersReducedMotion(mediaQuery.matches);
+     |     ^^^^^^^^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  11 |
+  12 |     const handleChange = (e: MediaQueryListEvent) => {
+  13 |       setPrefersReducedMotion(e.matches);  react-hooks/set-state-in-effect
+
+C:\Users\omusu\workspace\survibe-ai-season3\src\app\hooks\useSpeechToText.ts
+  49:5  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\omusu\workspace\survibe-ai-season3\src\app\hooks\useSpeechToText.ts:49:5
+  47 |     const w = window as unknown as IWindow;
+  48 |     const SpeechRecognitionAPI = w.SpeechRecognition || w.webkitSpeechRecognition;
+> 49 |     setIsSupported(!!SpeechRecognitionAPI);
+     |     ^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  50 |   }, []);
+  51 |
+  52 |   const stopListening = useCallback(() => {  react-hooks/set-state-in-effect
+
+笨・8 problems (5 errors, 3 warnings)
+

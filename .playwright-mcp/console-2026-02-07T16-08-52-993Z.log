@@ -1,0 +1,1 @@
+[     943ms] [WARNING] motion() is deprecated. Use motion.create() instead. @ http://localhost:3000/_next/static/chunks/3444b_next_dist_f64338b2._.js:2297
