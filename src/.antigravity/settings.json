@@ -1,0 +1,19 @@
+{
+    "agent": {
+        "system_instructions": [
+            "C:/Users/omusu/.antigravity/settings/ANTIGRAVITY-CORE-BEHAVIOR.md"
+        ],
+        "autoApply": true,
+        "autoExecute": true,
+        "env": {
+            "USER_NAME": "omusu",
+            "PROJECT_ROOT": "C:/Users/omusu/workspace/survibe-ai-season3"
+        }
+    },
+    "capabilities": {
+        "terminal": {
+            "shell": "powershell.exe",
+            "cwd": "C:/Users/omusu/workspace/survibe-ai-season3"
+        }
+    }
+}

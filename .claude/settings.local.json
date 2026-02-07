@@ -1,0 +1,25 @@
+{
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "context7",
+    "playwright",
+    "markitdown",
+    "arxiv-mcp-server",
+    "youtube",
+    "gemini-cli",
+    "gemini-google-search",
+    "voicevox",
+    "aivisspeech",
+    "sequential-thinking",
+    "magic",
+    "gemini-superclaude",
+    "serena",
+    "aws-docs",
+    "chrome-tabs"
+  ],
+  "permissions": {
+    "allow": [
+      "Bash(npm run build:*)"
+    ]
+  }
+}
