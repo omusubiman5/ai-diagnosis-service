@@ -4,74 +4,123 @@ import { createTheme } from '@mui/material/styles';
 const theme = createTheme({
     palette: {
         primary: {
-            main: '#205493', // Trust Blue
+            main: '#111111', // Almost Black
         },
         secondary: {
-            main: '#32CD32', // Growth Green
+            main: '#666666', // Dark Gray
         },
         background: {
-            default: '#F5F7FA', // Warm Beige/Light Gray
-            paper: '#FFFFFF',
+            default: '#FFFFFF', // Clean White
+            paper: '#FAFAFA', // Very Light Gray
         },
         text: {
-            primary: '#333333', // Dark Gray
+            primary: '#111111',
+            secondary: '#444444',
         },
     },
     typography: {
-        fontFamily: [
-            '"Helvetica Neue"',
-            'Arial',
-            '"Hiragino Kaku Gothic ProN"',
-            '"Hiragino Sans"',
-            'Meiryo',
-            'sans-serif',
-        ].join(','),
-        fontSize: 14, // Base size, but specific elements will be larger
+        fontFamily: 'var(--font-nanum-myeongjo), serif',
+        fontSize: 14,
         h1: {
-            fontSize: '2rem', // 32px
+            fontFamily: 'var(--font-nanum-myeongjo), serif',
+            fontSize: '2.5rem',
             '@media (min-width:600px)': {
-                fontSize: '3rem', // 48px
+                fontSize: '4.5rem', // Larger for Hero
             },
             fontWeight: 700,
+            lineHeight: 1.1,
+            letterSpacing: '-0.06em', // Tight spacing from Interlude
         },
         h2: {
-            fontSize: '1.5rem', // 24px
+            fontFamily: 'var(--font-nanum-myeongjo), serif',
+            fontSize: '2rem',
             '@media (min-width:600px)': {
-                fontSize: '2.25rem', // 36px
+                fontSize: '2.5rem',
             },
             fontWeight: 700,
+            lineHeight: 1.3,
+            letterSpacing: '-0.04em',
         },
         h3: {
-            fontSize: '1.25rem', // 20px
+            fontFamily: 'var(--font-nanum-myeongjo), serif',
+            fontSize: '1.5rem',
             '@media (min-width:600px)': {
-                fontSize: '1.5rem', // 24px
+                fontSize: '2rem',
             },
             fontWeight: 700,
+            lineHeight: 1.4,
+            letterSpacing: '-0.03em',
+        },
+        h4: {
+            fontFamily: 'var(--font-nanum-myeongjo), serif',
+            fontWeight: 700,
+        },
+        h5: {
+            fontFamily: 'var(--font-nanum-myeongjo), serif',
+            fontWeight: 700,
+        },
+        h6: {
+            fontFamily: 'var(--font-ibm-plex-mono), monospace', // Use Mono for smaller headings/tags
+            fontWeight: 500,
+            letterSpacing: '0.02em',
         },
         body1: {
-            fontSize: '1.125rem', // 18px (Senior Friendly)
-            lineHeight: 1.6,
+            fontFamily: 'var(--font-nanum-myeongjo), serif',
+            fontSize: '1rem',
+            lineHeight: 1.8,
+            letterSpacing: '0.02em',
+        },
+        body2: {
+            fontFamily: 'var(--font-nanum-myeongjo), serif',
+            fontSize: '0.875rem',
+            lineHeight: 1.7,
+            letterSpacing: '0.02em',
+        },
+        caption: {
+            fontFamily: 'var(--font-ibm-plex-mono), monospace',
+            fontSize: '0.75rem',
+            letterSpacing: '0.05em',
         },
         button: {
+            fontFamily: 'var(--font-nanum-myeongjo), serif',
             textTransform: 'none',
             fontWeight: 700,
+            letterSpacing: '0.02em',
         },
     },
     components: {
         MuiButton: {
             styleOverrides: {
                 root: {
-                    borderRadius: 8,
-                    padding: '12px 24px',
-                    minHeight: '44px', // Touch target size
+                    borderRadius: 9999, // Pill shape
+                    padding: '10px 32px',
+                    minHeight: '48px',
+                    boxShadow: 'none',
+                    fontSize: '1rem',
+                    '&:hover': {
+                        boxShadow: 'none',
+                    },
+                },
+                containedPrimary: {
+                    backgroundColor: '#111111',
+                    color: '#FFFFFF',
+                    '&:hover': {
+                        backgroundColor: '#333333',
+                    },
                 },
                 containedSecondary: {
-                    color: '#FFFFFF',
-                    fontSize: '1.125rem',
-                    boxShadow: '0 4px 6px rgba(50, 205, 50, 0.3)',
+                    backgroundColor: '#F0F0F0',
+                    color: '#111111',
                     '&:hover': {
-                        backgroundColor: '#2eb82e',
-                        boxShadow: '0 6px 8px rgba(50, 205, 50, 0.4)',
+                        backgroundColor: '#E0E0E0',
+                    },
+                },
+                outlined: {
+                    borderColor: '#E0E0E0',
+                    color: '#111111',
+                    '&:hover': {
+                        borderColor: '#111111',
+                        backgroundColor: 'transparent',
                     },
                 },
             },
@@ -79,6 +128,18 @@ const theme = createTheme({
         MuiContainer: {
             defaultProps: {
                 maxWidth: 'lg',
+            },
+        },
+        MuiPaper: {
+            styleOverrides: {
+                root: {
+                    backgroundImage: 'none',
+                    boxShadow: 'none',
+                    border: 'none', // Removed borders as per new design
+                },
+                elevation1: {
+                    boxShadow: 'none',
+                },
             },
         },
     },

@@ -1,35 +1,41 @@
 'use client';
 import React from 'react';
-import { Box, Container, Typography, Link, Stack } from '@mui/material';
+import { Box, Container, Typography, Link, Stack, Divider } from '@mui/material';
 
 export default function Footer() {
     return (
-        <Box sx={{ py: 6, bgcolor: '#1a1a1a', color: '#fff' }}>
+        <Box sx={{ py: 12, bgcolor: '#000000', color: '#FFFFFF' }}>
             <Container maxWidth="lg">
-                <Stack direction={{ xs: 'column', md: 'row' }} justifyContent="space-between" alignItems="center" spacing={4}>
-                    <Box>
-                        <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 1 }}>
+                <Stack direction={{ xs: 'column', md: 'row' }} justifyContent="space-between" alignItems="flex-start" spacing={8} sx={{ mb: 8 }}>
+                    <Box sx={{ maxWidth: '400px' }}>
+                        <Typography variant="h4" sx={{ fontFamily: 'var(--font-nanum-myeongjo)', mb: 3, letterSpacing: '-0.02em' }}>
                             SKILL60+
                         </Typography>
-                        <Typography variant="body2" color="rgba(255,255,255,0.7)">
+                        <Typography variant="body2" sx={{ opacity: 0.7, lineHeight: 1.8 }}>
+                            あなたの60年の経験を、次の価値へ。<br />
                             シニア独立支援AIキャリア診断サービス
                         </Typography>
                     </Box>
-                    <Stack direction="row" spacing={3}>
-                        <Link href="#" color="inherit" underline="hover">
-                            運営会社
+                    <Stack spacing={2}>
+                        <Link href="#" color="inherit" underline="hover" sx={{ opacity: 0.8, fontSize: '0.9rem', fontFamily: 'var(--font-ibm-plex-mono)' }}>
+                            COMPANY
                         </Link>
-                        <Link href="#" color="inherit" underline="hover">
-                            プライバシーポリシー
+                        <Link href="#" color="inherit" underline="hover" sx={{ opacity: 0.8, fontSize: '0.9rem', fontFamily: 'var(--font-ibm-plex-mono)' }}>
+                            PRIVACY
                         </Link>
-                        <Link href="#" color="inherit" underline="hover">
-                            利用規約
+                        <Link href="#" color="inherit" underline="hover" sx={{ opacity: 0.8, fontSize: '0.9rem', fontFamily: 'var(--font-ibm-plex-mono)' }}>
+                            TERMS
                         </Link>
                     </Stack>
                 </Stack>
-                <Typography variant="body2" align="center" sx={{ mt: 8, opacity: 0.5 }}>
-                    © {new Date().getFullYear()} SKILL60+. All rights reserved.
-                </Typography>
+
+                <Divider sx={{ borderColor: 'rgba(255,255,255,0.1)', mb: 4 }} />
+
+                <Stack direction={{ xs: 'column', md: 'row' }} justifyContent="space-between" alignItems="center">
+                    <Typography variant="body2" sx={{ opacity: 0.4, fontSize: '0.75rem', fontFamily: 'var(--font-ibm-plex-mono)' }}>
+                        © {new Date().getFullYear()} SKILL60+. All rights reserved.
+                    </Typography>
+                </Stack>
             </Container>
         </Box>
     );

@@ -1,11 +1,10 @@
 'use client';
 import React, { useRef } from 'react';
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Container, Typography, Stack } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import { useReducedMotion } from '../hooks/useReducedMotion';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -18,70 +17,69 @@ const steps = [
 export default function StepsSection() {
     const containerRef = useRef<HTMLDivElement>(null);
     const stepsRef = useRef<(HTMLDivElement | null)[]>([]);
-    const prefersReducedMotion = useReducedMotion();
 
     useGSAP(() => {
-        if (prefersReducedMotion) return;
-
         gsap.from(stepsRef.current, {
-            y: 50,
+            y: 30,
             opacity: 0,
-            duration: 0.8,
-            stagger: 0.3,
+            duration: 1,
+            stagger: 0.2,
             ease: 'power3.out',
             scrollTrigger: {
                 trigger: containerRef.current,
-                start: 'top 70%',
+                start: 'top 75%',
             }
         });
     }, { scope: containerRef });
 
     return (
-        <Box ref={containerRef} sx={{ py: 12, bgcolor: '#FFFFFF' }}>
+        <Box ref={containerRef} sx={{ py: 20, bgcolor: '#FFFFFF' }}>
             <Container maxWidth="lg">
-                <Typography
-                    variant="h2"
-                    align="center"
-                    color="primary"
-                    gutterBottom
-                    sx={{ mb: 8, fontWeight: 'bold' }}
-                >
-                    ご利用の流れ
-                </Typography>
-                <Grid container spacing={4}>
+                <Box sx={{ mb: 16, textAlign: 'center' }}>
+                    <Typography
+                        variant="h2"
+                        gutterBottom
+                        sx={{ fontWeight: 400, letterSpacing: '-0.02em', mb: 2 }}
+                    >
+                        ご利用の流れ
+                    </Typography>
+                    <Typography variant="body1" color="text.secondary" sx={{ fontFamily: 'var(--font-ibm-plex-mono)', fontSize: '0.9rem', letterSpacing: '0.1em' }} >
+                        HOW IT WORKS
+                    </Typography>
+                </Box>
+
+                <Grid container spacing={8} justifyContent="center">
                     {steps.map((step, index) => (
                         <Grid size={{ xs: 12, md: 4 }} key={index}>
                             <Box
                                 ref={(el: HTMLDivElement | null) => { stepsRef.current[index] = el }}
                                 sx={{
                                     textAlign: 'center',
-                                    position: 'relative',
-                                    p: 4,
+                                    borderTop: '1px solid #111',
+                                    pt: 4,
+                                    mt: 4
                                 }}
                             >
-                                <Typography
-                                    variant="h1"
-                                    color="secondary"
-                                    sx={{
-                                        fontSize: '6rem',
-                                        fontWeight: 900,
-                                        opacity: 0.2,
-                                        lineHeight: 1,
-                                        mb: -4,
-                                        position: 'relative',
-                                        zIndex: 0,
-                                    }}
-                                >
-                                    {step.number}
-                                </Typography>
-                                <Box sx={{ position: 'relative', zIndex: 1 }}>
-                                    <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 2 }}>
+                                <Stack alignItems="center" spacing={3}>
+                                    <Typography
+                                        variant="caption"
+                                        sx={{
+                                            fontFamily: 'var(--font-ibm-plex-mono)',
+                                            fontSize: '1rem',
+                                            fontWeight: 500,
+                                            color: '#111',
+                                            letterSpacing: '0.1em'
+                                        }}
+                                    >
+                                        STEP {step.number}
+                                    </Typography>
+                                    <Typography variant="h5" sx={{ fontFamily: 'var(--font-nanum-myeongjo)', mb: 2, fontWeight: 700 }}>
                                         {step.title}
                                     </Typography>
-                                    <Typography variant="body1" color="text.secondary" sx={{ whiteSpace: 'pre-line' }}>
+                                    <Typography variant="body1" color="text.secondary" sx={{ whiteSpace: 'pre-line', lineHeight: 2.0 }}>
                                         {step.description}
                                     </Typography>
-                                </Box>
+                                </Stack>
                             </Box>
                         </Grid>
                     ))}

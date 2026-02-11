@@ -1,11 +1,19 @@
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
+}
+
+body {
+  background-color: #FFFFFF;
+  color: #111111;
+  font-feature-settings: "palt";
 }
 
 /* ===================================
@@ -16,59 +24,76 @@
 @keyframes voice-ripple {
   0% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(211, 47, 47, 0.7),
-                0 0 20px rgba(211, 47, 47, 0.4);
+    box-shadow: 0 0 0 0 rgba(17, 17, 17, 0.4),
+      0 0 20px rgba(17, 17, 17, 0.2);
   }
+
   50% {
     transform: scale(1.05);
-    box-shadow: 0 0 0 10px rgba(211, 47, 47, 0),
-                0 0 25px rgba(211, 47, 47, 0.6);
+    box-shadow: 0 0 0 10px rgba(17, 17, 17, 0),
+      0 0 25px rgba(17, 17, 17, 0.4);
   }
+
   100% {
     transform: scale(1);
-    box-shadow: 0 0 0 20px rgba(211, 47, 47, 0),
-                0 0 20px rgba(211, 47, 47, 0.4);
+    box-shadow: 0 0 0 20px rgba(17, 17, 17, 0),
+      0 0 20px rgba(17, 17, 17, 0.2);
   }
 }
 
 .mic-recording {
-  animation: voice-ripple 1.2s infinite cubic-bezier(0.66, 0, 0, 1);
+  animation: voice-ripple 1.5s infinite cubic-bezier(0.66, 0, 0, 1);
   position: relative;
+  background-color: #FAFAFA !important;
+  color: #111111 !important;
 }
 
 /* 録音中バッジ */
 @keyframes pulse-badge {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.8; transform: scale(1.05); }
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
 }
 
 .recording-badge {
   position: absolute;
-  top: -8px;
-  right: -8px;
-  width: 12px;
-  height: 12px;
-  background-color: #f44336;
+  top: -4px;
+  right: -4px;
+  width: 10px;
+  height: 10px;
+  background-color: #111111;
   border-radius: 50%;
-  border: 2px solid white;
-  animation: pulse-badge 1s infinite;
+  border: 2px solid #FFFFFF;
+  animation: pulse-badge 1.5s infinite;
   z-index: 1;
 }
 
 /* 入力エリアのハイライト */
 @keyframes input-highlight {
-  0%, 100% {
-    box-shadow: 0 0 0 2px rgba(211, 47, 47, 0.3);
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 1px rgba(17, 17, 17, 0.1);
   }
+
   50% {
-    box-shadow: 0 0 0 2px rgba(211, 47, 47, 0.5),
-                0 0 15px rgba(211, 47, 47, 0.2);
+    box-shadow: 0 0 0 1px rgba(17, 17, 17, 0.3),
+      0 0 10px rgba(17, 17, 17, 0.05);
   }
 }
 
 .input-area-recording {
   animation: input-highlight 2s infinite;
   border-radius: 8px;
+  border-color: #333333 !important;
 }
 
 /* ===================================
@@ -77,29 +102,36 @@
 
 /* スピーカーアイコンのパルスアニメーション */
 @keyframes speaker-pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1);
-    opacity: 1;
+    opacity: 0.7;
   }
+
   50% {
-    transform: scale(1.15);
-    opacity: 0.8;
+    transform: scale(1.1);
+    opacity: 1;
   }
 }
 
 .speaker-active {
-  animation: speaker-pulse 1s infinite ease-in-out;
+  animation: speaker-pulse 1.5s infinite ease-in-out;
+  color: #111111 !important;
 }
 
 /* 波形アニメーション（改善版） */
 @keyframes wave-animation {
-  0%, 100% {
-    height: 4px;
-    opacity: 0.7;
+
+  0%,
+  100% {
+    height: 3px;
+    opacity: 0.3;
   }
+
   50% {
-    height: 18px;
-    opacity: 1;
+    height: 14px;
+    opacity: 0.8;
   }
 }
 
@@ -112,32 +144,48 @@
 }
 
 .speaking-wave-bar {
-  width: 3px;
-  background: linear-gradient(to top, #1976d2, #42a5f5);
-  border-radius: 3px;
-  animation: wave-animation 0.8s infinite ease-in-out;
-  box-shadow: 0 0 8px rgba(25, 118, 210, 0.3);
+  width: 2px;
+  background: #111111;
+  border-radius: 99px;
+  animation: wave-animation 1.2s infinite ease-in-out;
 }
 
-.speaking-wave-bar:nth-child(1) { animation-delay: 0s; }
-.speaking-wave-bar:nth-child(2) { animation-delay: 0.1s; }
-.speaking-wave-bar:nth-child(3) { animation-delay: 0.2s; }
-.speaking-wave-bar:nth-child(4) { animation-delay: 0.3s; }
-.speaking-wave-bar:nth-child(5) { animation-delay: 0.2s; }
+.speaking-wave-bar:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.speaking-wave-bar:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.speaking-wave-bar:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.speaking-wave-bar:nth-child(4) {
+  animation-delay: 0.3s;
+}
+
+.speaking-wave-bar:nth-child(5) {
+  animation-delay: 0.2s;
+}
 
 /* メッセージのグローエフェクト */
 @keyframes message-glow {
-  0%, 100% {
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+
+  0%,
+  100% {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   }
+
   50% {
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12),
-                0 0 15px rgba(25, 118, 210, 0.15);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   }
 }
 
 .message-speaking {
-  animation: message-glow 2s infinite;
+  animation: message-glow 3s infinite;
+  border-left: 2px solid #111111 !important;
 }
 
 /* ===================================
@@ -146,33 +194,52 @@
 
 /* タイピングインジケーター */
 @keyframes typing-dots {
-  0%, 20% { content: ''; }
-  40% { content: '.'; }
-  60% { content: '..'; }
-  80%, 100% { content: '...'; }
+
+  0%,
+  20% {
+    content: '';
+  }
+
+  40% {
+    content: '.';
+  }
+
+  60% {
+    content: '..';
+  }
+
+  80%,
+  100% {
+    content: '...';
+  }
 }
 
 .interim-text {
   position: relative;
+  font-family: var(--font-nanum-myeongjo);
 }
 
 .interim-text::after {
   content: '...';
   animation: typing-dots 1.5s infinite;
-  color: #666;
-  font-weight: bold;
+  color: #888;
+  font-weight: 400;
 }
 
 /* 中間テキストの背景パルス */
 @keyframes interim-pulse {
-  0%, 100% {
-    background-color: #FFF9C4;
+
+  0%,
+  100% {
+    background-color: #F5F5F5;
   }
+
   50% {
-    background-color: #FFF59D;
+    background-color: #EEEEEE;
   }
 }
 
 .interim-container {
   animation: interim-pulse 2s infinite;
+  color: #333;
 }

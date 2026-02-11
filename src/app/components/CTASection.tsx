@@ -1,9 +1,6 @@
 'use client';
 import React, { useState } from 'react';
 import { Box, Container, Typography, Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
-import { motion } from 'framer-motion';
-
-const MotionButton = motion.create(Button);
 
 export default function CTASection() {
     const [open, setOpen] = useState(false);
@@ -17,53 +14,59 @@ export default function CTASection() {
     };
 
     return (
-        <Box sx={{ py: 16, bgcolor: 'primary.main', color: '#fff', textAlign: 'center' }}>
+        <Box sx={{ py: 24, bgcolor: '#111111', color: '#FFFFFF', textAlign: 'center' }}>
             <Container maxWidth="md">
-                <Typography variant="h2" gutterBottom sx={{ fontWeight: 900, mb: 4 }}>
+                <Typography variant="h2" gutterBottom sx={{ fontFamily: 'var(--font-nanum-myeongjo)', mb: 6, fontWeight: 400, letterSpacing: '-0.02em', lineHeight: 1.4 }}>
                     あなたの新しい可能性、<br />今すぐ確認しませんか？
                 </Typography>
-                <Typography variant="h5" sx={{ mb: 8, opacity: 0.9 }}>
+                <Typography variant="body1" sx={{ mb: 12, opacity: 0.7, fontSize: '1.2rem', fontFamily: 'var(--font-nanum-myeongjo)' }}>
                     10,000人以上が診断済み。登録は無料です。
                 </Typography>
 
-                <MotionButton
+                <Button
                     variant="contained"
-                    color="secondary"
                     size="large"
                     onClick={handleClickOpen}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    whileFocus={{ outline: '3px solid #32CD32' }}
                     sx={{
-                        py: 2,
-                        px: 8,
-                        fontSize: '1.5rem',
-                        fontWeight: 'bold',
-                        borderRadius: 50,
-                        boxShadow: '0 8px 30px rgba(0,0,0,0.3)',
+                        bgcolor: '#FFFFFF',
+                        color: '#111111',
+                        py: 2.5,
+                        px: 10,
+                        fontSize: '1.1rem',
+                        borderRadius: 9999,
+                        boxShadow: 'none',
+                        fontFamily: 'var(--font-ibm-plex-mono)',
+                        fontWeight: 500,
+                        '&:hover': {
+                            bgcolor: '#E0E0E0',
+                            boxShadow: 'none',
+                        }
                     }}
                 >
-                    無料で診断を始める
-                </MotionButton>
+                    START DIAGNOSIS
+                </Button>
             </Container>
 
             <Dialog
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="cta-dialog-title"
+                PaperProps={{
+                    sx: { borderRadius: 4, p: 4 }
+                }}
             >
-                <DialogTitle id="cta-dialog-title" sx={{ fontWeight: 'bold', color: 'primary.main' }}>
-                    {"Coming Soon!"}
+                <DialogTitle id="cta-dialog-title" sx={{ fontFamily: 'var(--font-nanum-myeongjo)', textAlign: 'center', fontSize: '1.5rem' }}>
+                    Coming Soon!
                 </DialogTitle>
                 <DialogContent>
-                    <Typography>
+                    <Typography sx={{ textAlign: 'center', lineHeight: 2 }}>
                         SKILL60+診断機能は現在開発中です。
                         <br />
                         正式リリースまで今しばらくお待ちください。
                     </Typography>
                 </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose} color="primary" autoFocus>
+                <DialogActions sx={{ justifyContent: 'center', pb: 2 }}>
+                    <Button onClick={handleClose} sx={{ color: '#111' }}>
                         閉じる
                     </Button>
                 </DialogActions>
