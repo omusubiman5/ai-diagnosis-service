@@ -3,78 +3,69 @@ import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
     palette: {
+        mode: 'dark',
         primary: {
-            main: '#111111', // Almost Black
+            main: '#00D632', // Cash App Green
         },
         secondary: {
-            main: '#666666', // Dark Gray
+            main: '#FFFFFF', // White
         },
         background: {
-            default: '#FFFFFF', // Clean White
-            paper: '#FAFAFA', // Very Light Gray
+            default: '#000000', // Deep Black
+            paper: '#111111', // Dark Gray
         },
         text: {
-            primary: '#111111',
-            secondary: '#444444',
+            primary: '#FFFFFF',
+            secondary: '#999999',
         },
     },
     typography: {
-        fontFamily: 'var(--font-nanum-myeongjo), serif',
+        fontFamily: 'var(--font-inter), sans-serif',
         fontSize: 14,
         h1: {
             fontFamily: 'var(--font-nanum-myeongjo), serif',
-            fontSize: '2.5rem',
-            '@media (min-width:600px)': {
-                fontSize: '4.5rem', // Larger for Hero
-            },
-            fontWeight: 700,
+            fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
+            fontWeight: 800,
             lineHeight: 1.1,
-            letterSpacing: '-0.06em', // Tight spacing from Interlude
+            letterSpacing: '-0.02em',
         },
         h2: {
             fontFamily: 'var(--font-nanum-myeongjo), serif',
-            fontSize: '2rem',
-            '@media (min-width:600px)': {
-                fontSize: '2.5rem',
-            },
+            fontSize: 'clamp(2rem, 4vw, 3rem)',
             fontWeight: 700,
-            lineHeight: 1.3,
-            letterSpacing: '-0.04em',
+            lineHeight: 1.2,
+            letterSpacing: '-0.01em',
         },
         h3: {
             fontFamily: 'var(--font-nanum-myeongjo), serif',
-            fontSize: '1.5rem',
-            '@media (min-width:600px)': {
-                fontSize: '2rem',
-            },
+            fontSize: 'clamp(1.5rem, 3vw, 2.5rem)',
             fontWeight: 700,
-            lineHeight: 1.4,
-            letterSpacing: '-0.03em',
+            letterSpacing: '-0.01em',
         },
         h4: {
-            fontFamily: 'var(--font-nanum-myeongjo), serif',
-            fontWeight: 700,
+            fontFamily: 'var(--font-inter), sans-serif',
+            fontWeight: 600,
         },
         h5: {
-            fontFamily: 'var(--font-nanum-myeongjo), serif',
-            fontWeight: 700,
+            fontFamily: 'var(--font-inter), sans-serif',
+            fontWeight: 600,
         },
         h6: {
-            fontFamily: 'var(--font-ibm-plex-mono), monospace', // Use Mono for smaller headings/tags
+            fontFamily: 'var(--font-ibm-plex-mono), monospace',
             fontWeight: 500,
-            letterSpacing: '0.02em',
+            letterSpacing: '0.05em',
         },
         body1: {
-            fontFamily: 'var(--font-nanum-myeongjo), serif',
-            fontSize: '1rem',
-            lineHeight: 1.8,
-            letterSpacing: '0.02em',
+            fontFamily: 'var(--font-inter), sans-serif',
+            fontSize: '1.125rem',
+            lineHeight: 1.6,
+            letterSpacing: '0.01em',
         },
         body2: {
-            fontFamily: 'var(--font-nanum-myeongjo), serif',
-            fontSize: '0.875rem',
-            lineHeight: 1.7,
-            letterSpacing: '0.02em',
+            fontFamily: 'var(--font-inter), sans-serif',
+            fontSize: '0.9rem',
+            lineHeight: 1.6,
+            letterSpacing: '0.01em',
         },
         caption: {
             fontFamily: 'var(--font-ibm-plex-mono), monospace',
@@ -82,9 +73,9 @@ const theme = createTheme({
             letterSpacing: '0.05em',
         },
         button: {
-            fontFamily: 'var(--font-nanum-myeongjo), serif',
+            fontFamily: 'var(--font-inter), sans-serif',
             textTransform: 'none',
-            fontWeight: 700,
+            fontWeight: 600,
             letterSpacing: '0.02em',
         },
     },
@@ -92,34 +83,38 @@ const theme = createTheme({
         MuiButton: {
             styleOverrides: {
                 root: {
-                    borderRadius: 9999, // Pill shape
-                    padding: '10px 32px',
+                    borderRadius: 9999,
+                    padding: '12px 32px',
                     minHeight: '48px',
-                    boxShadow: 'none',
+                    boxShadow: '0 4px 14px 0 rgba(0, 214, 50, 0.39)',
                     fontSize: '1rem',
+                    transition: 'all 0.2s ease-in-out',
                     '&:hover': {
-                        boxShadow: 'none',
+                        transform: 'translateY(-1px)',
+                        boxShadow: '0 6px 20px rgba(0, 214, 50, 0.23)',
                     },
                 },
                 containedPrimary: {
-                    backgroundColor: '#111111',
-                    color: '#FFFFFF',
+                    backgroundColor: '#00D632',
+                    color: '#000000',
                     '&:hover': {
-                        backgroundColor: '#333333',
+                        backgroundColor: '#00B82B',
                     },
                 },
                 containedSecondary: {
-                    backgroundColor: '#F0F0F0',
-                    color: '#111111',
+                    backgroundColor: '#FFFFFF',
+                    color: '#000000',
+                    boxShadow: '0 4px 14px 0 rgba(255, 255, 255, 0.39)',
                     '&:hover': {
-                        backgroundColor: '#E0E0E0',
+                        backgroundColor: '#F0F0F0',
                     },
                 },
                 outlined: {
-                    borderColor: '#E0E0E0',
-                    color: '#111111',
+                    borderColor: '#333333',
+                    color: '#FFFFFF',
+                    boxShadow: 'none',
                     '&:hover': {
-                        borderColor: '#111111',
+                        borderColor: '#FFFFFF',
                         backgroundColor: 'transparent',
                     },
                 },
@@ -134,11 +129,9 @@ const theme = createTheme({
             styleOverrides: {
                 root: {
                     backgroundImage: 'none',
+                    backgroundColor: '#111111',
                     boxShadow: 'none',
-                    border: 'none', // Removed borders as per new design
-                },
-                elevation1: {
-                    boxShadow: 'none',
+                    border: '1px solid #222222',
                 },
             },
         },

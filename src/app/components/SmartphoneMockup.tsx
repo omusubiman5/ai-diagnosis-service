@@ -1,48 +1,17 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { Box } from '@mui/material';
-import { gsap } from 'gsap';
-import { useGSAP } from '@gsap/react';
 
 export default function SmartphoneMockup() {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const shadowRef = useRef<HTMLImageElement>(null);
-    const phoneRef = useRef<HTMLDivElement>(null);
-
-    useGSAP(() => {
-        const tl = gsap.timeline({ delay: 1.0 }); // Start after hero text
-
-        // Initial state
-        // Animation from hidden state
-        tl.from(containerRef.current, {
-            opacity: 0,
-            y: 100,
-            duration: 1.5,
-            ease: 'power3.out'
-        })
-            .to(containerRef.current, {
-                y: -15, // Float up slightly
-                duration: 3, // Slow
-                ease: "sine.inOut",
-                yoyo: true,
-                repeat: -1
-            });
-
-    }, { scope: containerRef });
-
     return (
         <Box
-            ref={containerRef}
             sx={{
                 position: 'relative',
-                width: '280px', // Base width for mobile/mockup
-                height: '570px', // Aspect ratio based on standard phone
+                width: '280px',
+                height: '570px',
                 mx: 'auto',
-                mt: 8, // Spacing from top content
                 zIndex: 1,
-                perspective: '1000px',
-                border: '2px solid red', // DEBUG: Confirm position
                 '@media (min-width: 600px)': {
                     width: '320px',
                     height: '650px',
@@ -52,7 +21,6 @@ export default function SmartphoneMockup() {
             {/* Shadow Layer - Bottom */}
             <Box
                 component="img"
-                ref={shadowRef}
                 src="https://framerusercontent.com/images/a9gc2DlbpkkZlsKZRlBfRklZyY.png"
                 alt="Shadow"
                 sx={{
@@ -63,13 +31,13 @@ export default function SmartphoneMockup() {
                     width: '140%', // Shadow is wider than phone
                     maxWidth: 'none',
                     zIndex: 0,
-                    pointerEvents: 'none'
+                    pointerEvents: 'none',
+                    opacity: 0.6
                 }}
             />
 
             {/* Phone Container (Bezel + Screen) */}
             <Box
-                ref={phoneRef}
                 sx={{
                     position: 'relative',
                     width: '100%',

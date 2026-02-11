@@ -1,76 +1,73 @@
 'use client';
-import React, { useState } from 'react';
-import { Box, Container, Typography, Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
+import React from 'react';
+import { Box, Container, Typography, Button } from '@mui/material';
+import ScrollReveal from './ScrollReveal';
 
 export default function CTASection() {
-    const [open, setOpen] = useState(false);
-
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
-
     return (
-        <Box sx={{ py: 24, bgcolor: '#111111', color: '#FFFFFF', textAlign: 'center' }}>
+        <Box
+            component="section"
+            sx={{
+                py: { xs: 16, md: 24 },
+                bgcolor: '#00D632',
+                color: '#000',
+            }}
+        >
             <Container maxWidth="md">
-                <Typography variant="h2" gutterBottom sx={{ fontFamily: 'var(--font-nanum-myeongjo)', mb: 6, fontWeight: 400, letterSpacing: '-0.02em', lineHeight: 1.4 }}>
-                    あなたの新しい可能性、<br />今すぐ確認しませんか？
-                </Typography>
-                <Typography variant="body1" sx={{ mb: 12, opacity: 0.7, fontSize: '1.2rem', fontFamily: 'var(--font-nanum-myeongjo)' }}>
-                    10,000人以上が診断済み。登録は無料です。
-                </Typography>
+                <ScrollReveal animation="slideUp">
+                    <Box sx={{ textAlign: 'center' }}>
+                        <Typography
+                            variant="h2"
+                            sx={{
+                                mb: 4,
+                                fontWeight: 700,
+                                letterSpacing: '-0.02em',
+                                fontSize: 'var(--font-size-hero)',
+                                fontFamily: 'var(--font-nanum-myeongjo)',
+                                lineHeight: 1.2,
+                            }}
+                        >
+                            今すぐ始めよう
+                        </Typography>
 
-                <Button
-                    variant="contained"
-                    size="large"
-                    onClick={handleClickOpen}
-                    sx={{
-                        bgcolor: '#FFFFFF',
-                        color: '#111111',
-                        py: 2.5,
-                        px: 10,
-                        fontSize: '1.1rem',
-                        borderRadius: 9999,
-                        boxShadow: 'none',
-                        fontFamily: 'var(--font-ibm-plex-mono)',
-                        fontWeight: 500,
-                        '&:hover': {
-                            bgcolor: '#E0E0E0',
-                            boxShadow: 'none',
-                        }
-                    }}
-                >
-                    START DIAGNOSIS
-                </Button>
+                        <Typography
+                            sx={{
+                                fontSize: 'var(--font-size-body)',
+                                lineHeight: 1.8,
+                                mb: 6,
+                                maxWidth: '600px',
+                                mx: 'auto',
+                            }}
+                        >
+                            あなたの60年の経験を、次の価値へ。
+                        </Typography>
+
+                        <Button
+                            variant="contained"
+                            size="large"
+                            sx={{
+                                bgcolor: '#000',
+                                color: '#00D632',
+                                fontSize: '1.2rem',
+                                px: 8,
+                                py: 2.5,
+                                borderRadius: '50px',
+                                textTransform: 'none',
+                                fontWeight: 700,
+                                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)',
+                                transition: 'all 0.3s ease',
+                                '&:hover': {
+                                    bgcolor: '#111',
+                                    transform: 'translateY(-2px)',
+                                    boxShadow: '0 6px 30px rgba(0, 0, 0, 0.3)',
+                                }
+                            }}
+                        >
+                            無料で診断を始める
+                        </Button>
+                    </Box>
+                </ScrollReveal>
             </Container>
-
-            <Dialog
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="cta-dialog-title"
-                PaperProps={{
-                    sx: { borderRadius: 4, p: 4 }
-                }}
-            >
-                <DialogTitle id="cta-dialog-title" sx={{ fontFamily: 'var(--font-nanum-myeongjo)', textAlign: 'center', fontSize: '1.5rem' }}>
-                    Coming Soon!
-                </DialogTitle>
-                <DialogContent>
-                    <Typography sx={{ textAlign: 'center', lineHeight: 2 }}>
-                        SKILL60+診断機能は現在開発中です。
-                        <br />
-                        正式リリースまで今しばらくお待ちください。
-                    </Typography>
-                </DialogContent>
-                <DialogActions sx={{ justifyContent: 'center', pb: 2 }}>
-                    <Button onClick={handleClose} sx={{ color: '#111' }}>
-                        閉じる
-                    </Button>
-                </DialogActions>
-            </Dialog>
         </Box>
     );
 }

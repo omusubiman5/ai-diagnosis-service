@@ -1,3 +1,7 @@
+/* ========================================
+   CASH APP GLOBAL STYLES - COMPLETE RESET
+   ======================================== */
+
 @media (prefers-reduced-motion: reduce) {
 
   *,
@@ -10,15 +14,186 @@
   }
 }
 
-body {
-  background-color: #FFFFFF;
-  color: #111111;
-  font-feature-settings: "palt";
+/* ========================================
+   TYPOGRAPHY SCALE (Cash App)
+   ======================================== */
+:root {
+  /* Responsive Typography - Cash App Scale */
+  --font-size-hero: clamp(2.4375rem, 1.56985rem + 4.33824vw, 6.125rem);
+  --font-size-h2: clamp(1.5rem, 1rem + 2.5vw, 3rem);
+  --font-size-h3: clamp(1.25rem, 0.9rem + 1.5vw, 2rem);
+  --font-size-body: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);
+  --font-size-small: clamp(0.875rem, 0.8rem + 0.3vw, 1rem);
+
+  /* Colors */
+  --color-green: #00D632;
+  --color-black: #000000;
+  --color-white: #FFFFFF;
+  --color-gray: #999999;
+  --color-gray-dark: #333333;
+
+  /* Spacing */
+  --spacing-section: clamp(4rem, 8vw, 8rem);
 }
 
-/* ===================================
-   音声入力中のアニメーション
-   =================================== */
+body {
+  background-color: var(--color-black);
+  color: var(--color-white);
+  font-feature-settings: "palt";
+  overflow-x: hidden;
+  transition: background-color 0.6s ease;
+}
+
+/* Scrollbar Customization */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-gray-dark);
+  border-radius: 16px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-black);
+}
+
+/* ========================================
+   CARD FAN ANIMATION (Cash App Exact)
+   ======================================== */
+
+.card-fan-container {
+  position: relative;
+  width: 300px;
+  height: 190px;
+  cursor: pointer;
+  margin: 0 auto;
+}
+
+.card {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  border-radius: 16px;
+  transition: transform 0.4s ease-in-out;
+  transform-origin: center center;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  /* Initial state: all stacked at -90deg */
+  transform: translate(-50%, -50%) rotate(-90deg);
+}
+
+/* Fan State - Exact angles from Cash App analysis */
+.card-fan-container:hover .card:nth-of-type(1) {
+  transform: translate(-50%, -50%) rotate(-82.5deg);
+}
+
+.card-fan-container:hover .card:nth-of-type(2) {
+  transform: translate(-50%, -50%) rotate(-75deg);
+}
+
+.card-fan-container:hover .card:nth-of-type(3) {
+  transform: translate(-50%, -50%) rotate(-60deg);
+}
+
+.card-fan-container:hover .card:nth-of-type(4) {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.card-fan-container:hover .card:nth-of-type(5) {
+  transform: translate(-50%, -50%) rotate(-30deg);
+}
+
+.card-fan-container:hover .card:nth-of-type(6) {
+  transform: translate(-50%, -50%) rotate(-15deg);
+}
+
+/* Card Content Styles */
+.card-content {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #333;
+}
+
+.card-chip {
+  position: absolute;
+  top: 15%;
+  left: 10%;
+  width: 20%;
+  height: 15%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 100%);
+  border-radius: 4px;
+}
+
+.card-text {
+  position: absolute;
+  bottom: 10%;
+  left: 10%;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.8);
+  font-family: var(--font-ibm-plex-mono);
+}
+
+@media (min-width: 600px) {
+  .card-fan-container {
+    width: 400px;
+    height: 250px;
+  }
+}
+
+/* ========================================
+   SIMPLE ANIMATIONS (Cash App Style)
+   ======================================== */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes introAnimation {
+  0% {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Utility classes for ScrollReveal */
+.scroll-section {
+  opacity: 0;
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.scroll-section.visible {
+  opacity: 1;
+  transform: none;
+}
+
 
 /* マイクボタンのリップル & グローアニメーション */
 @keyframes voice-ripple {
@@ -242,4 +417,145 @@ body {
 .interim-container {
   animation: interim-pulse 2s infinite;
   color: #333;
+}
+
+/* ===================================
+   Cash App Style Animations
+   =================================== */
+
+@keyframes introAnimation {
+  0% {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+    transform: scale(0.4);
+  }
+
+  100% {
+    opacity: 0.1;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes ctaSlideIn {
+  0% {
+    width: 96vw;
+    left: 2vw;
+    transform: translateY(100px);
+    opacity: 0;
+  }
+
+  100% {
+    width: 90vw;
+    left: 5vw;
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes slideUpFade {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-15px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Utility classes for ScrollReveal */
+.scroll-section {
+  opacity: 0;
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.scroll-section.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Global Float Animations */
+@keyframes float-slow {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes float-medium {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes float-fast {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+.animate-float-medium {
+  animation: float-medium 4s ease-in-out infinite;
+}
+
+.animate-float-fast {
+  animation: float-fast 3s ease-in-out infinite;
 }

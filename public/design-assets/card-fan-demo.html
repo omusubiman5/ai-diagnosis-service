@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cash App スタイル カードファンアニメーション</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 60px;
+        }
+
+        .header h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .card-fan-container {
+            position: relative;
+            width: min(90vw, 500px);
+            height: min(60vw, 350px);
+            cursor: pointer;
+            perspective: 1000px;
+        }
+
+        .card {
+            position: absolute;
+            width: min(70vw, 300px);
+            height: min(44vw, 188px);
+            top: 50%;
+            left: 50%;
+            border-radius: 16px;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transform-origin: center center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            
+            /* 初期状態: すべて重なる */
+            transform: translate(-50%, -50%) rotate(-90deg);
+        }
+
+        /* 各カードに個別のグラデーション */
+        .card:nth-child(1) { 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            z-index: 6;
+        }
+        .card:nth-child(2) { 
+            background: linear-gradient(135deg, #434343 0%, #000000 100%);
+            z-index: 5;
+        }
+        .card:nth-child(3) { 
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            z-index: 4;
+        }
+        .card:nth-child(4) { 
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            z-index: 3;
+        }
+        .card:nth-child(5) { 
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            z-index: 2;
+        }
+        .card:nth-child(6) { 
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            z-index: 1;
+        }
+
+        /* カードの内側デザイン */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 50px;
+            height: 35px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 100%);
+            border-radius: 6px;
+        }
+
+        .card::after {
+            content: 'Cash Card';
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            color: rgba(255,255,255,0.9);
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* ホバー時: 扇形に展開 */
+        .card-fan-container:hover .card:nth-child(1) { 
+            transform: translate(-50%, -50%) rotate(-82.5deg);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+        }
+        .card-fan-container:hover .card:nth-child(2) { 
+            transform: translate(-50%, -50%) rotate(-75deg);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+        }
+        .card-fan-container:hover .card:nth-child(3) { 
+            transform: translate(-50%, -50%) rotate(-60deg);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+        }
+        .card-fan-container:hover .card:nth-child(4) { 
+            transform: translate(-50%, -50%) rotate(-45deg);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+        }
+        .card-fan-container:hover .card:nth-child(5) { 
+            transform: translate(-50%, -50%) rotate(-30deg);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+        }
+        .card-fan-container:hover .card:nth-child(6) { 
+            transform: translate(-50%, -50%) rotate(-15deg);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+        }
+
+        .instruction {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            font-size: 1.1rem;
+            opacity: 0;
+            animation: fadeIn 1s ease-in 0.5s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 0.8;
+            }
+        }
+
+        .tech-stack {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 15px 30px;
+            border-radius: 12px;
+            color: white;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+            }
+
+            .tech-stack {
+                font-size: 0.8rem;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>💳 Card Fan Animation</h1>
+        <p>Cash App inspired design</p>
+    </div>
+
+    <div class="card-fan-container">
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+        <div class="card"></div>
+    </div>
+
+    <p class="instruction">
+        ✨ カードにホバーしてアニメーションを見てください
+    </p>
+
+    <div class="tech-stack">
+        🛠️ Pure CSS Animation | No JavaScript Libraries
+    </div>
+
+    <script>
+        // タッチデバイス用のサポート
+        const container = document.querySelector('.card-fan-container');
+        let isOpen = false;
+
+        container.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            isOpen = !isOpen;
+            
+            if (isOpen) {
+                container.classList.add('touch-active');
+            } else {
+                container.classList.remove('touch-active');
+            }
+        });
+
+        // タッチデバイス用のスタイル追加
+        const style = document.createElement('style');
+        style.textContent = `
+            .touch-active .card:nth-child(1) { 
+                transform: translate(-50%, -50%) rotate(-82.5deg) !important;
+                box-shadow: 0 15px 50px rgba(0,0,0,0.4) !important;
+            }
+            .touch-active .card:nth-child(2) { 
+                transform: translate(-50%, -50%) rotate(-75deg) !important;
+                box-shadow: 0 15px 50px rgba(0,0,0,0.4) !important;
+            }
+            .touch-active .card:nth-child(3) { 
+                transform: translate(-50%, -50%) rotate(-60deg) !important;
+                box-shadow: 0 15px 50px rgba(0,0,0,0.4) !important;
+            }
+            .touch-active .card:nth-child(4) { 
+                transform: translate(-50%, -50%) rotate(-45deg) !important;
+                box-shadow: 0 15px 50px rgba(0,0,0,0.4) !important;
+            }
+            .touch-active .card:nth-child(5) { 
+                transform: translate(-50%, -50%) rotate(-30deg) !important;
+                box-shadow: 0 15px 50px rgba(0,0,0,0.4) !important;
+            }
+            .touch-active .card:nth-child(6) { 
+                transform: translate(-50%, -50%) rotate(-15deg) !important;
+                box-shadow: 0 15px 50px rgba(0,0,0,0.4) !important;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

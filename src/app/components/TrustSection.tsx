@@ -1,91 +1,76 @@
 'use client';
-import React, { useRef } from 'react';
-import { Box, Container, Typography, Stack, Divider } from '@mui/material';
-import Grid from '@mui/material/Grid';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
-
-gsap.registerPlugin(ScrollTrigger);
+import React from 'react';
+import { Box, Container, Typography } from '@mui/material';
+import ScrollReveal from './ScrollReveal';
 
 export default function TrustSection() {
-    const containerRef = useRef<HTMLDivElement>(null);
-
-    useGSAP(() => {
-        // Minimal animations if needed
-    }, { scope: containerRef });
-
     return (
-        <Box ref={containerRef} sx={{ py: 20, bgcolor: '#FFFFFF' }}>
-            <Container maxWidth="lg">
-                <Box sx={{ mb: 16, textAlign: 'center' }}>
+        <Box
+            component="section"
+            sx={{
+                py: { xs: 12, md: 20 },
+                bgcolor: '#F5F5F5',
+                color: '#000',
+            }}
+        >
+            <Container maxWidth="md">
+                <ScrollReveal animation="slideUp">
                     <Typography
                         variant="h2"
-                        gutterBottom
-                        sx={{ fontWeight: 400, letterSpacing: '-0.02em', mb: 4 }}
+                        align="center"
+                        sx={{
+                            mb: 8,
+                            fontWeight: 700,
+                            letterSpacing: '-0.02em',
+                            fontSize: 'var(--font-size-h2)',
+                            fontFamily: 'var(--font-nanum-myeongjo)',
+                        }}
                     >
-                        なぜ、正確に診断できるのか？
+                        信頼の実績
                     </Typography>
-                </Box>
+                </ScrollReveal>
 
-                <Grid container spacing={12} alignItems="flex-start">
-                    <Grid size={{ xs: 12, md: 6 }}>
-                        <Box sx={{ pr: { md: 8 } }}>
-                            <Typography variant="h4" gutterBottom sx={{ fontFamily: 'var(--font-nanum-myeongjo)', mb: 6 }}>
-                                2つのデータの融合
-                            </Typography>
-
-                            <Stack spacing={6}>
-                                <Box>
-                                    <Typography variant="h6" sx={{ fontFamily: 'var(--font-ibm-plex-mono)', mb: 2, color: '#888', letterSpacing: '0.05em' }}>
-                                        DATA 01
-                                    </Typography>
-                                    <Typography variant="h5" sx={{ fontFamily: 'var(--font-nanum-myeongjo)', mb: 2, fontWeight: 700 }}>
-                                        求人市場データ
-                                    </Typography>
-                                    <Typography variant="body1" paragraph color="text.secondary" sx={{ lineHeight: 2.0 }}>
-                                        数百万件以上のシニア向け求人データを解析し、リアルタイムな市場価値を算出します。
-                                    </Typography>
-                                </Box>
-                                <Divider />
-                                <Box>
-                                    <Typography variant="h6" sx={{ fontFamily: 'var(--font-ibm-plex-mono)', mb: 2, color: '#888', letterSpacing: '0.05em' }}>
-                                        DATA 02
-                                    </Typography>
-                                    <Typography variant="h5" sx={{ fontFamily: 'var(--font-nanum-myeongjo)', mb: 2, fontWeight: 700 }}>
-                                        キャリア理論
-                                    </Typography>
-                                    <Typography variant="body1" color="text.secondary" sx={{ lineHeight: 2.0 }}>
-                                        長年の研究に基づくキャリア理論をAIに学習させ、表面的な経歴だけでなく、潜在的なスキルも抽出します。
-                                    </Typography>
-                                </Box>
-                            </Stack>
-                        </Box>
-                    </Grid>
-                    <Grid size={{ xs: 12, md: 6 }}>
-                        <Box sx={{
-                            position: 'relative',
-                            p: 8,
-                            bgcolor: '#FAFAFA',
-                        }}>
-                            <Typography variant="caption" sx={{ display: 'block', mb: 4, letterSpacing: '0.1em', color: '#111', fontFamily: 'var(--font-ibm-plex-mono)' }}>
-                                SUPERVISOR
-                            </Typography>
-                            <Typography variant="h5" sx={{ fontFamily: 'var(--font-nanum-myeongjo)', mb: 4, fontWeight: 700 }}>
-                                シニアキャリア研究所 監修
-                            </Typography>
-                            <Box sx={{ position: 'relative' }}>
-                                <Typography variant="h1" sx={{ position: 'absolute', top: -40, left: -20, fontFamily: 'serif', fontSize: '8rem', color: '#F0F0F0', zIndex: 0 }}>
-                                    “
-                                </Typography>
-                                <Typography variant="body1" sx={{ fontFamily: 'var(--font-nanum-myeongjo)', lineHeight: 2.2, position: 'relative', zIndex: 1 }}>
-                                    これまでの経験は、必ず誰かの役に立ちます。<br />
-                                    AI診断を通じて、あなたの新しい可能性を見つけてください。
-                                </Typography>
-                            </Box>
-                        </Box>
-                    </Grid>
-                </Grid>
+                <ScrollReveal animation="slideUp" delay={0.2}>
+                    <Box
+                        sx={{
+                            textAlign: 'center',
+                            p: 6,
+                            bgcolor: '#FFF',
+                            borderRadius: 2,
+                            boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+                        }}
+                    >
+                        <Typography
+                            sx={{
+                                fontSize: '3rem',
+                                fontWeight: 700,
+                                color: '#00D632',
+                                mb: 2,
+                                fontFamily: 'var(--font-ibm-plex-mono)',
+                            }}
+                        >
+                            10,000+
+                        </Typography>
+                        <Typography
+                            sx={{
+                                fontSize: 'var(--font-size-h3)',
+                                fontWeight: 600,
+                                mb: 3,
+                            }}
+                        >
+                            診断実績
+                        </Typography>
+                        <Typography
+                            sx={{
+                                fontSize: 'var(--font-size-body)',
+                                lineHeight: 1.8,
+                                color: '#666',
+                            }}
+                        >
+                            多くのシニアの方々が、SKILL60+で新しいキャリアの可能性を発見しています。
+                        </Typography>
+                    </Box>
+                </ScrollReveal>
             </Container>
         </Box>
     );
