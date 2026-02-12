@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, ReactNode } from 'react';
 
 interface ScrollRevealProps {
     children: ReactNode;
-    animation?: 'fade-in' | 'slide-up' | 'slideUp';
+    animation?: 'fade-in' | 'slide-up' | 'slideUp' | 'scale-up';
     delay?: number;
     duration?: number;
     threshold?: number;
@@ -16,7 +16,7 @@ export default function ScrollReveal({
     children,
     animation = 'fade-in',
     delay = 0,
-    duration = 0.6,
+    duration = 0.9,
     threshold = 0.1,
     className = '',
     width = 'full'
@@ -51,6 +51,7 @@ export default function ScrollReveal({
         const normalizedAnimation = animation === 'slideUp' ? 'slide-up' : animation;
         switch (normalizedAnimation) {
             case 'slide-up': return 'translateY(40px)';
+            case 'scale-up': return 'scale(0.95)';
             case 'fade-in': default: return 'none';
         }
     };
@@ -63,7 +64,7 @@ export default function ScrollReveal({
                 width: width === 'full' ? '100%' : 'auto',
                 opacity: isVisible ? 1 : 0,
                 transform: isVisible ? 'none' : getInitialTransform(),
-                transition: `opacity ${duration}s ease-out, transform ${duration}s ease-out`,
+                transition: `opacity ${duration}s cubic-bezier(0.16, 1, 0.3, 1), transform ${duration}s cubic-bezier(0.16, 1, 0.3, 1)`,
                 transitionDelay: `${delay}s`,
                 willChange: 'opacity, transform'
             }}

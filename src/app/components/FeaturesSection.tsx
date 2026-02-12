@@ -1,99 +1,102 @@
 'use client';
-import React from 'react';
-import { Box, Container, Typography, Grid } from '@mui/material';
-import ScrollReveal from './ScrollReveal';
 
-const features = [
-    {
-        id: '01',
-        title: 'AI診断',
-        description: '最新のAIがあなたの経験を分析',
-    },
-    {
-        id: '02',
-        title: '具体的提案',
-        description: '推定年収や求人数を数字で提示',
-    },
-    {
-        id: '03',
-        title: '3分で完了',
-        description: 'スマホから簡単に診断開始',
-    },
+import React from 'react';
+import { Box, Container, Typography, Grid, List, ListItem, ListItemText } from '@mui/material';
+import ScrollReveal from './ScrollReveal';
+import CardFan from './CardFan';
+
+const featureItems = [
+    '最新AIが膨大な求人データからマッチング',
+    '推定年収・求人数を具体的な数字で提示',
+    '週1日からの柔軟な働き方も提案',
+    'スマホから3分で完了する簡単操作',
 ];
 
 export default function FeaturesSection() {
     return (
         <Box
             component="section"
+            id="features"
             sx={{
                 py: { xs: 12, md: 20 },
-                bgcolor: '#FFF',
                 color: '#000',
-                transition: 'background-color 0.6s ease, color 0.6s ease',
             }}
         >
             <Container maxWidth="lg">
-                <ScrollReveal animation="slideUp">
-                    <Typography
-                        variant="h2"
-                        align="center"
-                        sx={{
-                            mb: 12,
-                            fontWeight: 700,
-                            letterSpacing: '-0.02em',
-                            fontSize: 'var(--font-size-h2)',
-                            fontFamily: 'var(--font-nanum-myeongjo)',
-                        }}
-                    >
-                        SKILL60+が選ばれる理由
-                    </Typography>
-                </ScrollReveal>
+                <Grid container spacing={{ xs: 6, md: 10 }} alignItems="center">
+                    {/* Left: Card fan visual */}
+                    <Grid size={{ xs: 12, md: 6 }}>
+                        <ScrollReveal animation="slide-up">
+                            <Box
+                                sx={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    minHeight: { xs: '280px', md: '400px' },
+                                }}
+                            >
+                                <CardFan />
+                            </Box>
+                        </ScrollReveal>
+                    </Grid>
 
-                <Grid container spacing={6} justifyContent="center">
-                    {features.map((feature, index) => (
-                        <Grid size={{ xs: 12, md: 4 }} key={index}>
-                            <ScrollReveal animation="slideUp" delay={index * 0.15}>
-                                <Box
-                                    sx={{
-                                        textAlign: 'center',
-                                        p: 4,
-                                    }}
-                                >
-                                    <Typography
-                                        sx={{
-                                            fontFamily: 'var(--font-ibm-plex-mono)',
-                                            fontSize: '3rem',
-                                            color: '#E0E0E0',
-                                            fontWeight: 300,
-                                            lineHeight: 1,
-                                            mb: 3,
-                                        }}
-                                    >
-                                        {feature.id}
-                                    </Typography>
-                                    <Typography
-                                        variant="h5"
-                                        sx={{
-                                            fontFamily: 'var(--font-nanum-myeongjo)',
-                                            fontWeight: 700,
-                                            mb: 2,
-                                        }}
-                                    >
-                                        {feature.title}
-                                    </Typography>
-                                    <Typography
-                                        sx={{
-                                            fontSize: 'var(--font-size-body)',
-                                            lineHeight: 1.8,
-                                            color: '#666',
-                                        }}
-                                    >
-                                        {feature.description}
-                                    </Typography>
-                                </Box>
-                            </ScrollReveal>
-                        </Grid>
-                    ))}
+                    {/* Right: Text + bullet list */}
+                    <Grid size={{ xs: 12, md: 6 }}>
+                        <ScrollReveal animation="slide-up" delay={0.15}>
+                            <Typography
+                                variant="h2"
+                                sx={{
+                                    fontWeight: 800,
+                                    letterSpacing: '-0.03em',
+                                    lineHeight: 1.15,
+                                    mb: 4,
+                                    fontFamily: 'var(--font-nanum-myeongjo)',
+                                    fontSize: 'var(--font-size-h2)',
+                                }}
+                            >
+                                AI診断で見つかる、
+                                <br />
+                                あなただけの市場価値
+                            </Typography>
+
+                            <List disablePadding sx={{ mb: 4 }}>
+                                {featureItems.map((item, i) => (
+                                    <ListItem key={i} disablePadding sx={{ py: 0.8 }}>
+                                        <ListItemText
+                                            primary={item}
+                                            primaryTypographyProps={{
+                                                sx: {
+                                                    fontSize: 'var(--font-size-body)',
+                                                    color: '#333',
+                                                    lineHeight: 1.7,
+                                                    pl: 2,
+                                                    borderLeft: '2px solid #00D632',
+                                                },
+                                            }}
+                                        />
+                                    </ListItem>
+                                ))}
+                            </List>
+
+                            <Typography
+                                component="a"
+                                href="#cta"
+                                sx={{
+                                    fontSize: '1rem',
+                                    fontWeight: 600,
+                                    color: '#000',
+                                    textDecoration: 'none',
+                                    display: 'inline-flex',
+                                    alignItems: 'center',
+                                    gap: 0.5,
+                                    cursor: 'pointer',
+                                    '&:hover': { textDecoration: 'underline' },
+                                }}
+                            >
+                                診断を試す &rarr;
+                            </Typography>
+                        </ScrollReveal>
+                    </Grid>
                 </Grid>
             </Container>
         </Box>

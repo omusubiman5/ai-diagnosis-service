@@ -1,49 +1,98 @@
 'use client';
+
 import React from 'react';
 import { Box, Container, Typography, Link, Stack, Divider } from '@mui/material';
-import ScrollReveal from './ScrollReveal';
 
 export default function Footer() {
     return (
-        <Box sx={{ py: 12, bgcolor: '#000000', color: '#FFFFFF' }}>
+        <Box sx={{ py: { xs: 8, md: 10 }, color: '#FFF' }}>
             <Container maxWidth="lg">
-                <Stack direction={{ xs: 'column', md: 'row' }} justifyContent="space-between" alignItems="flex-start" spacing={8} sx={{ mb: 8 }}>
-                    <ScrollReveal animation="slide-up">
-                        <Box sx={{ maxWidth: '400px' }}>
-                            <Typography variant="h4" sx={{ fontFamily: 'var(--font-nanum-myeongjo)', mb: 3, letterSpacing: '-0.02em', fontWeight: 700 }}>
-                                SKILL60+
-                            </Typography>
-                            <Typography variant="body2" sx={{ opacity: 0.7, lineHeight: 1.8 }}>
-                                あなたの60年の経験を、次の価値へ。<br />
-                                シニア独立支援AIキャリア診断サービス
-                            </Typography>
-                        </Box>
-                    </ScrollReveal>
-
-                    <ScrollReveal animation="slide-up" delay={0.2}>
-                        <Stack spacing={2}>
-                            <Link href="#" color="inherit" underline="hover" sx={{ opacity: 0.8, fontSize: '0.9rem', fontFamily: 'var(--font-ibm-plex-mono)' }}>
-                                COMPANY
-                            </Link>
-                            <Link href="#" color="inherit" underline="hover" sx={{ opacity: 0.8, fontSize: '0.9rem', fontFamily: 'var(--font-ibm-plex-mono)' }}>
-                                PRIVACY
-                            </Link>
-                            <Link href="#" color="inherit" underline="hover" sx={{ opacity: 0.8, fontSize: '0.9rem', fontFamily: 'var(--font-ibm-plex-mono)' }}>
-                                TERMS
-                            </Link>
-                        </Stack>
-                    </ScrollReveal>
+                {/* Contact info */}
+                <Stack
+                    direction={{ xs: 'column', md: 'row' }}
+                    spacing={{ xs: 3, md: 6 }}
+                    sx={{ mb: 6 }}
+                >
+                    <Box>
+                        <Typography sx={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.5)', mb: 0.5 }}>
+                            お問い合わせ
+                        </Typography>
+                        <Link
+                            href="mailto:support@skill60plus.jp"
+                            sx={{
+                                color: '#FFF',
+                                textDecoration: 'none',
+                                fontSize: '1rem',
+                                fontWeight: 500,
+                                '&:hover': { textDecoration: 'underline' },
+                            }}
+                        >
+                            support@skill60plus.jp
+                        </Link>
+                    </Box>
+                    <Box>
+                        <Typography sx={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.5)', mb: 0.5 }}>
+                            チャットサポート
+                        </Typography>
+                        <Typography sx={{ fontSize: '1rem', color: '#FFF' }}>
+                            アプリ内で24時間対応
+                        </Typography>
+                    </Box>
                 </Stack>
 
-                <Divider sx={{ borderColor: 'rgba(255,255,255,0.1)', mb: 4 }} />
+                {/* Navigation links */}
+                <Stack
+                    direction="row"
+                    spacing={3}
+                    sx={{ mb: 6, flexWrap: 'wrap', gap: 1.5 }}
+                >
+                    {['会社概要', 'プライバシーポリシー', '利用規約', 'よくある質問', 'お問い合わせ'].map(
+                        (label) => (
+                            <Link
+                                key={label}
+                                href="#"
+                                sx={{
+                                    color: 'rgba(255,255,255,0.6)',
+                                    textDecoration: 'none',
+                                    fontSize: '0.85rem',
+                                    '&:hover': { color: '#FFF' },
+                                }}
+                            >
+                                {label}
+                            </Link>
+                        )
+                    )}
+                </Stack>
 
-                <ScrollReveal animation="fade-in" delay={0.4}>
-                    <Stack direction={{ xs: 'column', md: 'row' }} justifyContent="space-between" alignItems="center">
-                        <Typography variant="body2" sx={{ opacity: 0.4, fontSize: '0.75rem', fontFamily: 'var(--font-ibm-plex-mono)' }}>
-                            © {new Date().getFullYear()} SKILL60+. All rights reserved.
-                        </Typography>
-                    </Stack>
-                </ScrollReveal>
+                <Divider sx={{ borderColor: 'rgba(255,255,255,0.08)', mb: 4 }} />
+
+                {/* Bottom bar */}
+                <Stack
+                    direction={{ xs: 'column', md: 'row' }}
+                    justifyContent="space-between"
+                    alignItems={{ xs: 'flex-start', md: 'center' }}
+                    spacing={2}
+                >
+                    <Typography
+                        sx={{
+                            fontFamily: 'var(--font-nanum-myeongjo)',
+                            fontWeight: 700,
+                            fontSize: '1rem',
+                            letterSpacing: '-0.02em',
+                        }}
+                    >
+                        SKILL60+
+                    </Typography>
+                    <Typography
+                        sx={{
+                            fontFamily: 'var(--font-ibm-plex-mono)',
+                            fontSize: '0.7rem',
+                            color: 'rgba(255,255,255,0.3)',
+                        }}
+                    >
+                        &copy; {new Date().getFullYear()} SKILL60+. All rights reserved.
+                    </Typography>
+                </Stack>
             </Container>
         </Box>
     );
