@@ -24,9 +24,11 @@ import { useVoiceGuide } from '../hooks/useVoiceGuide';
 interface AIChatWidgetProps {
   open: boolean;
   onClose: () => void;
+  // ★ 即時カスタム用フック: メッセージ送信前に判定し、handled=trueならAPIに送信しない
+  onBeforeSend?: (message: string) => { handled: boolean; response?: string };
 }
 
-export default function AIChatWidget({ open, onClose }: AIChatWidgetProps) {
+export default function AIChatWidget({ open, onClose, onBeforeSend }: AIChatWidgetProps) {
   const { messages, sendMessage, isLoading, error, clearMessages } = useAIChat();
   const {
     startListening,
@@ -41,15 +43,20 @@ export default function AIChatWidget({ open, onClose }: AIChatWidgetProps) {
   const { speak, cancel, isPlaying, prime } = useVoiceGuide();
 
   const [inputValue, setInputValue] = useState('');
+  // ★ onBeforeSendで直接追加されたメッセージ（APIを経由しない応答）
+  const [localMessages, setLocalMessages] = useState<Array<{ role: string; content: string }>>([]);
   const autoSpeak = true; // Auto-speaking is always enabled
   const lastMessageCountRef = useRef(messages.length);
   const lastProcessedTranscriptRef = useRef('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  // 全メッセージ = API経由 + ローカル直接追加
+  const allMessages = [...messages, ...localMessages];
+
   // Auto-scroll to bottom when messages change
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages, isLoading]);
+  }, [allMessages, isLoading]);
 
   // Auto-speak effect - Simplified
   useEffect(() => {
@@ -83,6 +90,22 @@ export default function AIChatWidget({ open, onClose }: AIChatWidgetProps) {
     text = text.trim();
     if (!text) return;
 
+    // ★ onBeforeSendフック: 即時カスタムトリガー判定
+    if (onBeforeSend) {
+      const result = onBeforeSend(text);
+      if (result.handled) {
+        // APIに送信せず、ローカルで応答を追加
+        setLocalMessages(prev => [
+          ...prev,
+          { role: 'user', content: text },
+          { role: 'assistant', content: result.response || '' },
+        ]);
+        setInputValue('');
+        if (isListening) stopListening();
+        return; // ★ ここでreturn。APIには送信しない
+      }
+    }
+
     // Cancel any ongoing speech and prime for next one
     cancel();
     prime();
@@ -90,7 +113,7 @@ export default function AIChatWidget({ open, onClose }: AIChatWidgetProps) {
     sendMessage(text);
     setInputValue('');
     if (isListening) stopListening();
-  }, [cancel, prime, sendMessage, isListening, stopListening, inputValue]);
+  }, [cancel, prime, sendMessage, isListening, stopListening, inputValue, onBeforeSend]);
 
   // When speech recognition completes a transcript, send it directly
   useEffect(() => {
@@ -172,7 +195,7 @@ export default function AIChatWidget({ open, onClose }: AIChatWidgetProps) {
           <Box sx={{ display: 'flex', gap: 0.5 }}>
             <Tooltip title="会話をクリア">
               <IconButton
-                onClick={clearMessages}
+                onClick={() => { clearMessages(); setLocalMessages([]); }}
                 size="small"
                 sx={{ color: 'white' }}
                 aria-label="会話をクリア"
@@ -206,7 +229,7 @@ export default function AIChatWidget({ open, onClose }: AIChatWidgetProps) {
             gap: 1.5,
           }}
         >
-          {messages.length === 0 && (
+          {allMessages.length === 0 && (
             <Box sx={{ textAlign: 'center', mt: 4, px: 2 }}>
               <Typography
                 variant="body1"
@@ -228,7 +251,7 @@ export default function AIChatWidget({ open, onClose }: AIChatWidgetProps) {
             </Box>
           )}
 
-          {messages.map((msg, index) => (
+          {allMessages.map((msg, index) => (
             <Box
               key={index}
               sx={{
@@ -241,7 +264,7 @@ export default function AIChatWidget({ open, onClose }: AIChatWidgetProps) {
               <Paper
                 elevation={1}
                 className={
-                  msg.role === 'assistant' && isPlaying && index === messages.length - 1
+                  msg.role === 'assistant' && isPlaying && index === allMessages.length - 1
                     ? 'message-speaking'
                     : ''
                 }
@@ -274,7 +297,7 @@ export default function AIChatWidget({ open, onClose }: AIChatWidgetProps) {
                     <IconButton
                       onClick={() => handleSpeak(msg.content)}
                       size="small"
-                      className={isPlaying && index === messages.length - 1 ? 'speaker-active' : ''}
+                      className={isPlaying && index === allMessages.length - 1 ? 'speaker-active' : ''}
                       sx={{ color: 'primary.main', minWidth: 36, minHeight: 36 }}
                       aria-label={isPlaying ? '読み上げを停止' : 'この応答を読み上げる'}
                     >
@@ -282,7 +305,7 @@ export default function AIChatWidget({ open, onClose }: AIChatWidgetProps) {
                     </IconButton>
                   </Tooltip>
                   {/* Speaking Wave Animation showing only for the current playing message */}
-                  {isPlaying && index === messages.length - 1 && (
+                  {isPlaying && index === allMessages.length - 1 && (
                     <Box className="speaking-wave-container">
                       <Box className="speaking-wave-bar" />
                       <Box className="speaking-wave-bar" />
