@@ -9,6 +9,39 @@
 }
 
 /* ===================================
+   即時カスタム: フォントサイズ変更
+   =================================== */
+:root { --fs-base: 16px; --fs-large: 20px; --fs-xlarge: 24px; }
+
+body.font-large p,
+body.font-large span,
+body.font-large button,
+body.font-large input,
+body.font-large textarea,
+body.font-large [class*="MuiTypography"],
+body.font-large [class*="MuiButton"],
+body.font-large [class*="MuiInputBase"] {
+  font-size: var(--fs-large) !important;
+}
+body.font-large h1 { font-size: 2rem !important; }
+body.font-large h2 { font-size: 1.6rem !important; }
+body.font-large h6 { font-size: 1.3rem !important; }
+
+body.font-xlarge p,
+body.font-xlarge span,
+body.font-xlarge button,
+body.font-xlarge input,
+body.font-xlarge textarea,
+body.font-xlarge [class*="MuiTypography"],
+body.font-xlarge [class*="MuiButton"],
+body.font-xlarge [class*="MuiInputBase"] {
+  font-size: var(--fs-xlarge) !important;
+}
+body.font-xlarge h1 { font-size: 2.4rem !important; }
+body.font-xlarge h2 { font-size: 2rem !important; }
+body.font-xlarge h6 { font-size: 1.5rem !important; }
+
+/* ===================================
    音声入力中のアニメーション
    =================================== */
 
@@ -121,7 +154,7 @@
 
 .speaking-wave-bar:nth-child(1) { animation-delay: 0s; }
 .speaking-wave-bar:nth-child(2) { animation-delay: 0.1s; }
-.speaking-wave-bar:nth-child(3) { animation-delay: 0.2s; }
+.speaking-wave-bar:nth-child(3) { animation-delay: 0.3s; }
 .speaking-wave-bar:nth-child(4) { animation-delay: 0.3s; }
 .speaking-wave-bar:nth-child(5) { animation-delay: 0.2s; }
 
