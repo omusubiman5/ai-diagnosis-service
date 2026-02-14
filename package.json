@@ -13,6 +13,7 @@
     "add": "liftkit add"
   },
   "dependencies": {
+    "@auth/mongodb-adapter": "^3.11.1",
     "@csstools/normalize.css": "^12.1.1",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
@@ -21,21 +22,28 @@
     "@mui/icons-material": "^7.3.7",
     "@mui/material": "^7.3.7",
     "@mui/material-nextjs": "^7.3.7",
+    "canvas-confetti": "^1.9.4",
     "framer-motion": "^12.33.0",
     "gsap": "^3.14.2",
+    "jose": "^6.1.3",
     "lottie-react": "^2.4.1",
     "lucide-react": "^0.563.0",
     "material-dynamic-colors": "^1.1.4",
+    "mongodb": "^6.21.0",
     "next": "16.1.6",
+    "next-auth": "^5.0.0-beta.30",
     "react": "19.2.3",
-    "react-dom": "19.2.3"
+    "react-dom": "19.2.3",
+    "sharp": "^0.34.5"
   },
   "devDependencies": {
     "@chainlift/liftkit": "^0.2.0",
+    "@playwright/test": "^1.58.2",
     "@tailwindcss/postcss": "^4",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",
+    "@types/canvas-confetti": "^1.9.0",
     "@types/jest": "^30.0.0",
     "@types/node": "^20",
     "@types/react": "^19",

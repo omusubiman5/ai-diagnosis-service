@@ -1,80 +1,205 @@
 'use client';
-import { useState, useEffect } from 'react';
-import { Box, Button, Typography, IconButton, Paper } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
-import AIChatWidget from '@/app/components/AIChatWidget';
-import { useAccessibility } from '../hooks/useAccessibility';
-import ButtonModeChat from './ButtonModeChat';
+import { useEffect, useRef } from 'react';
+import Script from 'next/script';
+import { useTTS } from '../../hooks/useTTS';
 
-const LINE_URL = 'https://line.me/R/ti/p/@skill60plus';
+declare global {
+  interface Window {
+    botpress?: {
+      open: () => void;
+      close: () => void;
+      toggle: () => void;
+      on: (event: string, callback: (data: unknown) => void) => void;
+      sendEvent: (payload: Record<string, unknown>) => Promise<void>;
+    };
+    botpressReady?: boolean;
+    diagBridge?: {
+      sendToBot: (text: string, meta?: Record<string, unknown>) => Promise<void>;
+    };
+  }
+}
+
+// ── アクセシビリティ: BotのFAQ応答テキストからCSS変更を発火 ──
+type FontSize = 'standard' | 'large' | 'xlarge';
+const SIZES: FontSize[] = ['standard', 'large', 'xlarge'];
+
+// Bot FAQ応答のトリガーフレーズ（bot側のFAQ answerと一致させる）
+const BOT_FONT_LARGE_TRIGGER = '文字の大きさを変えたわよ';
+const BOT_FONT_STANDARD_TRIGGER = '標準の大きさに戻したわよ';
+const BOT_TEXT_ONLY_TRIGGER = '音声を止めて、文字だけにしたわよ';
+
+function getCurrentFontSize(): FontSize {
+  try {
+    const s = sessionStorage.getItem('skill60-accessibility');
+    if (s) {
+      const p = JSON.parse(s);
+      if (SIZES.includes(p.fontSize)) return p.fontSize;
+    }
+  } catch { /* ignore */ }
+  return 'standard';
+}
+
+function applyFontSize(size: FontSize) {
+  document.body.classList.remove('font-large', 'font-xlarge');
+  if (size === 'large') document.body.classList.add('font-large');
+  if (size === 'xlarge') document.body.classList.add('font-xlarge');
+  try {
+    const s = sessionStorage.getItem('skill60-accessibility');
+    const p = s ? JSON.parse(s) : {};
+    p.fontSize = size;
+    sessionStorage.setItem('skill60-accessibility', JSON.stringify(p));
+  } catch { /* ignore */ }
+  // FontSizeControlコンポーネントにも通知
+  window.dispatchEvent(new CustomEvent('font-size-changed', { detail: { size } }));
+}
+
+function applyTextOnly() {
+  try {
+    const s = sessionStorage.getItem('skill60-accessibility');
+    const p = s ? JSON.parse(s) : {};
+    p.textOnly = true;
+    sessionStorage.setItem('skill60-accessibility', JSON.stringify(p));
+  } catch { /* ignore */ }
+}
+
+/** BotのFAQ応答テキストを検出してCSS変更 */
+function handleBotAccessibilityResponse(text: string): void {
+  if (text.includes(BOT_FONT_LARGE_TRIGGER)) {
+    const current = getCurrentFontSize();
+    const nextIdx = Math.min(SIZES.indexOf(current) + 1, SIZES.length - 1);
+    applyFontSize(SIZES[nextIdx]);
+    return;
+  }
+  if (text.includes(BOT_FONT_STANDARD_TRIGGER)) {
+    applyFontSize('standard');
+    return;
+  }
+  if (text.includes(BOT_TEXT_ONLY_TRIGGER)) {
+    applyTextOnly();
+    return;
+  }
+}
 
 export default function LpChatbot() {
-  const [showWelcome, setShowWelcome] = useState(false);
-  const [showChat, setShowChat] = useState(false);
-  const a11y = useAccessibility();
+  const readyRef = useRef(false);
+  const botUserIdRef = useRef<string | null>(null);
 
-  useEffect(() => { const t=setTimeout(()=>setShowWelcome(true),5000); return()=>clearTimeout(t); }, []);
+  // TTS: Botの返答を音声で読み上げ
+  const tts = useTTS({ pitch: -3.0, rate: 0.85 });
+  const ttsRef = useRef(tts);
+  ttsRef.current = tts;
 
-  // MemoryCards全めくり完了からのイベント受信
+  // MemoryCards全めくり完了からのイベント受信 → Botpress webchat を開く
   useEffect(() => {
-    const handler = () => { setShowWelcome(false); setShowChat(true); };
+    const handler = () => {
+      if (window.botpress) {
+        window.botpress.open();
+      }
+    };
     window.addEventListener('open-yoshiko-chat', handler);
     return () => window.removeEventListener('open-yoshiko-chat', handler);
   }, []);
 
-  const handleChoice = (action: string) => {
-    window.dataLayer?.push({ event: 'chatbot_choice', choice: action });
-    if (action === 'voice') {
-      const audio = new Audio('/audio/yoshiko-intro.mp3');
-      audio.play().catch(() => { setShowWelcome(false); setShowChat(true); });
-    }
-    if (action === 'ask') {
-      const el = document.getElementById('faq-section') || document.getElementById('trust-section');
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-      setShowWelcome(false);
-    }
-    if (action === 'try') { setShowWelcome(false); setShowChat(true); }
+  // Bridge setup: Botpress ↔ VoiceDiagOverlay + アクセシビリティ
+  useEffect(() => {
+    const setupBridge = () => {
+      if (!window.botpress) return false;
+
+      // Botpress webchat v3.6 メッセージ構造:
+      // { id, conversationId, authorId, timestamp, block: { block: { type, text }, type } }
+      // ユーザーとBotは異なるauthorIdで区別する
+      let userAuthorId: string | null = null;
+
+      window.botpress.on('message', (data: unknown) => {
+        const msg = data as Record<string, unknown>;
+        if (!msg) return;
+
+        // v3.6: テキストは block.block.text にある
+        const block = msg.block as Record<string, unknown> | undefined;
+        const innerBlock = block?.block as Record<string, unknown> | undefined;
+        const text = (innerBlock?.text as string) || '';
+        if (!text) return;
+
+        const authorId = msg.authorId as string | undefined;
+        const hasClientMeta = !!(msg.metadata as Record<string, unknown>)?.clientMessageId;
+
+        // ユーザーメッセージにはmetadata.clientMessageIdがある
+        if (hasClientMeta && authorId) {
+          userAuthorId = authorId;
+        }
+
+        const isBot = authorId && authorId !== userAuthorId;
+
+        if (isBot) {
+          // ── Botメッセージ ──
+          if (!botUserIdRef.current) botUserIdRef.current = authorId;
+          // アクセシビリティ: FAQ応答からCSS変更発火
+          handleBotAccessibilityResponse(text);
+          // DIAG Overlayへ転送
+          window.dispatchEvent(
+            new CustomEvent('diag-bot-message', {
+              detail: { text, raw: msg },
+            })
+          );
+
+          // TTS: Botの返答を音声で読み上げ（textOnlyモード時はスキップ）
+          let isTextOnly = false;
+          try {
+            const s = sessionStorage.getItem('skill60-accessibility');
+            if (s) isTextOnly = !!JSON.parse(s).textOnly;
+          } catch { /* ignore */ }
+          if (!isTextOnly) {
+            ttsRef.current.speak(text);
+          }
+        }
+        // ユーザーメッセージはスルー（Botpress側で処理）
+      });
+
+      // Expose sendToBot for VoiceDiagOverlay
+      window.diagBridge = {
+        sendToBot: async (text, meta) => {
+          if (window.botpress?.sendEvent) {
+            await window.botpress.sendEvent({
+              type: 'diagUserMessage',
+              text,
+              ...meta,
+            });
+          }
+        },
+      };
+
+      return true;
+    };
+
+    // Poll until botpress is ready
+    const interval = setInterval(() => {
+      if (setupBridge()) {
+        clearInterval(interval);
+      }
+    }, 500);
+
+    return () => {
+      clearInterval(interval);
+      delete window.diagBridge;
+    };
+  }, []);
+
+  const handleBotScriptLoad = () => {
+    if (readyRef.current) return;
+    readyRef.current = true;
   };
-  const openChat = () => { setShowWelcome(false); setShowChat(true); };
-  const handleLine = () => { window.dataLayer?.push({event:'line_redirect'}); window.open(LINE_URL,'_blank'); };
 
   return (
     <>
-      {showWelcome && !showChat && (
-        <Paper sx={{position:'fixed',bottom:80,right:16,zIndex:1000,p:2,maxWidth:280,borderRadius:3,boxShadow:'0 4px 20px rgba(0,0,0,0.12)'}}>
-          <IconButton size="small" onClick={()=>setShowWelcome(false)} sx={{position:'absolute',top:4,right:4}}><CloseIcon fontSize="small"/></IconButton>
-          <Box sx={{display:'flex',alignItems:'center',gap:1,mb:1.5}}>
-            <Box component="img" src="/img/yoshiko-avatar.webp" alt="ヨシコ" sx={{width:40,height:40,borderRadius:'50%'}} />
-            <Typography sx={{fontWeight:700,fontSize:'0.9rem'}}>ヨシコ（68歳）</Typography>
-          </Box>
-          <Typography variant="body2" sx={{mb:2,fontSize:'inherit'}}>こんにちは。何かお手伝いしますか？</Typography>
-          <Box sx={{display:'flex',flexDirection:'column',gap:1}}>
-            <Button variant="outlined" onClick={()=>handleChoice('voice')} startIcon={<span>🎤</span>} sx={{justifyContent:'flex-start',borderRadius:2,fontSize:'inherit'}}>声で聞く</Button>
-            <Button variant="outlined" onClick={()=>handleChoice('ask')} startIcon={<span>💬</span>} sx={{justifyContent:'flex-start',borderRadius:2,fontSize:'inherit'}}>質問がある</Button>
-            <Button variant="outlined" onClick={()=>handleChoice('try')} startIcon={<span>✨</span>} sx={{justifyContent:'flex-start',borderRadius:2,fontSize:'inherit'}}>試してみたい</Button>
-          </Box>
-        </Paper>
-      )}
-      {showChat && (
-        <Box sx={{position:'fixed',bottom:16,right:16,zIndex:1100,width:{xs:340,md:380},height:520,borderRadius:3,overflow:'hidden',boxShadow:'0 8px 40px rgba(0,0,0,0.2)',bgcolor:'#fff',display:'flex',flexDirection:'column'}}>
-          <Box sx={{display:'flex',alignItems:'center',gap:1.5,p:1.5,bgcolor:'#FFF8F0',borderBottom:'1px solid #eee',flexShrink:0}}>
-            <Box component="img" src="/img/yoshiko-avatar.webp" alt="ヨシコ" sx={{width:36,height:36,borderRadius:'50%'}} />
-            <Typography sx={{fontWeight:700,fontSize:'0.95rem'}}>ヨシコ（68歳）</Typography>
-            <IconButton size="small" onClick={()=>setShowChat(false)} sx={{ml:'auto'}}><CloseIcon fontSize="small"/></IconButton>
-          </Box>
-          <Box sx={{flex:1,overflow:'hidden',
-            '& [class*="header"], & [class*="Header"]':{display:'none !important'},
-            '& [class*="tts"], & [class*="speech"], & [class*="voice-btn"], & [class*="speaker"]':{display:'none !important'},
-          }}>
-            {a11y.buttonMode ? <ButtonModeChat onLineRedirect={handleLine} /> : <AIChatWidget open={true} onClose={() => setShowChat(false)} />}
-          </Box>
-        </Box>
-      )}
-      {!showChat && !showWelcome && (
-        <IconButton onClick={openChat} sx={{position:'fixed',bottom:16,right:16,zIndex:1000,width:56,height:56,bgcolor:'#E67E22',color:'#fff',boxShadow:'0 4px 16px rgba(0,0,0,0.2)','&:hover':{bgcolor:'#D35400'}}}>
-          <Box component="img" src="/img/yoshiko-avatar.webp" sx={{width:40,height:40,borderRadius:'50%'}} />
-        </IconButton>
-      )}
+      <Script
+        src="https://cdn.botpress.cloud/webchat/v3.6/inject.js"
+        strategy="afterInteractive"
+      />
+      <Script
+        src="https://files.bpcontent.cloud/2026/02/14/07/20260214072048-SMJ9JAOA.js"
+        strategy="afterInteractive"
+        onLoad={handleBotScriptLoad}
+      />
     </>
   );
 }

@@ -46,3 +46,26 @@ next-env.d.ts
 
 nul
 nuls
+
+# GCP service account keys
+docs/*-*.json
+
+# Playwright MCP logs/screenshots
+.playwright-mcp/
+
+# Temporary files
+all_files.txt
+*_history.txt
+test-results.txt
+test-results/
+fix_*.ps1
+install_debug.ps1
+
+# Design experiment files
+design1_*
+design2_*
+design3_*
+
+# Root-level screenshots
+*.png
+!src/**/*.png

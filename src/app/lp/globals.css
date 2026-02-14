@@ -60,8 +60,8 @@
 
   /* Font Size Control */
   --fs-base: 16px;
-  --fs-large: 20px;
-  --fs-xlarge: 24px;
+  --fs-large: 24px;
+  --fs-xlarge: 32px;
 }
 
 /* ダークモード */
@@ -398,10 +398,14 @@ body.font-xlarge [class*="MuiButton"] {
   font-size: var(--fs-xlarge) !important;
 }
 
-body.font-large h1 { font-size: 2rem !important; }
-body.font-large h2 { font-size: 1.6rem !important; }
-body.font-xlarge h1 { font-size: 2.4rem !important; }
-body.font-xlarge h2 { font-size: 2rem !important; }
+body.font-large h1 { font-size: 2.4rem !important; }
+body.font-large h2 { font-size: 2rem !important; }
+body.font-large h5 { font-size: 1.6rem !important; }
+body.font-large h6 { font-size: 1.4rem !important; }
+body.font-xlarge h1 { font-size: 3rem !important; }
+body.font-xlarge h2 { font-size: 2.6rem !important; }
+body.font-xlarge h5 { font-size: 2rem !important; }
+body.font-xlarge h6 { font-size: 1.8rem !important; }
 
 /* ═══ Accessibility: Reduced Motion ═══ */
 @media (prefers-reduced-motion: reduce) {

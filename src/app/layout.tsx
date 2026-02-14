@@ -4,6 +4,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
 import { Nanum_Myeongjo, IBM_Plex_Mono, Inter } from 'next/font/google';
 import theme from '../theme';
+import Providers from './providers';
 import './globals.css';
 
 const nanumMyeongjo = Nanum_Myeongjo({
@@ -43,7 +44,9 @@ export default function RootLayout({
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
             <CssBaseline />
-            {children}
+            <Providers>
+              {children}
+            </Providers>
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>

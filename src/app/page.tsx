@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Box } from '@mui/material';
 import Header from './components/Header';
 import HeroSection from './components/HeroSection';
@@ -10,9 +10,8 @@ import StepsSection from './components/StepsSection';
 import TrustSection from './components/TrustSection';
 import CTASection from './components/CTASection';
 import TransitionSection from './components/TransitionSection';
-import VoiceControl from './components/VoiceControl';
-import AIChatWidget from './components/AIChatWidget';
 import LpSectionsWrapper from './components/LpSectionsWrapper';
+import InfiniteLoopScroll from './components/InfiniteLoopScroll';
 
 // LP sections (aliased to avoid name conflicts)
 import LpHeroSection from './lp/components/HeroSection';
@@ -23,23 +22,13 @@ import LpActionSection from './lp/components/ActionSection';
 import LpChatbot from './lp/components/LpChatbot';
 import VoicevoxPlayer from './lp/components/VoicevoxPlayer';
 import FontSizeControl from './lp/components/FontSizeControl';
-
-// 即時カスタム: フォントサイズ変更トリガー
-const FONT_TRIGGERS: Record<string, { className: string; label: string }> = {
-  '文字を大きくして': { className: 'font-large', label: '大きめ' },
-  '大きくして': { className: 'font-large', label: '大きめ' },
-  '文字大きく': { className: 'font-large', label: '大きめ' },
-  'もっと大きく': { className: 'font-xlarge', label: '特大' },
-  '特大にして': { className: 'font-xlarge', label: '特大' },
-  '文字を小さくして': { className: '', label: '標準' },
-  '小さくして': { className: '', label: '標準' },
-  '元に戻して': { className: '', label: '標準' },
-  '標準にして': { className: '', label: '標準' },
-};
+import VoiceDiagOverlay from './lp/components/VoiceDiagOverlay';
+import VoiceControl from './lp/components/VoiceControl';
 
 export default function Home() {
-  const [isChatOpen, setIsChatOpen] = useState(false);
   const [bgColor, setBgColor] = useState('#FFFFFF');
+  const [isDiagOpen, setIsDiagOpen] = useState(false);
+  const [silentMode, setSilentMode] = useState(false);
   const mainRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -73,26 +62,14 @@ export default function Home() {
     };
   }, []);
 
-  const isDark = bgColor === '#000000';
-
-  const handleBeforeSend = useCallback((message: string): { handled: boolean; response?: string } => {
-    // フォントサイズ変更
-    for (const [trigger, config] of Object.entries(FONT_TRIGGERS)) {
-      if (message.includes(trigger)) {
-        document.body.classList.remove('font-large', 'font-xlarge');
-        if (config.className) {
-          document.body.classList.add(config.className);
-        }
-        return {
-          handled: true,
-          response: config.className
-            ? `文字を${config.label}にしましたよ。見やすくなりましたか？もっと大きくしたい場合は「もっと大きく」、元に戻したい場合は「元に戻して」と言ってくださいね。`
-            : `文字の大きさを標準に戻しました。また変えたいときはいつでも言ってくださいね。`,
-        };
-      }
-    }
-    return { handled: false };
+  // Listen for start-diag custom event
+  useEffect(() => {
+    const handler = () => setIsDiagOpen(true);
+    window.addEventListener('start-diag', handler);
+    return () => window.removeEventListener('start-diag', handler);
   }, []);
+
+  const isDark = bgColor === '#000000';
 
   return (
     <Box
@@ -106,64 +83,64 @@ export default function Home() {
     >
       <Header />
 
-      {/* === Main Sections === */}
-      <Box component="section" data-bg-color="#FFFFFF">
-        <HeroSection />
-      </Box>
-      <Box component="section" data-bg-color="#00D632">
-        <EmpathySection />
-      </Box>
-      <Box component="section" data-bg-color="#FFFFFF">
-        <FeaturesSection />
-      </Box>
-      <Box component="section" data-bg-color="#FAFAFA">
-        <SolutionSection />
-      </Box>
-      <Box component="section" data-bg-color="#FFFFFF">
-        <StepsSection />
-      </Box>
-      <Box component="section" data-bg-color="#FAFAFA">
-        <TrustSection />
-      </Box>
-      <Box component="section" data-bg-color="#000000">
-        <CTASection />
-      </Box>
+      <InfiniteLoopScroll>
+        {/* === Main Sections === */}
+        <Box component="section" data-bg-color="#FFFFFF">
+          <HeroSection />
+        </Box>
+        <Box component="section" data-bg-color="#00D632">
+          <EmpathySection />
+        </Box>
+        <Box component="section" data-bg-color="#FFFFFF">
+          <FeaturesSection />
+        </Box>
+        <Box component="section" data-bg-color="#FAFAFA">
+          <SolutionSection />
+        </Box>
+        <Box component="section" data-bg-color="#FFFFFF">
+          <StepsSection />
+        </Box>
+        <Box component="section" data-bg-color="#FAFAFA">
+          <TrustSection />
+        </Box>
+        <Box component="section" data-bg-color="#000000">
+          <CTASection />
+        </Box>
 
-      {/* === Transition: Main → LP === */}
-      <TransitionSection />
+        {/* === Transition: Main -> LP === */}
+        <TransitionSection />
 
-      {/* === LP Sections (scoped) === */}
-      <LpSectionsWrapper>
-        <Box component="section" data-bg-color="#FEF9E7" id="lp-hero">
-          <LpHeroSection />
-        </Box>
-        <Box component="section" data-bg-color="#F8F9FA">
-          <LpMeetSection />
-        </Box>
-        <Box component="section" data-bg-color="#FDFEFE">
-          <LpStoriesSection />
-        </Box>
-        <Box component="section" data-bg-color="#F8F9FA">
-          <LpTrustSection />
-        </Box>
-        <Box component="section" data-bg-color="#FFF8E1">
-          <LpActionSection />
-        </Box>
-      </LpSectionsWrapper>
+        {/* === LP Sections (scoped) === */}
+        <LpSectionsWrapper>
+          <Box component="section" data-bg-color="#FEF9E7" id="lp-hero">
+            <LpHeroSection />
+          </Box>
+          <Box component="section" data-bg-color="#F8F9FA">
+            <LpMeetSection />
+          </Box>
+          <Box component="section" data-bg-color="#FDFEFE">
+            <LpStoriesSection />
+          </Box>
+          <Box component="section" data-bg-color="#F8F9FA">
+            <LpTrustSection />
+          </Box>
+          <Box component="section" data-bg-color="#FFF8E1">
+            <LpActionSection />
+          </Box>
+        </LpSectionsWrapper>
+      </InfiniteLoopScroll>
 
       {/* === Floating UI === */}
       <FontSizeControl />
-      <VoiceControl
-        onChatToggle={() => setIsChatOpen(true)}
-        isChatOpen={isChatOpen}
-      />
-      <AIChatWidget
-        open={isChatOpen}
-        onClose={() => setIsChatOpen(false)}
-        onBeforeSend={handleBeforeSend}
-      />
+      <VoiceControl />
       <LpChatbot />
       <VoicevoxPlayer />
+      <VoiceDiagOverlay
+        isOpen={isDiagOpen}
+        onClose={() => setIsDiagOpen(false)}
+        silentMode={silentMode}
+        onSilentModeToggle={() => setSilentMode(!silentMode)}
+      />
     </Box>
   );
 }

@@ -12,10 +12,21 @@ export default function ActionSection() {
           会ってみませんか？
         </h2>
 
+        <button
+          onClick={() => window.dispatchEvent(new CustomEvent('start-diag'))}
+          className="cta-button cta-final"
+          aria-label="声でおしゃべりスキル診断を始める"
+          style={{ cursor: 'pointer', border: 'none' }}
+        >
+          <span className="cta-split">声でおしゃべり診断を始める</span>
+        </button>
+        <p className="cta-sub">声で5つの質問に答えるだけ・ボタンでもOK・無料</p>
+
         <a
           href="https://line.me/R/ti/p/@skill60plus"
           className="cta-button cta-final"
           aria-label="AIの友人に会ってみる - LINEが開きます"
+          style={{ marginTop: '16px' }}
         >
           <span className="cta-split">AIの友人に会ってみる</span>
         </a>

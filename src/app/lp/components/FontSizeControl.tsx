@@ -7,6 +7,11 @@ const LABELS: Record<FontSize,string> = {standard:'標準',large:'大',xlarge:'�
 export default function FontSizeControl() {
   const [size,setSize] = useState<FontSize>('standard');
   useEffect(() => { try { const s=sessionStorage.getItem('skill60-accessibility'); if(s){const p=JSON.parse(s); if(SIZES.includes(p.fontSize))setSize(p.fontSize);} } catch{} }, []);
+  useEffect(() => {
+    const handler = (e: Event) => { const sz = (e as CustomEvent).detail?.size; if (SIZES.includes(sz)) setSize(sz); };
+    window.addEventListener('font-size-changed', handler);
+    return () => window.removeEventListener('font-size-changed', handler);
+  }, []);
   const cycle = () => {
     const next = SIZES[(SIZES.indexOf(size)+1)%SIZES.length]; setSize(next);
     document.body.classList.remove('font-large','font-xlarge');

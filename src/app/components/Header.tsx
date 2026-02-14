@@ -11,9 +11,15 @@ import {
     IconButton,
     Link,
     Divider,
+    Avatar,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+import PersonIcon from '@mui/icons-material/Person';
+import LogoutIcon from '@mui/icons-material/Logout';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import { useSession, signOut } from 'next-auth/react';
+import NextLink from 'next/link';
 
 const NAV_LINKS = [
     '会社概要',
@@ -24,6 +30,7 @@ const NAV_LINKS = [
 ] as const;
 
 export default function Header() {
+    const { data: session, status } = useSession();
     const [scrolled, setScrolled] = useState(false);
     const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -70,28 +77,82 @@ export default function Header() {
                         </Typography>
 
                         <Stack direction="row" spacing={1} alignItems="center">
-                            <Button
-                                variant="contained"
-                                size="small"
-                                href="#cta"
-                                sx={{
-                                    bgcolor: '#000',
-                                    color: '#fff',
-                                    fontSize: '0.85rem',
-                                    px: 2.5,
-                                    py: 0.8,
-                                    borderRadius: '50px',
-                                    textTransform: 'none',
-                                    fontWeight: 600,
-                                    boxShadow: 'none',
-                                    '&:hover': {
-                                        bgcolor: '#222',
-                                        boxShadow: 'none',
-                                    },
-                                }}
-                            >
-                                診断を始める
-                            </Button>
+                            {status !== 'loading' && !session && (
+                                <>
+                                    <Button
+                                        component={NextLink}
+                                        href="/auth/signin"
+                                        variant="outlined"
+                                        size="small"
+                                        sx={{
+                                            color: scrolled ? '#000' : '#000',
+                                            borderColor: scrolled ? 'rgba(0,0,0,0.3)' : 'rgba(0,0,0,0.3)',
+                                            fontSize: '0.85rem',
+                                            px: 2,
+                                            py: 0.7,
+                                            borderRadius: '50px',
+                                            textTransform: 'none',
+                                            fontWeight: 600,
+                                            boxShadow: 'none',
+                                            '&:hover': {
+                                                borderColor: '#000',
+                                                bgcolor: 'rgba(0,0,0,0.04)',
+                                                boxShadow: 'none',
+                                            },
+                                        }}
+                                    >
+                                        ログイン
+                                    </Button>
+                                    <Button
+                                        component={NextLink}
+                                        href="/auth/signin"
+                                        variant="contained"
+                                        size="small"
+                                        sx={{
+                                            bgcolor: '#000',
+                                            color: '#fff',
+                                            fontSize: '0.85rem',
+                                            px: 2.5,
+                                            py: 0.8,
+                                            borderRadius: '50px',
+                                            textTransform: 'none',
+                                            fontWeight: 600,
+                                            boxShadow: 'none',
+                                            '&:hover': {
+                                                bgcolor: '#222',
+                                                boxShadow: 'none',
+                                            },
+                                        }}
+                                    >
+                                        新規登録
+                                    </Button>
+                                </>
+                            )}
+
+                            {session && (
+                                <IconButton
+                                    component={NextLink}
+                                    href="/dashboard"
+                                    aria-label="マイページ"
+                                    sx={{
+                                        p: 0.5,
+                                    }}
+                                >
+                                    <Avatar
+                                        src={session.user?.image ?? ''}
+                                        alt={session.user?.name ?? ''}
+                                        sx={{
+                                            width: 32,
+                                            height: 32,
+                                            fontSize: '0.85rem',
+                                            bgcolor: '#00D632',
+                                            color: '#000',
+                                        }}
+                                    >
+                                        {session.user?.name?.charAt(0) ?? '?'}
+                                    </Avatar>
+                                </IconButton>
+                            )}
 
                             <IconButton
                                 onClick={toggleDrawer(true)}
@@ -203,6 +264,106 @@ export default function Header() {
                             </Link>
                         ))}
                     </Stack>
+
+                    {/* Auth Links */}
+                    {status !== 'loading' && (
+                        <>
+                            <Divider sx={{ borderColor: 'rgba(255,255,255,0.08)', mb: 3 }} />
+                            {session ? (
+                                <Stack spacing={0} sx={{ mb: 4 }}>
+                                    <Link
+                                        component={NextLink}
+                                        href="/dashboard"
+                                        onClick={toggleDrawer(false)}
+                                        sx={{
+                                            color: '#FFF',
+                                            textDecoration: 'none',
+                                            fontSize: '1.1rem',
+                                            fontWeight: 400,
+                                            py: 2,
+                                            borderBottom: '1px solid rgba(255,255,255,0.08)',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            gap: 1.5,
+                                            '&:hover': { color: 'rgba(255,255,255,0.6)' },
+                                        }}
+                                    >
+                                        <DashboardIcon sx={{ fontSize: '1.2rem' }} />
+                                        マイページ
+                                    </Link>
+                                    <Link
+                                        component={NextLink}
+                                        href="/profile"
+                                        onClick={toggleDrawer(false)}
+                                        sx={{
+                                            color: '#FFF',
+                                            textDecoration: 'none',
+                                            fontSize: '1.1rem',
+                                            fontWeight: 400,
+                                            py: 2,
+                                            borderBottom: '1px solid rgba(255,255,255,0.08)',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            gap: 1.5,
+                                            '&:hover': { color: 'rgba(255,255,255,0.6)' },
+                                        }}
+                                    >
+                                        <PersonIcon sx={{ fontSize: '1.2rem' }} />
+                                        プロフィール
+                                    </Link>
+                                    <Link
+                                        href="#"
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            setDrawerOpen(false);
+                                            signOut({ callbackUrl: '/' });
+                                        }}
+                                        sx={{
+                                            color: 'rgba(255,255,255,0.6)',
+                                            textDecoration: 'none',
+                                            fontSize: '1.1rem',
+                                            fontWeight: 400,
+                                            py: 2,
+                                            borderBottom: '1px solid rgba(255,255,255,0.08)',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            gap: 1.5,
+                                            '&:hover': { color: 'rgba(255,255,255,0.4)' },
+                                        }}
+                                    >
+                                        <LogoutIcon sx={{ fontSize: '1.2rem' }} />
+                                        ログアウト
+                                    </Link>
+                                </Stack>
+                            ) : (
+                                <Stack spacing={2} sx={{ mb: 4 }}>
+                                    <Button
+                                        component={NextLink}
+                                        href="/auth/signin"
+                                        onClick={toggleDrawer(false)}
+                                        variant="contained"
+                                        fullWidth
+                                        sx={{
+                                            bgcolor: '#FFF',
+                                            color: '#000',
+                                            fontSize: '1rem',
+                                            fontWeight: 600,
+                                            py: 1.5,
+                                            borderRadius: '50px',
+                                            textTransform: 'none',
+                                            boxShadow: 'none',
+                                            '&:hover': {
+                                                bgcolor: 'rgba(255,255,255,0.9)',
+                                                boxShadow: 'none',
+                                            },
+                                        }}
+                                    >
+                                        ログイン / 新規登録
+                                    </Button>
+                                </Stack>
+                            )}
+                        </>
+                    )}
 
                     <Divider sx={{ borderColor: 'rgba(255,255,255,0.08)', mb: 4 }} />
 
