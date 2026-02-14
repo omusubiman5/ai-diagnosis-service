@@ -28,9 +28,11 @@ function FanCard({ card, index, scrollYProgress }: FanCardProps) {
         [0, 1],
         [STACKED_ANGLE, FAN_ANGLES[index]]
     );
+
+    const radius = 120;
     const transform = useTransform(
         angle,
-        (v) => `translate(-50%, -50%) rotate(${v}deg)`
+        (v) => `translate(-50%, -50%) rotate(${v}deg) translateY(-${radius}px)`
     );
 
     const isWhite = card.id === 4;

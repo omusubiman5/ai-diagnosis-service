@@ -1,0 +1,414 @@
+/* ═══════════════════════════════════════════════════════════════
+   SKILL60+ LP Global Styles (Scoped under .lp-scope)
+   ═══════════════════════════════════════════════════════════════ */
+
+.lp-scope {
+  /* カラー */
+  --c-primary: #1B4F72;
+  --c-accent: #2E86C1;
+  --c-warm: #E67E22;
+  --c-warm-hover: #D35400;
+  --c-warm-shadow: rgba(230, 126, 34, 0.3);
+  --c-bg: #FDFEFE;
+  --c-bg-section: #F8F9FA;
+  --c-text: #2C3E50;
+  --c-text-sub: #6C7A89;
+  --c-text-light: #95A5A6;
+  --c-card-bg: #FFFFFF;
+  --c-card-shadow: rgba(0, 0, 0, 0.06);
+  --c-trust: #27AE60;
+  --c-chat-ai: #E8F5E9;
+  --c-chat-user: #2E86C1;
+  --c-border: #E5E8EB;
+
+  /* タイポグラフィ */
+  --font-heading: 'Noto Sans JP', system-ui, -apple-system, sans-serif;
+  --font-body: system-ui, -apple-system, 'Hiragino Sans', 'Yu Gothic', sans-serif;
+  --fs-hero: clamp(1.75rem, 5vw, 2.5rem);
+  --fs-heading: clamp(1.25rem, 4vw, 1.75rem);
+  --fs-body: clamp(1.125rem, 3.5vw, 1.25rem);
+  --fs-small: clamp(0.9375rem, 3vw, 1.0625rem);
+  --fs-cta: clamp(1.0625rem, 3.5vw, 1.1875rem);
+  --lh-body: 1.85;
+
+  /* スペーシング */
+  --space-section: clamp(3rem, 8vw, 5rem);
+  --space-content: clamp(1.5rem, 4vw, 2.5rem);
+  --space-inline: 24px;
+  --max-width: 640px;
+  --header-height: 48px;
+  --btn-height: 64px;
+  --btn-min-tap: 56px;
+
+  /* 角丸 */
+  --radius-button: 16px;
+  --radius-card: 12px;
+  --radius-chat: 18px;
+  --radius-chat-tail: 4px;
+
+  /* アニメーション */
+  --dur-fade: 0.6s;
+  --dur-slide: 0.6s;
+  --dur-breathe: 2s;
+  --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  /* z-index */
+  --z-header: 100;
+  --z-scroll-top: 90;
+  --z-chatbot: 200;
+  --z-modal: 300;
+
+  /* Font Size Control */
+  --fs-base: 16px;
+  --fs-large: 20px;
+  --fs-xlarge: 24px;
+}
+
+/* ダークモード */
+@media (prefers-color-scheme: dark) {
+  .lp-scope {
+    --c-bg: #1A1A2E;
+    --c-bg-section: #16213E;
+    --c-text: #ECF0F1;
+    --c-text-sub: #B0BEC5;
+    --c-card-bg: #222240;
+    --c-card-shadow: rgba(0, 0, 0, 0.2);
+    --c-chat-ai: #1B3A26;
+    --c-border: #2C3E50;
+  }
+}
+
+/* reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .lp-scope *,
+  .lp-scope *::before,
+  .lp-scope *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ═══ Scoped Utilities ═══ */
+.lp-scope .speakable {
+  /* セクション読み上げ対象 */
+}
+
+.lp-scope .bg-alt {
+  background-color: var(--c-bg-section);
+}
+
+.lp-scope .section-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-section) var(--space-inline);
+}
+
+/* ═══ CTA Button Base ═══ */
+.lp-scope .cta-button {
+  display: inline-block;
+  min-height: var(--btn-height);
+  padding: 18px 32px;
+  background: var(--c-warm);
+  color: white;
+  font-size: var(--fs-cta);
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: var(--radius-button);
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s;
+  animation: breathe var(--dur-breathe) ease-in-out infinite alternate;
+}
+
+.lp-scope .cta-button:hover {
+  background: var(--c-warm-hover);
+}
+
+.lp-scope .cta-button:active {
+  transform: scale(0.97);
+  transition: transform 0.1s;
+  animation: none;
+}
+
+/* ANIM-02: CTA呼吸 */
+@keyframes breathe {
+  from {
+    transform: scale(1);
+    box-shadow: 0 4px 12px var(--c-warm-shadow);
+  }
+  to {
+    transform: scale(1.015);
+    box-shadow: 0 6px 20px rgba(230, 126, 34, 0.4);
+  }
+}
+
+.lp-scope .cta-sub {
+  display: block;
+  margin-top: 12px;
+  font-size: var(--fs-small);
+  color: var(--c-text-sub);
+  text-align: center;
+}
+
+/* ═══ ANIM-01: フェードスライドイン ═══ */
+.lp-scope .fade-slide {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--dur-fade) var(--ease-out),
+              transform var(--dur-slide) var(--ease-out);
+}
+
+.lp-scope .fade-slide.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ═══ Chat Bubbles (MeetSection) ═══ */
+.lp-scope .chat-container.is-visible .chat-bubble {
+  animation: bubble-in 0.5s var(--ease-out) forwards;
+}
+
+.lp-scope .chat-container.is-visible .chat-bubble:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.lp-scope .chat-container.is-visible .chat-bubble:nth-child(3) {
+  animation-delay: 0.8s;
+}
+
+.lp-scope .chat-container.is-visible .chat-bubble:nth-child(4) {
+  animation-delay: 1.3s;
+}
+
+.lp-scope .chat-container.is-visible .chat-bubble:nth-child(5) {
+  animation-delay: 1.8s;
+}
+
+@keyframes bubble-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ANIM-14: 褒められた温かみ */
+@keyframes warm-glow {
+  0% {
+    background-color: transparent;
+  }
+  30% {
+    background-color: rgba(255, 243, 224, 0.4);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+.lp-scope .chat-container.is-visible {
+  animation: warm-glow 2s ease-out 2.3s;
+}
+
+/* ═══ Story Cards (StoriesSection) ═══ */
+.lp-scope .story-card {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity var(--dur-fade) var(--ease-out),
+              transform var(--dur-slide) var(--ease-out);
+}
+
+.lp-scope .story-card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.lp-scope .story-card:nth-child(2).is-visible {
+  transition-delay: 0.15s;
+}
+
+.lp-scope .story-card:nth-child(3).is-visible {
+  transition-delay: 0.3s;
+}
+
+/* ANIM-12: Before→After遷移 */
+@keyframes fade-dim {
+  to {
+    opacity: 0.4;
+    filter: blur(1px);
+  }
+}
+
+@keyframes check-pop {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.lp-scope .story-card.is-visible .story-before {
+  animation: fade-dim 0.6s var(--ease-out) 1.0s forwards;
+}
+
+.lp-scope .story-card.is-visible .story-divider {
+  animation: check-pop 0.3s var(--ease-out) 1.3s forwards;
+}
+
+.lp-scope .story-card.is-visible .story-after {
+  animation: bubble-in 0.6s var(--ease-out) 1.5s forwards;
+}
+
+.lp-scope .score-number {
+  font-size: 1.3em;
+  font-weight: 700;
+  color: var(--c-accent);
+}
+
+/* ═══ Check Items (TrustSection) ═══ */
+.lp-scope .check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  background: var(--c-card-bg);
+  border-radius: var(--radius-card);
+  box-shadow: 0 2px 8px var(--c-card-shadow);
+}
+
+.lp-scope .check-item.is-visible .check-icon {
+  animation: check-pop 0.3s var(--ease-out) forwards;
+  color: var(--c-trust);
+}
+
+.lp-scope .check-item:nth-child(1).is-visible .check-icon {
+  animation-delay: 0.1s;
+}
+
+.lp-scope .check-item:nth-child(2).is-visible .check-icon {
+  animation-delay: 0.25s;
+}
+
+.lp-scope .check-item:nth-child(3).is-visible .check-icon {
+  animation-delay: 0.4s;
+}
+
+.lp-scope .check-item p {
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--c-text);
+  margin: 0;
+}
+
+/* ═══ FAQ (TrustSection) ═══ */
+.lp-scope .faq-item {
+  background: var(--c-card-bg);
+  border-radius: var(--radius-card);
+  box-shadow: 0 2px 8px var(--c-card-shadow);
+  overflow: hidden;
+}
+
+.lp-scope .faq-question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-size: var(--fs-body);
+  font-weight: 600;
+  color: var(--c-text);
+  font-family: var(--font-body);
+  transition: background-color 0.2s;
+}
+
+.lp-scope .faq-question:hover {
+  background-color: rgba(27, 79, 114, 0.05);
+}
+
+.lp-scope .faq-toggle-icon {
+  flex-shrink: 0;
+  transition: transform 0.3s;
+}
+
+.lp-scope .faq-item.is-open .faq-toggle-icon {
+  transform: rotate(180deg);
+}
+
+.lp-scope .faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+  padding: 0 16px;
+}
+
+.lp-scope .faq-item.is-open .faq-answer {
+  max-height: 300px;
+  padding: 12px 16px 16px;
+}
+
+.lp-scope .faq-answer p {
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--c-text);
+  margin: 0;
+}
+
+/* ═══ Memory Cards Animation ═══ */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ═══ Font Size Control (body-level, stays global) ═══ */
+body.font-large,
+body.font-large p,
+body.font-large span,
+body.font-large button,
+body.font-large input,
+body.font-large [class*="MuiTypography"],
+body.font-large [class*="MuiButton"] {
+  font-size: var(--fs-large) !important;
+}
+
+body.font-xlarge,
+body.font-xlarge p,
+body.font-xlarge span,
+body.font-xlarge button,
+body.font-xlarge input,
+body.font-xlarge [class*="MuiTypography"],
+body.font-xlarge [class*="MuiButton"] {
+  font-size: var(--fs-xlarge) !important;
+}
+
+body.font-large h1 { font-size: 2rem !important; }
+body.font-large h2 { font-size: 1.6rem !important; }
+body.font-xlarge h1 { font-size: 2.4rem !important; }
+body.font-xlarge h2 { font-size: 2rem !important; }
+
+/* ═══ Accessibility: Reduced Motion ═══ */
+@media (prefers-reduced-motion: reduce) {
+  .lp-scope .service-card,
+  .lp-scope .memory-card {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

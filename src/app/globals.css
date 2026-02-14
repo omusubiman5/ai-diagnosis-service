@@ -532,3 +532,138 @@ body {
 .animate-float-fast {
   animation: float-fast 3s ease-in-out infinite;
 }
+
+/* ========================================
+   CARD FAN ANIMATION (Cash App Exact)
+   ======================================== */
+
+.card-fan-container {
+  position: relative;
+  width: 300px;
+  height: 190px;
+  cursor: pointer;
+  margin: 0 auto;
+}
+
+.card {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  border-radius: 16px;
+  transition: transform 0.4s ease-in-out;
+  transform-origin: center center;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  /* Initial state: all stacked at -90deg */
+  transform: translate(-50%, -50%) rotate(-90deg);
+}
+
+/* Fan State - Exact angles from Cash App analysis */
+.card-fan-container:hover .card:nth-of-type(1) {
+  transform: translate(-50%, -50%) rotate(-82.5deg);
+}
+
+.card-fan-container:hover .card:nth-of-type(2) {
+  transform: translate(-50%, -50%) rotate(-75deg);
+}
+
+.card-fan-container:hover .card:nth-of-type(3) {
+  transform: translate(-50%, -50%) rotate(-60deg);
+}
+
+.card-fan-container:hover .card:nth-of-type(4) {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.card-fan-container:hover .card:nth-of-type(5) {
+  transform: translate(-50%, -50%) rotate(-30deg);
+}
+
+.card-fan-container:hover .card:nth-of-type(6) {
+  transform: translate(-50%, -50%) rotate(-15deg);
+}
+
+/* Card Content Styles */
+.card-content {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #333;
+}
+
+.card-chip {
+  position: absolute;
+  top: 15%;
+  left: 10%;
+  width: 20%;
+  height: 15%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 100%);
+  border-radius: 4px;
+}
+
+.card-text {
+  position: absolute;
+  bottom: 10%;
+  left: 10%;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.8);
+  font-family: var(--font-ibm-plex-mono);
+}
+
+@media (min-width: 600px) {
+  .card-fan-container {
+    width: 400px;
+    height: 250px;
+  }
+}
+
+/* ========================================
+   HAMBURGER MENU DRAWER
+   ======================================== */
+
+.hamburger-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+.hamburger-btn:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.drawer-nav-link {
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  font-size: 0.95rem;
+  padding: 12px 0;
+  display: block;
+  transition: color 0.2s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.drawer-nav-link:hover {
+  color: #FFFFFF;
+}
+
+.drawer-contact-label {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.drawer-contact-value {
+  font-size: 1rem;
+  color: #FFFFFF;
+}

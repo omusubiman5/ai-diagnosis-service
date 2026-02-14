@@ -1,0 +1,82 @@
+.meet {
+  text-align: center;
+}
+
+.meet h2 {
+  font-family: var(--font-heading);
+  font-size: var(--fs-heading);
+  font-weight: 700;
+  margin-bottom: var(--space-content);
+  color: var(--c-primary);
+}
+
+.chatContainer {
+  max-width: 480px;
+  margin: 0 auto var(--space-content);
+  padding: 24px;
+  background: var(--c-card-bg);
+  border-radius: var(--radius-card);
+  box-shadow: 0 2px 12px var(--c-card-shadow);
+  text-align: left;
+}
+
+.chatAvatar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.chatAvatar img {
+  border-radius: 50%;
+}
+
+.chatName {
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--c-primary);
+}
+
+.chatBubble {
+  margin-bottom: 12px;
+  padding: 12px 16px;
+  border-radius: var(--radius-chat);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  opacity: 0;
+}
+
+.chatBubbleAi {
+  background: var(--c-chat-ai);
+  color: var(--c-text);
+  border-bottom-left-radius: var(--radius-chat-tail);
+  margin-right: 20%;
+}
+
+.chatBubbleUser {
+  background: var(--c-chat-user);
+  color: white;
+  border-bottom-right-radius: var(--radius-chat-tail);
+  margin-left: 20%;
+  text-align: right;
+}
+
+.featurePoints {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 24px;
+  background: var(--c-card-bg);
+  border-radius: var(--radius-card);
+  box-shadow: 0 2px 8px var(--c-card-shadow);
+}
+
+.featurePoints p {
+  margin: 0;
+  font-size: var(--fs-body);
+  text-align: left;
+}
+
+/* Animations are defined in globals.css */

@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Box } from '@mui/material';
 import Header from './components/Header';
 import HeroSection from './components/HeroSection';
@@ -9,20 +9,20 @@ import SolutionSection from './components/SolutionSection';
 import StepsSection from './components/StepsSection';
 import TrustSection from './components/TrustSection';
 import CTASection from './components/CTASection';
-import Footer from './components/Footer';
+import TransitionSection from './components/TransitionSection';
 import VoiceControl from './components/VoiceControl';
 import AIChatWidget from './components/AIChatWidget';
+import LpSectionsWrapper from './components/LpSectionsWrapper';
 
-const SECTION_COLORS = [
-  '#FFFFFF', // Hero
-  '#00D632', // Empathy
-  '#FFFFFF', // Features
-  '#FAFAFA', // Solution
-  '#FFFFFF', // Steps
-  '#FAFAFA', // Trust
-  '#000000', // CTA
-  '#000000', // Footer
-];
+// LP sections (aliased to avoid name conflicts)
+import LpHeroSection from './lp/components/HeroSection';
+import LpMeetSection from './lp/components/MeetSection';
+import LpStoriesSection from './lp/components/StoriesSection';
+import LpTrustSection from './lp/components/TrustSection';
+import LpActionSection from './lp/components/ActionSection';
+import LpChatbot from './lp/components/LpChatbot';
+import VoicevoxPlayer from './lp/components/VoicevoxPlayer';
+import FontSizeControl from './lp/components/FontSizeControl';
 
 export default function Home() {
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -35,7 +35,6 @@ export default function Home() {
 
     const observer = new IntersectionObserver(
       (entries) => {
-        // Find the most visible section
         let maxRatio = 0;
         let activeColor = bgColor;
         entries.forEach((entry) => {
@@ -61,7 +60,6 @@ export default function Home() {
     };
   }, []);
 
-  // Determine text color based on background
   const isDark = bgColor === '#000000';
 
   return (
@@ -75,6 +73,8 @@ export default function Home() {
       }}
     >
       <Header />
+
+      {/* === Main Sections === */}
       <Box component="section" data-bg-color="#FFFFFF">
         <HeroSection />
       </Box>
@@ -96,9 +96,31 @@ export default function Home() {
       <Box component="section" data-bg-color="#000000">
         <CTASection />
       </Box>
-      <Box component="section" data-bg-color="#000000">
-        <Footer />
-      </Box>
+
+      {/* === Transition: Main → LP === */}
+      <TransitionSection />
+
+      {/* === LP Sections (scoped) === */}
+      <LpSectionsWrapper>
+        <Box component="section" data-bg-color="#FEF9E7" id="lp-hero">
+          <LpHeroSection />
+        </Box>
+        <Box component="section" data-bg-color="#F8F9FA">
+          <LpMeetSection />
+        </Box>
+        <Box component="section" data-bg-color="#FDFEFE">
+          <LpStoriesSection />
+        </Box>
+        <Box component="section" data-bg-color="#F8F9FA">
+          <LpTrustSection />
+        </Box>
+        <Box component="section" data-bg-color="#FFF8E1">
+          <LpActionSection />
+        </Box>
+      </LpSectionsWrapper>
+
+      {/* === Floating UI === */}
+      <FontSizeControl />
       <VoiceControl
         onChatToggle={() => setIsChatOpen(true)}
         isChatOpen={isChatOpen}
@@ -107,6 +129,8 @@ export default function Home() {
         open={isChatOpen}
         onClose={() => setIsChatOpen(false)}
       />
+      <LpChatbot />
+      <VoicevoxPlayer />
     </Box>
   );
 }

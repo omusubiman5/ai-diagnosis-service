@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { Box, Container, Typography, Button, Grid } from '@mui/material';
-import { ArrowRight } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
 
 const stats = [
@@ -21,7 +20,7 @@ export default function CTASection() {
                 overflow: 'hidden',
             }}
         >
-            {/* Stats + CTA grid - Cash App style bottom bar */}
+            {/* 現行: Stats grid */}
             <Container maxWidth="lg" sx={{ py: { xs: 10, md: 14 } }}>
                 <ScrollReveal animation="slide-up">
                     <Typography
@@ -77,7 +76,6 @@ export default function CTASection() {
                         </Grid>
                     ))}
 
-                    {/* CTA card */}
                     <Grid size={{ xs: 12, md: 3 }}>
                         <ScrollReveal animation="slide-up" delay={0.3}>
                             <Box
@@ -123,6 +121,66 @@ export default function CTASection() {
                     </Grid>
                 </Grid>
             </Container>
+
+            {/* design1要素: 緑CTA帯 */}
+            <Box
+                sx={{
+                    bgcolor: '#00D632',
+                    color: '#000',
+                    py: { xs: 8, md: 12 },
+                    textAlign: 'center',
+                }}
+            >
+                <Container maxWidth="md">
+                    <ScrollReveal animation="slide-up">
+                        <Typography
+                            sx={{
+                                fontFamily: 'var(--font-nanum-myeongjo)',
+                                fontSize: { xs: '1.5rem', md: 'var(--font-size-h2)' },
+                                fontWeight: 700,
+                                letterSpacing: '-0.02em',
+                                lineHeight: 1.3,
+                                mb: 2,
+                            }}
+                        >
+                            今すぐ始めよう
+                        </Typography>
+                        <Typography
+                            sx={{
+                                fontSize: 'var(--font-size-body)',
+                                lineHeight: 1.8,
+                                mb: 5,
+                            }}
+                        >
+                            あなたの60年の経験を、次の価値へ。
+                        </Typography>
+                        <Button
+                            variant="contained"
+                            size="large"
+                            href="#"
+                            sx={{
+                                bgcolor: '#000',
+                                color: '#00D632',
+                                fontSize: '1.2rem',
+                                px: 8,
+                                py: 2.5,
+                                borderRadius: '50px',
+                                textTransform: 'none',
+                                fontWeight: 700,
+                                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.2)',
+                                transition: 'all 0.3s ease',
+                                '&:hover': {
+                                    bgcolor: '#111',
+                                    transform: 'translateY(-2px)',
+                                    boxShadow: '0 6px 30px rgba(0, 0, 0, 0.3)',
+                                },
+                            }}
+                        >
+                            無料で診断を始める
+                        </Button>
+                    </ScrollReveal>
+                </Container>
+            </Box>
         </Box>
     );
 }

@@ -1,0 +1,77 @@
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 560px;
+  margin: 0 auto var(--space-content);
+}
+
+@media (min-width: 768px) {
+  .steps {
+    flex-direction: row;
+    gap: 32px;
+  }
+}
+
+.step {
+  flex: 1;
+  text-align: center;
+  padding: 24px;
+  background: var(--c-card-bg);
+  border-radius: var(--radius-card);
+  box-shadow: 0 2px 8px var(--c-card-shadow);
+}
+
+.stepNum {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--c-primary);
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.step p {
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--c-text);
+  margin: 0;
+}
+
+.step small {
+  display: block;
+  margin-top: 8px;
+  font-size: var(--fs-small);
+  color: var(--c-text-sub);
+}
+
+/* ═══ チェックリスト ═══ */
+.checkList {
+  max-width: 560px;
+  margin: 0 auto var(--space-content);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.checkIcon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  opacity: 0;
+}
+
+/* ═══ FAQ ═══ */
+.faqList {
+  max-width: 560px;
+  margin: var(--space-content) auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Global FAQ and check item styles are in globals.css */
