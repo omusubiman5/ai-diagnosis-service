@@ -1,0 +1,159 @@
+.stories {
+  text-align: center;
+  padding: var(--space-section) var(--space-inline);
+}
+
+.stories h2 {
+  font-family: var(--font-heading);
+  font-size: var(--fs-heading);
+  font-weight: 700;
+  margin-bottom: var(--space-content);
+  color: var(--c-primary);
+}
+
+/* ═══ 体験カード円状展開 ═══ */
+.experienceSection {
+  margin-bottom: var(--space-section);
+}
+
+.experienceLead {
+  font-size: 1.1rem;
+  color: var(--c-text-light);
+  margin-bottom: 24px;
+}
+
+.experienceCards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  perspective: 800px;
+}
+
+.experienceCard {
+  width: 120px;
+  height: 140px;
+  padding: 16px 8px;
+  background: var(--c-card-bg);
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  text-align: center;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 0.3s ease;
+}
+
+.experienceCard:hover {
+  transform: scale(1.08) rotateY(5deg);
+}
+
+.experienceIcon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.experienceText {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--c-text);
+  margin: 0;
+}
+
+.experienceText small {
+  color: var(--c-accent);
+  font-weight: 600;
+  display: block;
+  margin-top: 4px;
+}
+
+/* ═══ 物語カード ═══ */
+.storiesContainer {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 var(--space-inline);
+  scrollbar-width: none;
+  margin-bottom: var(--space-content);
+}
+
+.storiesContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.storyCard {
+  flex: 0 0 85%;
+  scroll-snap-align: center;
+  background: var(--c-card-bg);
+  border-radius: var(--radius-card);
+  padding: 24px;
+  box-shadow: 0 2px 12px var(--c-card-shadow);
+  text-align: left;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity var(--dur-fade) var(--ease-out),
+              transform var(--dur-slide) var(--ease-out);
+}
+
+.storyCard.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.storyCard:nth-child(2).is-visible {
+  transition-delay: 0.15s;
+}
+
+.storyCard:nth-child(3).is-visible {
+  transition-delay: 0.3s;
+}
+
+@media (min-width: 768px) {
+  .storiesContainer {
+    flex-wrap: nowrap;
+    overflow-x: visible;
+    justify-content: center;
+  }
+
+  .storyCard {
+    flex: 1;
+    max-width: 320px;
+  }
+}
+
+.storyBefore {
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--c-text-sub);
+  margin-bottom: 16px;
+  font-style: italic;
+}
+
+.storyDivider {
+  text-align: center;
+  font-size: 1.5rem;
+  color: var(--c-accent);
+  margin: 16px 0;
+  opacity: 0;
+}
+
+.storyAfter {
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--c-text);
+  margin-bottom: 16px;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.storyName {
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--c-primary);
+  text-align: right;
+  margin-top: 16px;
+}
+
+/* Animations are defined in globals.css */

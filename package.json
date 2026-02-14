@@ -9,23 +9,29 @@
     "lint": "eslint",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "add": "liftkit add"
   },
   "dependencies": {
+    "@csstools/normalize.css": "^12.1.1",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@gsap/react": "^2.1.2",
+    "@material/material-color-utilities": "^0.4.0",
     "@mui/icons-material": "^7.3.7",
     "@mui/material": "^7.3.7",
     "@mui/material-nextjs": "^7.3.7",
     "framer-motion": "^12.33.0",
     "gsap": "^3.14.2",
     "lottie-react": "^2.4.1",
+    "lucide-react": "^0.563.0",
+    "material-dynamic-colors": "^1.1.4",
     "next": "16.1.6",
     "react": "19.2.3",
     "react-dom": "19.2.3"
   },
   "devDependencies": {
+    "@chainlift/liftkit": "^0.2.0",
     "@tailwindcss/postcss": "^4",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",

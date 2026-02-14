@@ -1,84 +1,144 @@
 'use client';
-import React, { useRef } from 'react';
-import { Box, Container, Typography, Paper, Avatar } from '@mui/material';
-import Grid from '@mui/material/Grid';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
-import { useReducedMotion } from '../hooks/useReducedMotion';
 
-gsap.registerPlugin(ScrollTrigger);
+import React from 'react';
+import { Box, Container, Typography } from '@mui/material';
+import Grid from '@mui/material/Grid';
+import ScrollReveal from './ScrollReveal';
+
+const metrics = [
+    { value: '10,000+', label: '診断実績' },
+    { value: '95%', label: '利用者満足度' },
+    { value: '3分', label: '平均診断時間' },
+];
 
 export default function TrustSection() {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const leftColRef = useRef<HTMLDivElement>(null);
-    const rightColRef = useRef<HTMLDivElement>(null);
-    const prefersReducedMotion = useReducedMotion();
-
-    useGSAP(() => {
-        if (prefersReducedMotion) return;
-
-        gsap.from(leftColRef.current, {
-            x: -50, opacity: 0, duration: 1, ease: 'power2.out',
-            scrollTrigger: { trigger: containerRef.current, start: 'top 75%' }
-        });
-        gsap.from(rightColRef.current, {
-            x: 50, opacity: 0, duration: 1, delay: 0.2, ease: 'power2.out',
-            scrollTrigger: { trigger: containerRef.current, start: 'top 75%' }
-        });
-    }, { scope: containerRef });
-
     return (
-        <Box ref={containerRef} sx={{ py: 12, bgcolor: '#FFFFFF' }}>
-            <Container maxWidth="lg">
-                <Typography variant="h2" align="center" color="primary" gutterBottom sx={{ mb: 8, fontWeight: 'bold' }}>
-                    なぜ、正確に診断できるのか？
-                </Typography>
+        <Box
+            component="section"
+            sx={{
+                py: { xs: 12, md: 16 },
+                color: '#000',
+            }}
+        >
+            <Container maxWidth="md">
+                <ScrollReveal animation="slide-up">
+                    <Typography
+                        variant="h2"
+                        align="center"
+                        sx={{
+                            fontWeight: 800,
+                            letterSpacing: '-0.03em',
+                            lineHeight: 1.15,
+                            mb: 6,
+                            fontFamily: 'var(--font-nanum-myeongjo)',
+                            fontSize: 'var(--font-size-h2)',
+                        }}
+                    >
+                        多くの方が、新しい一歩を
+                        <br />
+                        踏み出しています
+                    </Typography>
+                </ScrollReveal>
 
-                <Grid container spacing={6} alignItems="center">
-                    <Grid size={{ xs: 12, md: 6 }}>
-                        <div ref={leftColRef}>
-                            <Paper sx={{ p: 4, borderRadius: 4, bgcolor: '#f0f4f9', borderLeft: '8px solid #205493' }}>
-                                <Typography variant="h4" gutterBottom sx={{ fontWeight: 'bold', color: 'primary.main' }}>
-                                    2つのデータの融合
-                                </Typography>
-                                <Box sx={{ my: 3 }}>
-                                    <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-                                        📈 膨大な求人市場データ
+                {/* design1要素: 指標カード */}
+                <Grid container spacing={3} sx={{ mb: 6 }}>
+                    {metrics.map((metric, index) => (
+                        <Grid size={{ xs: 4 }} key={index}>
+                            <ScrollReveal animation="slide-up" delay={index * 0.1}>
+                                <Box
+                                    sx={{
+                                        textAlign: 'center',
+                                        p: { xs: 3, md: 4 },
+                                        bgcolor: '#FFF',
+                                        borderRadius: 3,
+                                        boxShadow: '0 2px 16px rgba(0,0,0,0.06)',
+                                        border: '1px solid rgba(0,0,0,0.04)',
+                                    }}
+                                >
+                                    <Typography
+                                        sx={{
+                                            fontSize: { xs: '1.5rem', md: '2.5rem' },
+                                            fontWeight: 700,
+                                            color: '#00D632',
+                                            mb: 0.5,
+                                            fontFamily: 'var(--font-ibm-plex-mono)',
+                                            lineHeight: 1,
+                                        }}
+                                    >
+                                        {metric.value}
                                     </Typography>
-                                    <Typography variant="body1" paragraph>
-                                        数百万件以上のシニア向け求人データをリアルタイムで解析。
-                                    </Typography>
-                                    <Typography variant="h6" sx={{ fontWeight: 'bold', mt: 2 }}>
-                                        🧠 キャリア理論
-                                    </Typography>
-                                    <Typography variant="body1">
-                                        長年の研究に基づくキャリア理論をAIに学習させ、潜在的なスキルを抽出。
+                                    <Typography
+                                        sx={{
+                                            fontSize: { xs: '0.75rem', md: '0.9rem' },
+                                            color: '#666',
+                                        }}
+                                    >
+                                        {metric.label}
                                     </Typography>
                                 </Box>
-                            </Paper>
-                        </div>
-                    </Grid>
-                    <Grid size={{ xs: 12, md: 6 }}>
-                        <div ref={rightColRef}>
-                            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-                                <Avatar sx={{ width: 120, height: 120, mb: 2, bgcolor: 'text.secondary', fontSize: '3rem' }}>
-                                    監
-                                </Avatar>
-                                <Typography variant="h5" sx={{ fontWeight: 'bold' }}>
-                                    シニアキャリア研究所
-                                </Typography>
-                                <Typography variant="subtitle1" color="text.secondary" gutterBottom>
-                                    監修
-                                </Typography>
-                                <Typography variant="body1" sx={{ mt: 2, maxWidth: 400 }}>
-                                    「これまでの経験は、必ず誰かの役に立ちます。
-                                    AI診断を通じて、あなたの新しい可能性を見つけてください。」
-                                </Typography>
-                            </Box>
-                        </div>
-                    </Grid>
+                            </ScrollReveal>
+                        </Grid>
+                    ))}
                 </Grid>
+
+                {/* 現行: 体験談カード */}
+                <ScrollReveal animation="slide-up" delay={0.3}>
+                    <Box
+                        sx={{
+                            bgcolor: '#FFF',
+                            borderRadius: 4,
+                            p: { xs: 4, md: 6 },
+                            boxShadow: '0 2px 30px rgba(0,0,0,0.04)',
+                            border: '1px solid rgba(0,0,0,0.04)',
+                            textAlign: 'center',
+                            mb: 4,
+                        }}
+                    >
+                        <Typography
+                            sx={{
+                                fontSize: { xs: '1.1rem', md: '1.25rem' },
+                                fontStyle: 'italic',
+                                color: '#333',
+                                lineHeight: 2,
+                                maxWidth: '600px',
+                                mx: 'auto',
+                                mb: 3,
+                            }}
+                        >
+                            &ldquo;定年後は自分に価値がないと思っていました。
+                            でもSKILL60+の診断で、私の30年の製造管理経験が
+                            中小企業に求められていると知り、自信が戻りました。&rdquo;
+                        </Typography>
+                        <Typography
+                            sx={{
+                                fontFamily: 'var(--font-ibm-plex-mono)',
+                                fontSize: '0.85rem',
+                                color: '#999',
+                            }}
+                        >
+                            &#8212; Tさん (65歳・元製造管理職)
+                        </Typography>
+                    </Box>
+                </ScrollReveal>
+
+                <ScrollReveal animation="slide-up" delay={0.4}>
+                    <Typography
+                        component="a"
+                        href="#cta"
+                        sx={{
+                            display: 'block',
+                            textAlign: 'center',
+                            fontSize: '1rem',
+                            fontWeight: 600,
+                            color: '#000',
+                            textDecoration: 'none',
+                            cursor: 'pointer',
+                            '&:hover': { textDecoration: 'underline' },
+                        }}
+                    >
+                        体験談をもっと見る &rarr;
+                    </Typography>
+                </ScrollReveal>
             </Container>
         </Box>
     );

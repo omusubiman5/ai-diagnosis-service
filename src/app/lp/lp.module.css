@@ -1,0 +1,135 @@
+/* ═══════════════════════════════════════════════════════════════
+   SKILL60+ LP CSS Module (Component-specific styles)
+   ═══════════════════════════════════════════════════════════════ */
+
+.lpContainer {
+  background-color: var(--c-bg);
+  color: var(--c-text);
+  min-height: 100vh;
+  font-family: var(--font-body);
+  line-height: var(--lh-body);
+  font-size: var(--fs-body);
+}
+
+/* ═══ Sticky Header ═══ */
+.siteHeader {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  background: var(--c-bg);
+  box-shadow: none;
+  transition: box-shadow 0.3s;
+}
+
+.siteHeader.isScrolled {
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.08);
+}
+
+.headerInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px var(--space-inline);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: var(--header-height);
+}
+
+.headerLogo {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--c-primary);
+}
+
+.headerPhone {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--c-primary);
+  text-decoration: none;
+  font-size: var(--fs-small);
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+.headerPhone:hover {
+  background-color: rgba(27, 79, 114, 0.08);
+}
+
+.headerPhoneText {
+  display: none;
+}
+
+@media (min-width: 600px) {
+  .headerPhoneText {
+    display: inline;
+  }
+}
+
+/* ═══ Footer ═══ */
+.siteFooter {
+  background: var(--c-bg-section);
+  padding: var(--space-section) var(--space-inline);
+  text-align: center;
+}
+
+.footerMessage {
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  margin-bottom: var(--space-content);
+  color: var(--c-text);
+}
+
+.footerPhone {
+  display: block;
+  color: var(--c-primary);
+  text-decoration: none;
+  font-size: var(--fs-small);
+  margin-bottom: 16px;
+}
+
+.footerPhone:hover {
+  text-decoration: underline;
+}
+
+.footerCopy {
+  font-size: var(--fs-small);
+  color: var(--c-text-sub);
+}
+
+/* ═══ Scroll Top Button ═══ */
+.scrollTopBtn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: var(--z-scroll-top);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--c-primary);
+  color: white;
+  border: none;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.scrollTopBtn.isShown {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.scrollTopBtn:hover {
+  transform: scale(1.05);
+}
+
+.scrollTopBtn:active {
+  transform: scale(0.95);
+}

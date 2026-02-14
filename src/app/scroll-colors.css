@@ -1,0 +1,29 @@
+/* ========================================
+   SCROLL-BASED COLOR TRANSITIONS
+   ======================================== */
+
+/* Section background colors that change on scroll */
+.section-black {
+    background-color: var(--color-black);
+    color: var(--color-white);
+}
+
+.section-white {
+    background-color: var(--color-white);
+    color: var(--color-black);
+}
+
+.section-green {
+    background-color: var(--color-green);
+    color: var(--color-black);
+}
+
+.section-gray {
+    background-color: #F5F5F5;
+    color: var(--color-black);
+}
+
+/* Smooth transitions between sections */
+section {
+    transition: background-color 0.6s ease, color 0.6s ease;
+}

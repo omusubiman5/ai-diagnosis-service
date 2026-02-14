@@ -1,64 +1,9 @@
 'use client';
+
 import React from 'react';
-import { Box, Container, Typography, Card, CardContent } from '@mui/material';
+import { Box, Container, Typography, Stack, Divider } from '@mui/material';
 import Grid from '@mui/material/Grid';
-import { motion } from 'framer-motion';
-import { Groups, TrendingDown, MonetizationOn } from '@mui/icons-material';
-import Lottie from 'lottie-react';
-
-const iconMap: Record<string, React.ReactElement> = {
-    '孤独感': <Groups sx={{ fontSize: 80, color: 'primary.main' }} />,
-    '自信喪失': <TrendingDown sx={{ fontSize: 80, color: 'warning.main' }} />,
-    '収入への不満': <MonetizationOn sx={{ fontSize: 80, color: 'success.main' }} />,
-};
-
-const animationData = {
-    v: "5.5.7", fr: 30, ip: 0, op: 60, w: 500, h: 500, nm: "Circle", ddd: 0, assets: [],
-    layers: [{
-        ddd: 0, ind: 1, ty: 4, nm: "Circle", sr: 1,
-        ks: { o: { a: 0, k: 100 }, r: { a: 1, k: [{ t: 0, s: [0] }, { t: 60, s: [360] }] }, p: { a: 0, k: [250, 250] }, a: { a: 0, k: [0, 0] }, s: { a: 0, k: [100, 100] } },
-        shapes: [{ ty: "gr", it: [{ d: 1, ty: "el", s: { a: 0, k: [300, 300] }, p: { a: 0, k: [0, 0] }, nm: "Ellipse Path" }, { ty: "st", c: { a: 0, k: [0.2, 0.33, 0.58, 1] }, o: { a: 0, k: 100 }, w: { a: 0, k: 10 }, nm: "Stroke" }, { ty: "tr", p: { a: 0, k: [0, 0] }, a: { a: 0, k: [0, 0] }, s: { a: 0, k: [100, 100] }, r: { a: 0, k: 0 }, o: { a: 0, k: 100 }, nm: "Transform" }] }]
-    }]
-};
-
-const WorryCard = ({ worry }: { worry: { title: string, description: string } }) => {
-    return (
-        <motion.div
-            whileHover={{
-                scale: 1.05,
-                boxShadow: '0 8px 16px rgba(50, 205, 50, 0.3)'
-            }}
-            whileFocus={{
-                outline: '3px solid #32CD32'
-            }}
-            whileTap={{
-                scale: 0.98
-            }}
-            transition={{
-                type: 'spring',
-                stiffness: 300,
-                damping: 20
-            }}
-        >
-            <Card sx={{ height: '100%', textAlign: 'center', borderRadius: 4 }}>
-                <CardContent sx={{ p: 4 }}>
-                    <Box sx={{ width: 120, height: 120, mx: 'auto', mb: 2, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
-                        <Box sx={{ position: 'absolute', inset: 0, opacity: 0.2 }}>
-                            <Lottie animationData={animationData} loop={true} />
-                        </Box>
-                        {iconMap[worry.title]}
-                    </Box>
-                    <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 2, color: 'text.primary' }}>
-                        {worry.title}
-                    </Typography>
-                    <Typography variant="body1" color="text.secondary" sx={{ whiteSpace: 'pre-line' }}>
-                        {worry.description}
-                    </Typography>
-                </CardContent>
-            </Card>
-        </motion.div>
-    );
-};
+import ScrollReveal from './ScrollReveal';
 
 const worries = [
     { title: '孤独感', description: '定年後、社会との繋がりが\n急になくなるのが怖い...' },
@@ -68,21 +13,99 @@ const worries = [
 
 export default function EmpathySection() {
     return (
-        <Box sx={{ py: 12, bgcolor: '#FFFFFF' }}>
+        <Box
+            sx={{
+                py: { xs: 12, md: 16 },
+                color: '#000',
+            }}
+        >
             <Container maxWidth="lg">
-                <Typography
-                    variant="h2"
-                    align="center"
-                    color="primary"
-                    gutterBottom
-                    sx={{ mb: 8, fontWeight: 'bold' }}
-                >
-                    こんなモヤモヤ、<br />抱えていませんか？
-                </Typography>
-                <Grid container spacing={4}>
+                {/* 現行: ヘッドライン + 説明文 */}
+                <Grid container spacing={{ xs: 6, md: 10 }} alignItems="center">
+                    <Grid size={{ xs: 12, md: 7 }}>
+                        <ScrollReveal animation="slide-up">
+                            <Typography
+                                variant="h2"
+                                sx={{
+                                    fontWeight: 800,
+                                    letterSpacing: '-0.03em',
+                                    lineHeight: 1.15,
+                                    mb: 3,
+                                    fontFamily: 'var(--font-nanum-myeongjo)',
+                                    fontSize: 'var(--font-size-h2)',
+                                }}
+                            >
+                                定年後の不安を、
+                                <br />
+                                可能性に変える
+                            </Typography>
+                        </ScrollReveal>
+                    </Grid>
+                    <Grid size={{ xs: 12, md: 5 }}>
+                        <ScrollReveal animation="slide-up" delay={0.15}>
+                            <Stack spacing={3}>
+                                <Typography
+                                    sx={{
+                                        fontSize: 'var(--font-size-body)',
+                                        lineHeight: 1.8,
+                                        color: 'rgba(0,0,0,0.75)',
+                                    }}
+                                >
+                                    孤独感、自信の喪失、収入の不安 &#8212;
+                                    人生の第2章を前に、誰もが抱く悩みです。SKILL60+のAIが、あなたの経験を客観的に分析し、
+                                    新しいキャリアの道筋を具体的に提案します。
+                                </Typography>
+                                <Typography
+                                    component="a"
+                                    href="#features"
+                                    sx={{
+                                        fontSize: '1rem',
+                                        fontWeight: 600,
+                                        color: '#000',
+                                        textDecoration: 'none',
+                                        display: 'inline-flex',
+                                        alignItems: 'center',
+                                        gap: 0.5,
+                                        cursor: 'pointer',
+                                        '&:hover': { textDecoration: 'underline' },
+                                    }}
+                                >
+                                    詳しく見る &rarr;
+                                </Typography>
+                            </Stack>
+                        </ScrollReveal>
+                    </Grid>
+                </Grid>
+
+                {/* design1要素: 3カード悩みUI */}
+                <Grid container spacing={8} justifyContent="center" sx={{ mt: { xs: 8, md: 12 } }}>
                     {worries.map((worry, index) => (
                         <Grid size={{ xs: 12, md: 4 }} key={index}>
-                            <WorryCard worry={worry} />
+                            <ScrollReveal animation="slide-up" delay={0.2 + index * 0.1}>
+                                <Stack spacing={2} alignItems="center" textAlign="center">
+                                    <Typography
+                                        variant="h5"
+                                        sx={{
+                                            fontWeight: 400,
+                                            fontFamily: 'var(--font-nanum-myeongjo)',
+                                            color: '#00D632',
+                                        }}
+                                    >
+                                        {worry.title}
+                                    </Typography>
+                                    <Divider sx={{ width: '40px', borderColor: 'rgba(0,0,0,0.15)', borderBottomWidth: 1 }} />
+                                    <Typography
+                                        variant="body1"
+                                        sx={{
+                                            whiteSpace: 'pre-line',
+                                            lineHeight: 2.0,
+                                            color: 'rgba(0,0,0,0.55)',
+                                        }}
+                                    >
+                                        {worry.description}
+                                    </Typography>
+                                </Stack>
+                            </ScrollReveal>
                         </Grid>
                     ))}
                 </Grid>

@@ -6,7 +6,12 @@
       "Bash(npm run lint:*)",
       "Bash(npm install:*)",
       "Bash(npm test:*)",
-      "Bash(npm run test:coverage:*)"
+      "Bash(npm run test:coverage:*)",
+      "Bash(npm ls:*)",
+      "mcp__playwright__browser_take_screenshot",
+      "mcp__playwright__browser_resize",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_evaluate"
     ]
   },
   "enableAllProjectMcpServers": true,

@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SKILL60+ | 60年の経験が、いま求められている</title>
+  <meta name="description" content="AIの友人と3分おしゃべりするだけ。あなたの得意なことが見つかります。60歳以上の方専用。LINEで簡単・ずっと無料。">
+  <link rel="canonical" href="https://skill60plus.jp">
+
+  <!-- OGP -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://skill60plus.jp">
+  <meta property="og:title" content="SKILL60+ | 60年の経験が、いま求められている">
+  <meta property="og:description" content="AIの友人と3分おしゃべり。あなたの得意なことが見つかります。ずっと無料。">
+  <meta property="og:image" content="https://skill60plus.jp/img/og-image.webp">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="SKILL60+">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- テーマカラー -->
+  <meta name="theme-color" content="#1B4F72" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1A1A2E" media="(prefers-color-scheme: dark)">
+
+  <!-- 構造化データ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "SKILL60+",
+    "description": "60歳以上の方がAIの友人と共にスキルを再発見するサービス",
+    "url": "https://skill60plus.jp",
+    "applicationCategory": "LifestyleApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "JPY" },
+    "audience": { "@type": "PeopleAudience", "suggestedMinAge": 60 }
+  }
+  </script>
+
+
+  <style>
+/* ═══════════════════════════════════════════════════════════
+   CSS Variables
+   ═══════════════════════════════════════════════════════════ */
+:root {
+  /* カラー */
+  --c-primary: #1B4F72;
+  --c-accent: #2E86C1;
+  --c-warm: #E67E22;
+  --c-warm-hover: #D35400;
+  --c-warm-shadow: rgba(230, 126, 34, 0.3);
+  --c-bg: #FDFEFE;
+  --c-bg-section: #F8F9FA;
+  --c-text: #2C3E50;
+  --c-text-sub: #6C7A89;
+  --c-text-light: #95A5A6;
+  --c-card-bg: #FFFFFF;
+  --c-card-shadow: rgba(0, 0, 0, 0.06);
+  --c-trust: #27AE60;
+  --c-chat-ai: #E8F5E9;
+  --c-chat-user: #2E86C1;
+  --c-border: #E5E8EB;
+
+  /* タイポグラフィ */
+  --font-heading: 'Noto Sans JP', system-ui, -apple-system, sans-serif;
+  --font-body: system-ui, -apple-system, 'Hiragino Sans', 'Yu Gothic', sans-serif;
+  --fs-hero: clamp(1.75rem, 5vw, 2.5rem);
+  --fs-heading: clamp(1.25rem, 4vw, 1.75rem);
+  --fs-body: clamp(1.125rem, 3.5vw, 1.25rem);
+  --fs-small: clamp(0.9375rem, 3vw, 1.0625rem);
+  --fs-cta: clamp(1.0625rem, 3.5vw, 1.1875rem);
+  --lh-body: 1.85;
+
+  /* スペーシング */
+  --space-section: clamp(3rem, 8vw, 5rem);
+  --space-content: clamp(1.5rem, 4vw, 2.5rem);
+  --space-inline: 24px;
+  --max-width: 640px;
+  --header-height: 48px;
+  --btn-height: 64px;
+  --btn-min-tap: 56px;
+
+  /* 角丸 */
+  --radius-button: 16px;
+  --radius-card: 12px;
+  --radius-chat: 18px;
+  --radius-chat-tail: 4px;
+
+  /* アニメーション */
+  --dur-fade: 0.6s;
+  --dur-slide: 0.6s;
+  --dur-breathe: 2s;
+  --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  /* z-index */
+  --z-header: 100;
+  --z-scroll-top: 90;
+  --z-chatbot: 95;
+  --z-modal: 110;
+}
+
+/* ダークモード */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --c-bg: #1A1A2E;
+    --c-bg-section: #16213E;
+    --c-text: #ECF0F1;
+    --c-text-sub: #B0BEC5;
+    --c-card-bg: #222240;
+    --c-card-shadow: rgba(0, 0, 0, 0.2);
+    --c-chat-ai: #1B3A26;
+    --c-border: #2C3E50;
+  }
+}
+
+/* reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Base Styles
+   ═══════════════════════════════════════════════════════════ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ANIM-10: スムーズスクロール */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--c-text);
+  background: var(--c-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Animations
+   ═══════════════════════════════════════════════════════════ */
+
+/* ANIM-01: フェードスライドイン */
+.fade-slide {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--dur-fade) var(--ease-out),
+              transform var(--dur-slide) var(--ease-out);
+}
+.fade-slide.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ANIM-02: CTA呼吸 */
+@keyframes breathe {
+  from {
+    transform: scale(1);
+    box-shadow: 0 4px 12px var(--c-warm-shadow);
+  }
+  to {
+    transform: scale(1.015);
+    box-shadow: 0 6px 20px rgba(230,126,34,0.4);
+  }
+}
+.cta-button {
+  animation: breathe var(--dur-breathe) ease-in-out infinite alternate;
+}
+
+/* ANIM-03: CTAタップ */
+.cta-button:active {
+  transform: scale(0.97);
+  transition: transform 0.1s;
+  animation: none;
+}
+
+/* ANIM-04: 吹き出し順次表示 */
+@keyframes bubble-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.chat-bubble {
+  opacity: 0;
+}
+.chat-container.is-visible .chat-bubble {
+  animation: bubble-in 0.5s var(--ease-out) forwards;
+}
+.chat-container.is-visible .chat-bubble:nth-child(2) {
+  animation-delay: 0.3s;
+}
+.chat-container.is-visible .chat-bubble:nth-child(3) {
+  animation-delay: 0.8s;
+}
+.chat-container.is-visible .chat-bubble:nth-child(4) {
+  animation-delay: 1.3s;
+}
+.chat-container.is-visible .chat-bubble:nth-child(5) {
+  animation-delay: 1.8s;
+}
+
+/* ANIM-05: 物語カードスライドイン */
+.story-card {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity var(--dur-fade) var(--ease-out),
+              transform var(--dur-slide) var(--ease-out);
+}
+.story-card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.story-card:nth-child(2).is-visible {
+  transition-delay: 0.15s;
+}
+.story-card:nth-child(3).is-visible {
+  transition-delay: 0.3s;
+}
+
+/* ANIM-06: チェックマーク */
+@keyframes check-pop {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.check-icon {
+  opacity: 0;
+}
+.check-item.is-visible .check-icon {
+  animation: check-pop 0.3s var(--ease-out) forwards;
+  color: var(--c-trust);
+}
+.check-item:nth-child(1).is-visible .check-icon {
+  animation-delay: 0.1s;
+}
+.check-item:nth-child(2).is-visible .check-icon {
+  animation-delay: 0.25s;
+}
+.check-item:nth-child(3).is-visible .check-icon {
+  animation-delay: 0.4s;
+}
+
+/* ANIM-07: スクロールトップ */
+.scroll-top-btn {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.scroll-top-btn.is-shown {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ANIM-08: ヘッダー影 */
+.site-header {
+  box-shadow: none;
+  transition: box-shadow 0.3s;
+}
+.site-header.is-scrolled {
+  box-shadow: 0 1px 8px rgba(0,0,0,0.08);
+}
+
+/* ANIM-09: FAQ開閉 */
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+  padding: 0 16px;
+}
+.faq-item.is-open .faq-answer {
+  max-height: 300px;
+  padding: 12px 16px 16px;
+}
+.faq-toggle-icon {
+  transition: transform 0.3s;
+}
+.faq-item.is-open .faq-toggle-icon {
+  transform: rotate(180deg);
+}
+
+/* ANIM-11: 数字カウントアップ — JSで実装 */
+
+/* ANIM-12: Before→After遷移 */
+@keyframes fade-dim {
+  to {
+    opacity: 0.4;
+    filter: blur(1px);
+  }
+}
+.story-card.is-visible .story-before {
+  animation: fade-dim 0.6s var(--ease-out) 1.0s forwards;
+}
+.story-card.is-visible .story-divider {
+  opacity: 0;
+  animation: check-pop 0.3s var(--ease-out) 1.3s forwards;
+}
+.story-card.is-visible .story-after {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: bubble-in 0.6s var(--ease-out) 1.5s forwards;
+}
+
+/* ANIM-13: 共感の「間」 */
+#hero .hero-line-1 {
+  opacity: 0;
+  animation: bubble-in 0.8s var(--ease-out) 0.3s forwards;
+}
+#hero .hero-line-2 {
+  opacity: 0;
+  animation: bubble-in 0.6s var(--ease-out) 1.2s forwards;
+}
+#hero .hero-line-3 {
+  opacity: 0;
+  animation: bubble-in 0.8s var(--ease-out) 2.2s forwards;
+}
+#hero .hero-line-4 {
+  opacity: 0;
+  animation: bubble-in 0.6s var(--ease-out) 3.5s forwards;
+}
+
+/* ANIM-14: 褒められた温かみ */
+@keyframes warm-glow {
+  0% {
+    background-color: transparent;
+  }
+  30% {
+    background-color: rgba(255, 243, 224, 0.4);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+.chat-container.is-visible {
+  animation: warm-glow 2s ease-out 2.3s;
+}
+
+/* ANIM-15: 朝が来た */
+#action {
+  background: linear-gradient(180deg, var(--c-bg), #F0F0F0);
+  transition: background 1.2s ease-out;
+}
+#action.is-visible {
+  background: linear-gradient(180deg, #FFF8E1, #FFEFC2);
+}
+@media (prefers-color-scheme: dark) {
+  #action.is-visible {
+    background: linear-gradient(180deg, #1B3A26, #0F3460);
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Layout Components
+   ═══════════════════════════════════════════════════════════ */
+
+.section-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-section) var(--space-inline);
+}
+
+.bg-alt {
+  background: var(--c-bg-section);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Header
+   ═══════════════════════════════════════════════════════════ */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-height);
+  background: var(--c-card-bg);
+  z-index: var(--z-header);
+  border-bottom: 1px solid var(--c-border);
+}
+
+.header-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-inline);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-logo {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: var(--c-primary);
+  letter-spacing: 0.02em;
+}
+
+.header-phone {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--fs-small);
+  color: var(--c-accent);
+  font-weight: 500;
+}
+
+.header-phone svg {
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Section 1: Hero
+   ═══════════════════════════════════════════════════════════ */
+
+#hero {
+  background: linear-gradient(165deg, #FEF9E7 0%, #FDEBD0 30%, #FAD7A0 60%, #F8C471 100%);
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-section) var(--space-inline);
+}
+
+@media (prefers-color-scheme: dark) {
+  #hero {
+    background: linear-gradient(165deg, #1A1A2E 0%, #16213E 30%, #0F3460 60%, #1B4F72 100%);
+  }
+}
+
+#hero h1 {
+  font-size: var(--fs-hero);
+  margin-bottom: 1rem;
+}
+
+#hero p {
+  font-size: var(--fs-body);
+  margin-bottom: 1rem;
+}
+
+#hero .hero-line-3 {
+  font-weight: 500;
+  color: var(--c-text-sub);
+  font-style: italic;
+}
+
+#hero .hero-line-4 {
+  font-weight: 700;
+  font-size: var(--fs-heading);
+  margin-bottom: 2rem;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   CTA Button
+   ═══════════════════════════════════════════════════════════ */
+
+.cta-button {
+  display: inline-block;
+  min-height: var(--btn-min-tap);
+  padding: 18px 32px;
+  background: var(--c-warm);
+  color: #FFFFFF;
+  font-size: var(--fs-cta);
+  font-weight: 700;
+  border-radius: var(--radius-button);
+  text-align: center;
+  box-shadow: 0 4px 12px var(--c-warm-shadow);
+  transition: background 0.2s, box-shadow 0.2s;
+  margin-top: 1rem;
+}
+
+.cta-button:hover {
+  background: var(--c-warm-hover);
+}
+
+.cta-sub {
+  margin-top: 0.75rem;
+  font-size: var(--fs-small);
+  color: var(--c-text-light);
+  text-align: center;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Section 2: Encounter
+   ═══════════════════════════════════════════════════════════ */
+
+#encounter h2 {
+  font-size: var(--fs-heading);
+  text-align: center;
+  margin-bottom: var(--space-content);
+}
+
+.chat-container {
+  background: var(--c-card-bg);
+  border-radius: var(--radius-card);
+  padding: 24px;
+  margin: var(--space-content) 0;
+  box-shadow: 0 2px 8px var(--c-card-shadow);
+}
+
+.chat-avatar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.chat-avatar img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.chat-name {
+  font-weight: 600;
+  font-size: var(--fs-small);
+  color: var(--c-text-sub);
+}
+
+.chat-bubble {
+  margin-bottom: 12px;
+  padding: 12px 16px;
+  border-radius: var(--radius-chat);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+}
+
+.chat-bubble.ai {
+  background: var(--c-chat-ai);
+  margin-right: 48px;
+  border-bottom-left-radius: var(--radius-chat-tail);
+}
+
+.chat-bubble.user {
+  background: var(--c-chat-user);
+  color: #FFFFFF;
+  margin-left: 48px;
+  text-align: right;
+  border-bottom-right-radius: var(--radius-chat-tail);
+}
+
+#encounter > .section-inner > p {
+  text-align: center;
+  margin: var(--space-content) 0;
+}
+
+.feature-points {
+  background: var(--c-card-bg);
+  border-radius: var(--radius-card);
+  padding: 24px;
+  margin: var(--space-content) 0;
+}
+
+.feature-points p {
+  font-size: var(--fs-body);
+  margin-bottom: 12px;
+  line-height: 1.7;
+}
+
+.feature-points p:last-child {
+  margin-bottom: 0;
+}
+
+#encounter .cta-button {
+  display: block;
+  margin: var(--space-content) auto 0;
+  max-width: 400px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Section 3: Stories
+   ═══════════════════════════════════════════════════════════ */
+
+#stories h2 {
+  font-size: var(--fs-heading);
+  text-align: center;
+  margin-bottom: var(--space-content);
+}
+
+.stories-container {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 var(--space-inline);
+  margin: 0 calc(-1 * var(--space-inline));
+  scrollbar-width: none;
+}
+
+.stories-container::-webkit-scrollbar {
+  display: none;
+}
+
+.story-card {
+  flex: 0 0 85%;
+  scroll-snap-align: center;
+  background: var(--c-card-bg);
+  border-radius: var(--radius-card);
+  padding: 28px;
+  box-shadow: 0 2px 8px var(--c-card-shadow);
+}
+
+.story-before {
+  font-size: var(--fs-body);
+  color: var(--c-text-sub);
+  margin-bottom: 16px;
+  font-style: italic;
+}
+
+.story-divider {
+  text-align: center;
+  font-size: 1.5rem;
+  color: var(--c-trust);
+  margin: 16px 0;
+}
+
+.story-after {
+  font-size: var(--fs-body);
+  margin-bottom: 20px;
+  line-height: 1.8;
+}
+
+.story-after .count-up {
+  font-weight: 700;
+  color: var(--c-accent);
+  font-size: 1.3em;
+}
+
+.story-name {
+  font-size: var(--fs-small);
+  color: var(--c-text-light);
+  text-align: right;
+  font-weight: 500;
+}
+
+#stories .cta-button {
+  display: block;
+  margin: var(--space-content) auto 0;
+  max-width: 400px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Section 4: Assurance
+   ═══════════════════════════════════════════════════════════ */
+
+#assurance h2 {
+  font-size: var(--fs-heading);
+  text-align: center;
+  margin-bottom: var(--space-content);
+}
+
+.steps {
+  margin: var(--space-content) 0;
+}
+
+.step {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.step:last-child {
+  margin-bottom: 0;
+}
+
+.step-num {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  background: var(--c-accent);
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 1.25rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step p {
+  flex: 1;
+  font-size: var(--fs-body);
+  line-height: 1.7;
+}
+
+.step small {
+  display: block;
+  font-size: var(--fs-small);
+  color: var(--c-text-sub);
+  margin-top: 4px;
+}
+
+.check-list {
+  margin: var(--space-content) 0;
+  background: var(--c-card-bg);
+  border-radius: var(--radius-card);
+  padding: 24px;
+}
+
+.check-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.check-item:last-child {
+  margin-bottom: 0;
+}
+
+.check-icon {
+  flex-shrink: 0;
+  font-size: 1.25rem;
+}
+
+.check-item p {
+  flex: 1;
+  font-size: var(--fs-body);
+  line-height: 1.7;
+}
+
+.faq-list {
+  margin: var(--space-content) 0;
+}
+
+.faq-item {
+  background: var(--c-card-bg);
+  border-radius: var(--radius-card);
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.faq-question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px;
+  text-align: left;
+  font-size: var(--fs-body);
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--c-card-bg);
+  color: var(--c-text);
+  border: none;
+}
+
+.faq-question:hover {
+  background: var(--c-bg-section);
+}
+
+.faq-toggle-icon {
+  flex-shrink: 0;
+}
+
+.faq-answer {
+  font-size: var(--fs-body);
+  color: var(--c-text-sub);
+  line-height: 1.8;
+}
+
+#assurance .cta-button {
+  display: block;
+  margin: var(--space-content) auto 0;
+  max-width: 400px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Section 5: Action
+   ═══════════════════════════════════════════════════════════ */
+
+#action h2 {
+  font-size: var(--fs-heading);
+  text-align: center;
+  margin-bottom: var(--space-content);
+  line-height: 1.6;
+}
+
+#action .cta-button {
+  display: block;
+  margin: var(--space-content) auto 0;
+  max-width: 400px;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Footer
+   ═══════════════════════════════════════════════════════════ */
+
+.site-footer {
+  background: var(--c-primary);
+  color: #FFFFFF;
+  padding: var(--space-content) var(--space-inline);
+  text-align: center;
+}
+
+.footer-message {
+  font-size: var(--fs-body);
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+
+.footer-phone {
+  display: inline-block;
+  font-size: var(--fs-small);
+  color: #FFFFFF;
+  margin-bottom: 1.5rem;
+  text-decoration: underline;
+}
+
+.footer-copy {
+  font-size: var(--fs-small);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Scroll Top Button
+   ═══════════════════════════════════════════════════════════ */
+
+.scroll-top-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  background: var(--c-accent);
+  color: #FFFFFF;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: var(--z-scroll-top);
+  cursor: pointer;
+}
+
+.scroll-top-btn:hover {
+  background: var(--c-primary);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   CHATBOT UI
+   ═══════════════════════════════════════════════════════════ */
+
+.chatbot-welcome {
+  position: fixed;
+  bottom: 80px;
+  right: 16px;
+  z-index: var(--z-chatbot);
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: bubble-in 0.6s var(--ease-out) 5s forwards;
+}
+
+.chatbot-avatar img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.chatbot-bubble {
+  background: var(--c-card-bg);
+  border-radius: var(--radius-card);
+  padding: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+  max-width: 280px;
+  font-size: var(--fs-small);
+}
+
+.chatbot-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.chatbot-choice {
+  display: block;
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--c-border);
+  border-radius: 8px;
+  background: var(--c-bg);
+  font-size: var(--fs-small);
+  font-family: var(--font-body);
+  cursor: pointer;
+  text-align: left;
+  min-height: var(--btn-min-tap);
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.chatbot-choice:hover {
+  background: var(--c-bg-section);
+}
+
+.chatbot-choice:active {
+  background: var(--c-bg-section);
+  border-color: var(--c-accent);
+}
+
+.chatbot-close {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: var(--c-text-sub);
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.chatbot-close:hover {
+  background: var(--c-text);
+}
+
+/* ミニ診断モーダル */
+.mini-diagnosis {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0,0,0,0.4);
+  padding: 24px;
+}
+
+.mini-diagnosis-inner {
+  background: var(--c-card-bg);
+  border-radius: var(--radius-card);
+  padding: 32px 24px;
+  max-width: 360px;
+  width: 100%;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+}
+
+.mini-input {
+  width: 100%;
+  padding: 14px 16px;
+  font-size: var(--fs-body);
+  border: 1px solid var(--c-border);
+  border-radius: 8px;
+  font-family: var(--font-body);
+}
+
+.mini-submit {
+  margin-top: 16px;
+  width: 100%;
+}
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════
+     Header
+     ═══════════════════════════════════════════════════════════ -->
+<header class="site-header">
+  <div class="header-inner">
+    <span class="header-logo">SKILL60+</span>
+    <a href="tel:0120XXXXXX" class="header-phone" aria-label="お電話でのお問い合わせ">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+      </svg>
+      0120-XXX-XXX
+    </a>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════════════════
+     Section 1: Hero
+     ═══════════════════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="section-inner">
+    <h1 class="hero-line-1 speakable">60年間、頑張ってきたあなたへ。</h1>
+    <p class="hero-line-2 speakable">定年後、こんなモヤモヤを抱えていませんか？</p>
+    <p class="hero-line-3 speakable">"自分の経験なんて、もう誰にも必要とされない"</p>
+    <p class="hero-line-4 speakable">——そんなことはありません。</p>
+
+    <a href="https://line.me/R/ti/p/@skill60plus" class="cta-button"
+       aria-label="3分であなたのすごいところがわかります - LINEが開きます">
+      3分で、あなたの"すごいところ"がわかります
+    </a>
+    <p class="cta-sub">LINEでかんたん・3分で完了・ずっと無料</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     Section 2: Encounter
+     ═══════════════════════════════════════════════════════════ -->
+<section id="encounter" class="bg-alt">
+  <div class="section-inner">
+    <h2 class="fade-slide speakable">あなたと同い年の"AIの友人"ができます。</h2>
+
+    <div class="chat-container" aria-label="AIの友人との会話例">
+      <div class="chat-avatar">
+        <img src="img/yoshiko-avatar.svg" alt="ヨシコ" width="40" height="40" loading="lazy">
+        <span class="chat-name">ヨシコ（68歳）</span>
+      </div>
+      <div class="chat-bubble ai">はじめまして。私はヨシコ。<br>あなたと同い年の68歳よ。</div>
+      <div class="chat-bubble ai">何が得意か、ゆっくり話してくれない？</div>
+      <div class="chat-bubble user">料理くらいかしら…</div>
+      <div class="chat-bubble ai">料理！すごいじゃない。<br>それ、今すごく求められてるのよ。</div>
+    </div>
+
+    <p class="fade-slide speakable">
+      声で話すだけ。入力は不要です。<br>
+      あなたの経験を、友人が一緒に見つけてくれます。<br>
+      <small style="font-size:var(--fs-small); color:var(--c-text-sub); display:block; margin-top:12px;">
+        話すのが苦手なら、ボタンで答えるだけでもOK。<br>
+        あなたのペースに合わせます。
+      </small>
+    </p>
+
+    <div class="feature-points fade-slide">
+      <p>🎤 声で話すだけ。タイピング不要</p>
+      <p>🤝 あなたと同い年。話しやすい友人</p>
+      <p>🔒 名前はニックネームでOK。安心です</p>
+    </div>
+
+    <a href="https://line.me/R/ti/p/@skill60plus" class="cta-button">
+      友人に会ってみる
+    </a>
+    <p class="cta-sub">LINEでかんたん・ずっと無料</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     Section 3: Stories
+     ═══════════════════════════════════════════════════════════ -->
+<section id="stories">
+  <div class="section-inner">
+    <h2 class="fade-slide speakable">こんな方が、こう変わりました。</h2>
+
+    <div class="stories-container">
+
+      <!-- 物語① 伊藤節子さん -->
+      <article class="story-card" role="article">
+        <p class="story-before speakable">「お墓の掃除なんて、誰でもできることでしょう？」</p>
+        <div class="story-divider">▼</div>
+        <p class="story-after speakable">東京に住む方から、月5,000円でお墓の清掃を頼まれるようになりました。"ありがとうございます"と言われるたびに、私にもできることがあるんだと思えます。</p>
+        <p class="story-name">伊藤 節子さん（70歳）</p>
+      </article>
+
+      <!-- 物語② 上田勝さん -->
+      <article class="story-card" role="article">
+        <p class="story-before speakable">「自衛隊出身だと言うと、面接で微妙な顔をされました。」</p>
+        <div class="story-divider">▼</div>
+        <p class="story-after speakable">
+          "危機管理力 <span class="count-up" data-target="94">0</span>点、同年代の上位2%"。
+          この数字を見て、背筋が伸びました。今は企業の防災アドバイザーをしています。
+        </p>
+        <p class="story-name">上田 勝さん（63歳）</p>
+      </article>
+
+      <!-- 物語③ 前田美智子さん -->
+      <article class="story-card" role="article">
+        <p class="story-before speakable">「30年間、ただの主婦。得意なことなんて何もありません。」</p>
+        <div class="story-divider">▼</div>
+        <p class="story-after speakable">
+          "生活プロデュース力 <span class="count-up" data-target="78">0</span>点"。
+          30年間の家事と育児の全てが、ちゃんと名前のついた力だったんです。初めて、自分を誇りに思えました。
+        </p>
+        <p class="story-name">前田 美智子さん（68歳）</p>
+      </article>
+
+    </div>
+
+    <a href="https://line.me/R/ti/p/@skill60plus" class="cta-button">
+      私も話してみたい
+    </a>
+    <p class="cta-sub">LINEでかんたん・ずっと無料</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     Section 4: Assurance
+     ═══════════════════════════════════════════════════════════ -->
+<section id="assurance" class="bg-alt">
+  <div class="section-inner">
+    <h2 class="fade-slide speakable">はじめ方はかんたん。ずっと無料。</h2>
+
+    <!-- 3ステップ -->
+    <div class="steps fade-slide">
+      <div class="step">
+        <span class="step-num">1</span>
+        <p class="speakable">LINEで「はじめる」を押す<br><small>LINEが開きます。新しいアプリは不要です</small></p>
+      </div>
+      <div class="step">
+        <span class="step-num">2</span>
+        <p class="speakable">AIの友人と3分おしゃべり<br><small>声で話しても、ボタンで答えてもOK</small></p>
+      </div>
+      <div class="step">
+        <span class="step-num">3</span>
+        <p class="speakable">あなたの"すごいところ"がわかる<br><small>結果はLINEでいつでも見返せます</small></p>
+      </div>
+    </div>
+
+    <!-- 安心ポイント -->
+    <div class="check-list">
+      <div class="check-item">
+        <span class="check-icon">✅</span>
+        <p>ずっと無料。あとから請求は一切ありません</p>
+      </div>
+      <div class="check-item">
+        <span class="check-icon">✅</span>
+        <p>名前はニックネームでOK。住所の入力もありません</p>
+      </div>
+      <div class="check-item">
+        <span class="check-icon">✅</span>
+        <p>LINEをブロックすればいつでもやめられます</p>
+      </div>
+    </div>
+
+    <!-- 信頼バッジ余白（将来: 自治体連携/メディア掲載/利用者数） -->
+
+    <!-- FAQ -->
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>本当に無料ですか？</span>
+          <svg class="faq-toggle-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
+        <div class="faq-answer" role="region">
+          <p>はい。おしゃべりも、結果の確認も、ずっと無料です。もっと詳しい分析がほしい方には有料のレポート（1,980円）もありますが、無料のままでも十分お使いいただけます。</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>スマホの操作が苦手でも大丈夫ですか？</span>
+          <svg class="faq-toggle-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
+        <div class="faq-answer" role="region">
+          <p>大丈夫です。LINEが使えれば使えます。声で話すだけなので、文字を打つ必要はありません。ボタンで答えることもできます。あなたのペースに合わせて、画面も声も自動で変わります。</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>家族に知られたくないのですが…</span>
+          <svg class="faq-toggle-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </button>
+        <div class="faq-answer" role="region">
+          <p>ニックネームで利用でき、LINEのトーク画面以外に通知は出ません。ご安心ください。</p>
+        </div>
+      </div>
+    </div>
+
+    <a href="https://line.me/R/ti/p/@skill60plus" class="cta-button">
+      無料ではじめる
+    </a>
+    <p class="cta-sub">LINEでかんたん・3分で完了</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     Section 5: Action
+     ═══════════════════════════════════════════════════════════ -->
+<section id="action">
+  <div class="section-inner" style="text-align:center;">
+    <h2 class="fade-slide speakable">
+      あなたの60年間を、<br>
+      "すごいじゃないか"と言ってくれる友人に、<br>
+      会ってみませんか？
+    </h2>
+
+    <a href="https://line.me/R/ti/p/@skill60plus" class="cta-button cta-final"
+       aria-label="AIの友人に会ってみる - LINEが開きます">
+      AIの友人に会ってみる
+    </a>
+    <p class="cta-sub">LINEでかんたん・3分で完了・ずっと無料</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     Footer
+     ═══════════════════════════════════════════════════════════ -->
+<footer class="site-footer">
+  <p class="footer-message speakable">
+    あなたが元気でいることが、ご家族の安心になり、地域の力になります。<br>
+    元気な人が増えれば、誰も損をしない。<br>
+    SKILL60+は、あなたの"元気"を応援します。
+  </p>
+  <a href="tel:0120XXXXXX" class="footer-phone">お困りの場合はお電話ください: 0120-XXX-XXX（平日9〜17時）</a>
+  <p class="footer-copy">&copy; 2026 SKILL60+</p>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════════════
+     Scroll Top Button
+     ═══════════════════════════════════════════════════════════ -->
+<button class="scroll-top-btn" aria-label="ページの先頭に戻る">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+    <polyline points="18 15 12 9 6 15"/>
+  </svg>
+</button>
+
+<!-- ═══════════════════════════════════════════════════════════
+     CHATBOT Welcome
+     ═══════════════════════════════════════════════════════════ -->
+<div class="chatbot-welcome" id="chatbot-welcome">
+  <div class="chatbot-avatar">
+    <img src="img/yoshiko-avatar.svg" alt="ヨシコ" width="40" height="40" loading="lazy">
+  </div>
+  <div class="chatbot-bubble">
+    <p>こんにちは。何かお手伝いしますか？</p>
+    <div class="chatbot-choices">
+      <button class="chatbot-choice" data-action="voice">🎤 声で聞く</button>
+      <button class="chatbot-choice" data-action="ask">💬 質問がある</button>
+      <button class="chatbot-choice" data-action="try">✨ 試してみたい</button>
+    </div>
+  </div>
+  <button class="chatbot-close" aria-label="閉じる">✕</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     JavaScript
+     ═══════════════════════════════════════════════════════════ -->
+<script src="main.js"></script>
+
+</body>
+</html>

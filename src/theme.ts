@@ -3,75 +3,119 @@ import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
     palette: {
+        mode: 'dark',
         primary: {
-            main: '#205493', // Trust Blue
+            main: '#00D632', // Cash App Green
         },
         secondary: {
-            main: '#32CD32', // Growth Green
+            main: '#FFFFFF', // White
         },
         background: {
-            default: '#F5F7FA', // Warm Beige/Light Gray
-            paper: '#FFFFFF',
+            default: '#000000', // Deep Black
+            paper: '#111111', // Dark Gray
         },
         text: {
-            primary: '#333333', // Dark Gray
+            primary: '#FFFFFF',
+            secondary: '#999999',
         },
     },
     typography: {
-        fontFamily: [
-            '"Helvetica Neue"',
-            'Arial',
-            '"Hiragino Kaku Gothic ProN"',
-            '"Hiragino Sans"',
-            'Meiryo',
-            'sans-serif',
-        ].join(','),
-        fontSize: 14, // Base size, but specific elements will be larger
+        fontFamily: 'var(--font-inter), sans-serif',
+        fontSize: 14,
         h1: {
-            fontSize: '2rem', // 32px
-            '@media (min-width:600px)': {
-                fontSize: '3rem', // 48px
-            },
-            fontWeight: 700,
+            fontFamily: 'var(--font-nanum-myeongjo), serif',
+            fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
+            fontWeight: 800,
+            lineHeight: 1.1,
+            letterSpacing: '-0.02em',
         },
         h2: {
-            fontSize: '1.5rem', // 24px
-            '@media (min-width:600px)': {
-                fontSize: '2.25rem', // 36px
-            },
+            fontFamily: 'var(--font-nanum-myeongjo), serif',
+            fontSize: 'clamp(2rem, 4vw, 3rem)',
             fontWeight: 700,
+            lineHeight: 1.2,
+            letterSpacing: '-0.01em',
         },
         h3: {
-            fontSize: '1.25rem', // 20px
-            '@media (min-width:600px)': {
-                fontSize: '1.5rem', // 24px
-            },
+            fontFamily: 'var(--font-nanum-myeongjo), serif',
+            fontSize: 'clamp(1.5rem, 3vw, 2.5rem)',
             fontWeight: 700,
+            letterSpacing: '-0.01em',
+        },
+        h4: {
+            fontFamily: 'var(--font-inter), sans-serif',
+            fontWeight: 600,
+        },
+        h5: {
+            fontFamily: 'var(--font-inter), sans-serif',
+            fontWeight: 600,
+        },
+        h6: {
+            fontFamily: 'var(--font-ibm-plex-mono), monospace',
+            fontWeight: 500,
+            letterSpacing: '0.05em',
         },
         body1: {
-            fontSize: '1.125rem', // 18px (Senior Friendly)
+            fontFamily: 'var(--font-inter), sans-serif',
+            fontSize: '1.125rem',
             lineHeight: 1.6,
+            letterSpacing: '0.01em',
+        },
+        body2: {
+            fontFamily: 'var(--font-inter), sans-serif',
+            fontSize: '0.9rem',
+            lineHeight: 1.6,
+            letterSpacing: '0.01em',
+        },
+        caption: {
+            fontFamily: 'var(--font-ibm-plex-mono), monospace',
+            fontSize: '0.75rem',
+            letterSpacing: '0.05em',
         },
         button: {
+            fontFamily: 'var(--font-inter), sans-serif',
             textTransform: 'none',
-            fontWeight: 700,
+            fontWeight: 600,
+            letterSpacing: '0.02em',
         },
     },
     components: {
         MuiButton: {
             styleOverrides: {
                 root: {
-                    borderRadius: 8,
-                    padding: '12px 24px',
-                    minHeight: '44px', // Touch target size
+                    borderRadius: 9999,
+                    padding: '12px 32px',
+                    minHeight: '48px',
+                    boxShadow: '0 4px 14px 0 rgba(0, 214, 50, 0.39)',
+                    fontSize: '1rem',
+                    transition: 'all 0.2s ease-in-out',
+                    '&:hover': {
+                        transform: 'translateY(-1px)',
+                        boxShadow: '0 6px 20px rgba(0, 214, 50, 0.23)',
+                    },
+                },
+                containedPrimary: {
+                    backgroundColor: '#00D632',
+                    color: '#000000',
+                    '&:hover': {
+                        backgroundColor: '#00B82B',
+                    },
                 },
                 containedSecondary: {
-                    color: '#FFFFFF',
-                    fontSize: '1.125rem',
-                    boxShadow: '0 4px 6px rgba(50, 205, 50, 0.3)',
+                    backgroundColor: '#FFFFFF',
+                    color: '#000000',
+                    boxShadow: '0 4px 14px 0 rgba(255, 255, 255, 0.39)',
                     '&:hover': {
-                        backgroundColor: '#2eb82e',
-                        boxShadow: '0 6px 8px rgba(50, 205, 50, 0.4)',
+                        backgroundColor: '#F0F0F0',
+                    },
+                },
+                outlined: {
+                    borderColor: '#333333',
+                    color: '#FFFFFF',
+                    boxShadow: 'none',
+                    '&:hover': {
+                        borderColor: '#FFFFFF',
+                        backgroundColor: 'transparent',
                     },
                 },
             },
@@ -79,6 +123,16 @@ const theme = createTheme({
         MuiContainer: {
             defaultProps: {
                 maxWidth: 'lg',
+            },
+        },
+        MuiPaper: {
+            styleOverrides: {
+                root: {
+                    backgroundImage: 'none',
+                    backgroundColor: '#111111',
+                    boxShadow: 'none',
+                    border: '1px solid #222222',
+                },
             },
         },
     },

@@ -1,0 +1,32 @@
+.action {
+  background: linear-gradient(180deg, var(--c-bg), #F0F0F0);
+  transition: background 1.2s ease-out;
+  padding: var(--space-section) var(--space-inline);
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action.is-visible {
+  background: linear-gradient(180deg, #FFF8E1, #FFEFC2);
+}
+
+@media (prefers-color-scheme: dark) {
+  .action.is-visible {
+    background: linear-gradient(180deg, #1B3A26, #0F3460);
+  }
+}
+
+.action h2 {
+  font-family: var(--font-heading);
+  font-size: var(--fs-heading);
+  font-weight: 700;
+  line-height: 1.7;
+  margin-bottom: 48px;
+  color: var(--c-primary);
+}
+
+:global(.cta-final) {
+  margin-bottom: 16px;
+}

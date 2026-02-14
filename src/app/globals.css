@@ -1,18 +1,71 @@
+/* ========================================
+   CASH APP GLOBAL STYLES - COMPLETE RESET
+   ======================================== */
+
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
+}
+
+/* ========================================
+   TYPOGRAPHY SCALE (Cash App)
+   ======================================== */
+:root {
+  /* Responsive Typography - Cash App Scale */
+  --font-size-hero: clamp(2.4375rem, 1.56985rem + 4.33824vw, 6.125rem);
+  --font-size-h2: clamp(1.5rem, 1rem + 2.5vw, 3rem);
+  --font-size-h3: clamp(1.25rem, 0.9rem + 1.5vw, 2rem);
+  --font-size-body: clamp(1rem, 0.9rem + 0.5vw, 1.25rem);
+  --font-size-small: clamp(0.875rem, 0.8rem + 0.3vw, 1rem);
+
+  /* Colors */
+  --color-green: #00D632;
+  --color-black: #000000;
+  --color-white: #FFFFFF;
+  --color-gray: #999999;
+  --color-gray-dark: #333333;
+
+  /* Spacing */
+  --spacing-section: clamp(4rem, 8vw, 8rem);
+
+  /* Font Size Control */
+  --fs-base: 16px;
+  --fs-large: 20px;
+  --fs-xlarge: 24px;
+}
+
+body {
+  background-color: var(--color-white);
+  color: var(--color-black);
+  font-feature-settings: "palt";
+  overflow-x: hidden;
+  transition: background-color 0.6s ease;
+}
+
+/* Scrollbar Customization */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-gray-dark);
+  border-radius: 16px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-black);
 }
 
 /* ===================================
    即時カスタム: フォントサイズ変更
    =================================== */
-:root { --fs-base: 16px; --fs-large: 20px; --fs-xlarge: 24px; }
-
 body.font-large p,
 body.font-large span,
 body.font-large button,
@@ -41,6 +94,114 @@ body.font-xlarge h1 { font-size: 2.4rem !important; }
 body.font-xlarge h2 { font-size: 2rem !important; }
 body.font-xlarge h6 { font-size: 1.5rem !important; }
 
+/* ========================================
+   CARD FAN ANIMATION (Cash App Exact)
+   ======================================== */
+
+.card-fan-container {
+  position: relative;
+  width: 300px;
+  height: 190px;
+  cursor: pointer;
+  margin: 0 auto;
+}
+
+.card {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  border-radius: 16px;
+  transform-origin: center center;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Card Content Styles */
+.card-content {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #333;
+}
+
+.card-chip {
+  position: absolute;
+  top: 15%;
+  left: 10%;
+  width: 20%;
+  height: 15%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.1) 100%);
+  border-radius: 4px;
+}
+
+.card-text {
+  position: absolute;
+  bottom: 10%;
+  left: 10%;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.8);
+  font-family: var(--font-ibm-plex-mono);
+}
+
+@media (min-width: 600px) {
+  .card-fan-container {
+    width: 400px;
+    height: 250px;
+  }
+}
+
+/* ========================================
+   SIMPLE ANIMATIONS (Cash App Style)
+   ======================================== */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes introAnimation {
+  0% {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Utility classes for ScrollReveal */
+.scroll-section {
+  opacity: 0;
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.scroll-section.visible {
+  opacity: 1;
+  transform: none;
+}
+
 /* ===================================
    音声入力中のアニメーション
    =================================== */
@@ -49,59 +210,76 @@ body.font-xlarge h6 { font-size: 1.5rem !important; }
 @keyframes voice-ripple {
   0% {
     transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(211, 47, 47, 0.7),
-                0 0 20px rgba(211, 47, 47, 0.4);
+    box-shadow: 0 0 0 0 rgba(17, 17, 17, 0.4),
+      0 0 20px rgba(17, 17, 17, 0.2);
   }
+
   50% {
     transform: scale(1.05);
-    box-shadow: 0 0 0 10px rgba(211, 47, 47, 0),
-                0 0 25px rgba(211, 47, 47, 0.6);
+    box-shadow: 0 0 0 10px rgba(17, 17, 17, 0),
+      0 0 25px rgba(17, 17, 17, 0.4);
   }
+
   100% {
     transform: scale(1);
-    box-shadow: 0 0 0 20px rgba(211, 47, 47, 0),
-                0 0 20px rgba(211, 47, 47, 0.4);
+    box-shadow: 0 0 0 20px rgba(17, 17, 17, 0),
+      0 0 20px rgba(17, 17, 17, 0.2);
   }
 }
 
 .mic-recording {
-  animation: voice-ripple 1.2s infinite cubic-bezier(0.66, 0, 0, 1);
+  animation: voice-ripple 1.5s infinite cubic-bezier(0.66, 0, 0, 1);
   position: relative;
+  background-color: #FAFAFA !important;
+  color: #111111 !important;
 }
 
 /* 録音中バッジ */
 @keyframes pulse-badge {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.8; transform: scale(1.05); }
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
 }
 
 .recording-badge {
   position: absolute;
-  top: -8px;
-  right: -8px;
-  width: 12px;
-  height: 12px;
-  background-color: #f44336;
+  top: -4px;
+  right: -4px;
+  width: 10px;
+  height: 10px;
+  background-color: #111111;
   border-radius: 50%;
-  border: 2px solid white;
-  animation: pulse-badge 1s infinite;
+  border: 2px solid #FFFFFF;
+  animation: pulse-badge 1.5s infinite;
   z-index: 1;
 }
 
 /* 入力エリアのハイライト */
 @keyframes input-highlight {
-  0%, 100% {
-    box-shadow: 0 0 0 2px rgba(211, 47, 47, 0.3);
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 1px rgba(17, 17, 17, 0.1);
   }
+
   50% {
-    box-shadow: 0 0 0 2px rgba(211, 47, 47, 0.5),
-                0 0 15px rgba(211, 47, 47, 0.2);
+    box-shadow: 0 0 0 1px rgba(17, 17, 17, 0.3),
+      0 0 10px rgba(17, 17, 17, 0.05);
   }
 }
 
 .input-area-recording {
   animation: input-highlight 2s infinite;
   border-radius: 8px;
+  border-color: #333333 !important;
 }
 
 /* ===================================
@@ -110,29 +288,36 @@ body.font-xlarge h6 { font-size: 1.5rem !important; }
 
 /* スピーカーアイコンのパルスアニメーション */
 @keyframes speaker-pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: scale(1);
-    opacity: 1;
+    opacity: 0.7;
   }
+
   50% {
-    transform: scale(1.15);
-    opacity: 0.8;
+    transform: scale(1.1);
+    opacity: 1;
   }
 }
 
 .speaker-active {
-  animation: speaker-pulse 1s infinite ease-in-out;
+  animation: speaker-pulse 1.5s infinite ease-in-out;
+  color: #111111 !important;
 }
 
 /* 波形アニメーション（改善版） */
 @keyframes wave-animation {
-  0%, 100% {
-    height: 4px;
-    opacity: 0.7;
+
+  0%,
+  100% {
+    height: 3px;
+    opacity: 0.3;
   }
+
   50% {
-    height: 18px;
-    opacity: 1;
+    height: 14px;
+    opacity: 0.8;
   }
 }
 
@@ -145,32 +330,34 @@ body.font-xlarge h6 { font-size: 1.5rem !important; }
 }
 
 .speaking-wave-bar {
-  width: 3px;
-  background: linear-gradient(to top, #1976d2, #42a5f5);
-  border-radius: 3px;
-  animation: wave-animation 0.8s infinite ease-in-out;
-  box-shadow: 0 0 8px rgba(25, 118, 210, 0.3);
+  width: 2px;
+  background: #111111;
+  border-radius: 99px;
+  animation: wave-animation 1.2s infinite ease-in-out;
 }
 
 .speaking-wave-bar:nth-child(1) { animation-delay: 0s; }
 .speaking-wave-bar:nth-child(2) { animation-delay: 0.1s; }
-.speaking-wave-bar:nth-child(3) { animation-delay: 0.3s; }
+.speaking-wave-bar:nth-child(3) { animation-delay: 0.2s; }
 .speaking-wave-bar:nth-child(4) { animation-delay: 0.3s; }
 .speaking-wave-bar:nth-child(5) { animation-delay: 0.2s; }
 
 /* メッセージのグローエフェクト */
 @keyframes message-glow {
-  0%, 100% {
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+
+  0%,
+  100% {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   }
+
   50% {
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12),
-                0 0 15px rgba(25, 118, 210, 0.15);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   }
 }
 
 .message-speaking {
-  animation: message-glow 2s infinite;
+  animation: message-glow 3s infinite;
+  border-left: 2px solid #111111 !important;
 }
 
 /* ===================================
@@ -179,33 +366,217 @@ body.font-xlarge h6 { font-size: 1.5rem !important; }
 
 /* タイピングインジケーター */
 @keyframes typing-dots {
-  0%, 20% { content: ''; }
-  40% { content: '.'; }
-  60% { content: '..'; }
-  80%, 100% { content: '...'; }
+
+  0%,
+  20% {
+    content: '';
+  }
+
+  40% {
+    content: '.';
+  }
+
+  60% {
+    content: '..';
+  }
+
+  80%,
+  100% {
+    content: '...';
+  }
 }
 
 .interim-text {
   position: relative;
+  font-family: var(--font-nanum-myeongjo);
 }
 
 .interim-text::after {
   content: '...';
   animation: typing-dots 1.5s infinite;
-  color: #666;
-  font-weight: bold;
+  color: #888;
+  font-weight: 400;
 }
 
 /* 中間テキストの背景パルス */
 @keyframes interim-pulse {
-  0%, 100% {
-    background-color: #FFF9C4;
+
+  0%,
+  100% {
+    background-color: #F5F5F5;
   }
+
   50% {
-    background-color: #FFF59D;
+    background-color: #EEEEEE;
   }
 }
 
 .interim-container {
   animation: interim-pulse 2s infinite;
+  color: #333;
+}
+
+/* ===================================
+   Cash App Style Animations
+   =================================== */
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+    transform: scale(0.4);
+  }
+
+  100% {
+    opacity: 0.1;
+    transform: scale(1.1);
+  }
+}
+
+@keyframes ctaSlideIn {
+  0% {
+    width: 96vw;
+    left: 2vw;
+    transform: translateY(100px);
+    opacity: 0;
+  }
+
+  100% {
+    width: 90vw;
+    left: 5vw;
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes slideUpFade {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-15px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Global Float Animations */
+@keyframes float-slow {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes float-medium {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes float-fast {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+.animate-float-medium {
+  animation: float-medium 4s ease-in-out infinite;
+}
+
+.animate-float-fast {
+  animation: float-fast 3s ease-in-out infinite;
+}
+
+/* ========================================
+   HAMBURGER MENU DRAWER
+   ======================================== */
+
+.hamburger-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+.hamburger-btn:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.drawer-nav-link {
+  color: rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+  font-size: 0.95rem;
+  padding: 12px 0;
+  display: block;
+  transition: color 0.2s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.drawer-nav-link:hover {
+  color: #FFFFFF;
+}
+
+.drawer-contact-label {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.drawer-contact-value {
+  font-size: 1rem;
+  color: #FFFFFF;
 }

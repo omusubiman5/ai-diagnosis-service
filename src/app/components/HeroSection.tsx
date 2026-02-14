@@ -1,191 +1,130 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
-import { Box, Container, Typography, Button, Stack, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
-import Grid from '@mui/material/Grid';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
-import { useVoiceGuide } from '../hooks/useVoiceGuide';
-
-gsap.registerPlugin(ScrollTrigger);
+import React, { useRef } from 'react';
+import { Box, Container, Typography, Button } from '@mui/material';
+import { ArrowRight } from 'lucide-react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import SmartphoneMockup from './SmartphoneMockup';
 
 export default function HeroSection() {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const headlineRef = useRef<HTMLHeadingElement>(null);
-    const subheadlineRef = useRef<HTMLHeadingElement>(null);
-    const ctaRef = useRef<HTMLButtonElement>(null);
-    const counterRef = useRef<HTMLSpanElement>(null);
-    const { speak } = useVoiceGuide();
-    const [dialogOpen, setDialogOpen] = useState(false);
+    const sectionRef = useRef<HTMLDivElement>(null);
+    const { scrollYProgress } = useScroll({
+        target: sectionRef,
+        offset: ['start start', 'end start'],
+    });
 
-    useGSAP(() => {
-        const tl = gsap.timeline();
-
-        // Background Gradient Initial Fade (single execution)
-        tl.fromTo(containerRef.current,
-            { background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)' },
-            { background: 'linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%)', duration: 2, ease: 'sine.inOut' }
-        );
-
-        // Text & CTA Entry
-        tl.from(headlineRef.current, { y: 50, opacity: 0, duration: 1, ease: 'power3.out' }, 0.5)
-            .from(subheadlineRef.current, { y: 30, opacity: 0, duration: 0.8, ease: 'power3.out' }, '-=0.6')
-            .from(ctaRef.current, { scale: 0, opacity: 0, duration: 0.5, ease: 'back.out(1.7)' }, '-=0.4');
-
-        // Counter Animation (fires immediately after delay, no ScrollTrigger)
-        if (counterRef.current) {
-            tl.to(counterRef.current, {
-                innerText: 250000,
-                duration: 2,
-                delay: 1.5,
-                snap: { innerText: 1000 },
-                onUpdate: function () {
-                    if (counterRef.current) {
-                        counterRef.current.innerText = Math.ceil(this.targets()[0].innerText).toLocaleString();
-                    }
-                }
-            }, '-=0.2');
-        }
-    }, { scope: containerRef });
-
-    const handleCTAClick = () => {
-        speak('hero_cta_click');
-        alert('Coming Soon! 先行登録を受け付けています。');
-    };
-
-    const handleDialogClose = () => {
-        setDialogOpen(false);
-    };
+    const textOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+    const textY = useTransform(scrollYProgress, [0, 0.5], [0, -60]);
+    const mockupScale = useTransform(scrollYProgress, [0, 0.6], [1, 0.9]);
+    const mockupOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
     return (
-        <Box ref={containerRef} sx={{
-            minHeight: '90vh',
-            display: 'flex',
-            alignItems: 'center',
-            background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
-            overflow: 'hidden',
-            position: 'relative'
-        }}>
-            <Container maxWidth="lg">
-                <Grid container spacing={4} alignItems="center">
-                    <Grid size={{ xs: 12, md: 7 }}>
+        <Box
+            ref={sectionRef}
+            component="div"
+            sx={{
+                position: 'relative',
+                minHeight: '100vh',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#000',
+                overflow: 'hidden',
+                pt: { xs: 12, md: 8 },
+                pb: { xs: 4, md: 0 },
+            }}
+        >
+            <Container maxWidth="md">
+                <motion.div
+                    style={{ opacity: textOpacity, y: textY }}
+                    initial={{ opacity: 0, y: 40 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                >
+                    <Box sx={{ textAlign: 'center' }}>
                         <Typography
-                            ref={headlineRef}
                             variant="h1"
                             component="h1"
                             sx={{
+                                fontSize: 'var(--font-size-hero)',
                                 fontWeight: 800,
-                                mb: 2,
-                                color: 'primary.main',
-                                lineHeight: 1.2,
-                                textShadow: '0 4px 10px rgba(0,0,0,0.1)'
+                                lineHeight: 1.05,
+                                letterSpacing: '-0.03em',
+                                mb: 3,
+                                fontFamily: 'var(--font-nanum-myeongjo)',
+                                color: '#000',
                             }}
                         >
-                            60年の経験は、<br />
-                            まだ社会の宝だ。
+                            60年の経験が、
+                            <br />
+                            次の価値になる
                         </Typography>
+
                         <Typography
-                            ref={subheadlineRef}
-                            variant="h5"
-                            color="text.secondary"
-                            sx={{ mb: 6, fontWeight: 500, lineHeight: 1.8 }}
+                            sx={{
+                                fontSize: 'var(--font-size-body)',
+                                color: '#666',
+                                mb: 5,
+                                maxWidth: '520px',
+                                mx: 'auto',
+                                lineHeight: 1.7,
+                            }}
                         >
-                            <Box component="span" sx={{ display: 'block', mb: 1 }}>
-                                あなたのキャリアをAIが再発掘。
-                            </Box>
-                            推定市場価値 <Box component="span" ref={counterRef} sx={{ fontSize: '2em', fontWeight: 'bold', color: 'secondary.main' }}>0</Box> 円〜
+                            あなたの積み重ねた知識と技術を、AIが分析。
+                            <br />
+                            具体的なキャリアプランと市場価値を、無料でお届けします。
                         </Typography>
-                        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
-                            <Button
-                                ref={ctaRef}
-                                variant="contained"
-                                color="secondary"
-                                size="large"
-                                onClick={handleCTAClick}
-                                sx={{
-                                    py: 2,
-                                    px: 6,
-                                    fontSize: '1.2rem',
-                                    borderRadius: 50,
-                                    boxShadow: '0 8px 25px rgba(50, 205, 50, 0.4)',
-                                    transition: 'transform 0.2s',
-                                    '&:hover': {
-                                        transform: 'scale(1.05)',
-                                    },
-                                }}
-                            >
-                                無料で価値を診断する
-                            </Button>
-                        </Stack>
-                    </Grid>
-                    {/* Right Column: Trust Indicators & Success Metrics */}
-                    <Grid size={{ xs: 12, md: 5 }} sx={{ display: { xs: 'none', md: 'block' } }}>
-                        <Box sx={{
-                            p: 4,
-                            borderRadius: 4,
-                            background: 'rgba(255, 255, 255, 0.9)',
-                            backdropFilter: 'blur(10px)',
-                            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
-                        }}>
-                            <Typography variant="h6" sx={{ fontWeight: 700, mb: 3, color: 'primary.main' }}>
-                                信頼の実績
-                            </Typography>
-                            <Stack spacing={3}>
-                                <Box>
-                                    <Typography variant="h3" sx={{ fontWeight: 800, color: 'secondary.main', mb: 1 }}>
-                                        10,000+
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary">
-                                        診断済みユーザー数
-                                    </Typography>
-                                </Box>
-                                <Box>
-                                    <Typography variant="h3" sx={{ fontWeight: 800, color: 'secondary.main', mb: 1 }}>
-                                        94%
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary">
-                                        診断結果満足度
-                                    </Typography>
-                                </Box>
-                                <Box>
-                                    <Typography variant="h3" sx={{ fontWeight: 800, color: 'secondary.main', mb: 1 }}>
-                                        平均 38万円
-                                    </Typography>
-                                    <Typography variant="body2" color="text.secondary">
-                                        推定市場価値（60代）
-                                    </Typography>
-                                </Box>
-                            </Stack>
-                        </Box>
-                    </Grid>
-                </Grid>
+
+                        <Button
+                            variant="contained"
+                            size="large"
+                            href="#cta"
+                            endIcon={<ArrowRight size={18} />}
+                            sx={{
+                                bgcolor: '#00D632',
+                                color: '#000',
+                                fontSize: '1.05rem',
+                                px: 5,
+                                py: 1.8,
+                                borderRadius: '50px',
+                                textTransform: 'none',
+                                fontWeight: 700,
+                                boxShadow: '0 4px 20px rgba(0, 214, 50, 0.25)',
+                                transition: 'all 0.3s ease',
+                                '&:hover': {
+                                    bgcolor: '#00C02D',
+                                    transform: 'translateY(-2px)',
+                                    boxShadow: '0 6px 30px rgba(0, 214, 50, 0.35)',
+                                },
+                            }}
+                        >
+                            無料で診断を始める
+                        </Button>
+                    </Box>
+                </motion.div>
             </Container>
 
-            {/* Coming Soon Dialog */}
-            <Dialog
-                open={dialogOpen}
-                onClose={handleDialogClose}
-                maxWidth="sm"
-                fullWidth
+            {/* Phone mockup with parallax scale-down */}
+            <motion.div
+                style={{
+                    scale: mockupScale,
+                    opacity: mockupOpacity,
+                }}
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
             >
-                <DialogTitle sx={{ fontWeight: 700, color: 'primary.main' }}>
-                    Coming Soon!
-                </DialogTitle>
-                <DialogContent>
-                    <Typography variant="body1" sx={{ mb: 2 }}>
-                        先行登録を受け付けています。
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                        サービス開始時にお知らせいたします。
-                    </Typography>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleDialogClose} variant="contained" color="primary">
-                        閉じる
-                    </Button>
-                </DialogActions>
-            </Dialog>
+                <Box
+                    sx={{
+                        mt: { xs: 6, md: 8 },
+                        position: 'relative',
+                        zIndex: 1,
+                    }}
+                >
+                    <SmartphoneMockup />
+                </Box>
+            </motion.div>
         </Box>
     );
 }
