@@ -1,8 +1,6 @@
 import { MongoClient } from "mongodb"
-import dns from "dns"
 
-// ローカルDNSがSRVクエリを拒否する環境向けにGoogle Public DNSを使用
-dns.setServers(["8.8.8.8", "8.8.4.4"])
+// DNS設定は instrumentation.ts で実行済み（Node.jsランタイムのみ）
 
 const uri = process.env.MONGODB_URI
 
