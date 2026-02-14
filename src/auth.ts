@@ -3,7 +3,6 @@ import Google from "next-auth/providers/google"
 import GitHub from "next-auth/providers/github"
 import Twitter from "next-auth/providers/twitter"
 import Line from "next-auth/providers/line"
-import clientPromise from "@/lib/mongodb"
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -31,11 +30,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   },
   secret: process.env.AUTH_SECRET,
   callbacks: {
-    async jwt({ token, user, account, profile }) {
+    async jwt({ token, user, account }) {
       // 初回ログイン時にMongoDBへユーザー情報を保存
+      // 動的importでEdgeランタイム（middleware）との互換性を確保
       if (user && account) {
         token.id = user.id
         try {
+          const { default: clientPromise } = await import("@/lib/mongodb")
           const client = await clientPromise
           const db = client.db()
           await db.collection("users").updateOne(
